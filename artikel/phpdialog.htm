@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Php Xdialog</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 25 Juni 2007, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Php Xdialog</h2>
+
+<p>
+Ini sebuah alternatif penggunaan script Php. Bukan untuk menghasilkan halaman web,
+tapi untuk menampilkan sebuah aplikasi desktop sangat sederhana, dengan tampilan
+grafis/GUI. Script Php yang dibuat dijalankan dari konsol, dan penggabungan
+dengan program <b>Xdialog</b> menghasilkan sebuah aplikasi dengan tampilan grafis.
+Sekedar tambahan info, ini tidak menggunakan Php-Gtk.
+</p>
+
+<p>
+Yang diperlukan untuk membuat aplikasi dengan cara ini adalah Php yang jalan
+untuk konsol, dan program <b>Xdialog</b>. Ketika artikel ini ditulis, Xdialog
+bisa diperoleh dari http://xdialog.dyns.net<br>
+Xdialog adalah sebuah program yang hanya menampilkan form sederhana, seperti
+tombol yes/no, textbox, messagebox, file dialog, list,
+dan beberapa fungsi sederhana lainnya. Setelah kita melakukan interaksi dengan
+form tersebut, Xdialog akan mengembalikan sebuah nilai tertentu, sesuai aksi
+yang dilakukan. Nilai/data/text tersebut bisa diproses selanjutnya.
+</p>
+
+<p>
+Yang dilakukan disini adalah membuat script Php yang di dalamnya terdapat aksi
+untuk menampilkan form Xdialog. Tampilan Xdialog ini menjadi media interaksi
+dengan user, kemudian data yang dikembalikan oleh Xdialog diterima oleh script Php
+untuk diolah sesuai aplikasi yang kita inginkan. Cukup sederhana. Namun tak tertutup
+kemungkinan untuk menghasilkan sebuah aplikasi yang cukup berguna, karena Php
+memiliki fungsi yang cukup lengkap.
+</p>
+
+<p>
+Berikut ini adalah contoh script Php yang berguna untuk menampilkan isi file.
+Pertama kita panggil Xdialog untuk menampilkan form pemilihan file, lalu setelah
+file dipilih, dipanggil lagi Xdialog untuk menampilkan isi file tersebut.
+Sebelum ditampilkan diperiksa, apakah ukuran file lebih besar dari 250000 byte.
+Jika lebih besar, yang ditampilkan adalah pesan bahwa file terlalu besar. 
+Untuk keterangan lengkap penggunaan Xdialog, silahkan lihat manual Xdialog.
+</p>
+
+<pre>
+#!/usr/local/bin/php
+&lt;?php
+
+$opr = "Xdialog --stdout --fselect \"\" 0 0"; 
+$hasil = exec($opr,$out,$code);
+
+if (file_exists($hasil)) {
+  if (filesize($hasil) > 250000) {
+    $opr = "Xdialog --stdout --msgbox \"Ukuran File Diluar Batas\" 0 0"; 
+    $hasil = exec($opr,$out,$code);	
+  } else {
+    $opr = "Xdialog --stdout --textbox \"$hasil\" 0 0"; 
+    $hasil = exec($opr,$out,$code);
+  }
+}
+
+?&gt;
+</pre>
+
+<p>
+Untuk baris pertama yang berisi #!/usr/local/bin/php harus ditulis pada baris
+paling atas, tanpa ada spasi mendahuluinya. Kemudian pastikan letak program php
+apakah memang di /usr/local/bin/php, jika tidak, sesuaikan dengan lokasi program
+php yang ada di komputer.
+Gunakan saja perintah <b>which php</b> untuk melihat lokasi program php tersebut.
+Setelah itu simpan file ini dengan nama apa saja, misalnya lihat.php, dan jangan
+lupa mengganti attribut file dengan chmod. Misalnya <b>chmod 755 lihat.php</b><br>
+Setelah itu script sudah bisa dijalankan dengan memanggil nama file <b>./lihat.php</b>
+</p>
+
+<p>
+Berikut adalah screenshot dari script di atas. Gambar pertama adalah dialog
+untuk menampilkan pemilihan file. Gambar berikutnya menampilkan isi file yang dipilih.
+</p>
+
+<img src="media/phpdialog/pilih.jpg"><br><br>
+<img src="media/phpdialog/tampil.jpg"><br><br>
+
+<!-- isi selesai -->
+
+</body>
+</html>

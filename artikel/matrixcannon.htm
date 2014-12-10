@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Perkalian Matriks Menggunakan Algoritma Cannon</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 27 Desember 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+
+<h2>Perkalian Matriks Menggunakan Algoritma Cannon</h2>
+
+<p>
+Tulisan ini memaparkan tantang perkalian matriks, menggunakan algoritma Cannon. Kemudian dibuat sebuah kalkulasi sederhana. Kalkulasi waktu proses dilihat untuk 1 prosesor, dan dengan n<sup>2</sup> prosesor secara paralel. Bagian penghitungan <i>speedup</i> yang diperoleh dengan prosesor paralel belum dilengkapi.
+</p>
+
+<p>
+Perkalian matriks  A x B = C yang berukuran 3 x 3 dengan menggunakan algoritma Cannon digambarkan pada diagram berikut ini.
+</p>
+
+<table border="0" cellspacing="0" cellpadding="5">
+<tr>
+
+<td>
+<table border="0" cellspacing="1" cellpadding="5" bgcolor="#606060">
+<tr bgcolor="#f0f0f0"><td>C<sub>11</sub></td><td>C<sub>12</sub></td><td>C<sub>13</sub></td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>21</sub></td><td>C<sub>22</sub></td><td>C<sub>23</sub></td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>31</sub></td><td>C<sub>32</sub></td><td>C<sub>33</sub></td></tr>
+</table>
+</td>
+
+<td><img src="media/cannon/panahkiri.gif"></td>
+
+<td>
+<table border="0" cellspacing="1" cellpadding="5" bgcolor="#606060">
+<tr bgcolor="#f0f0f0"><td>&nbsp;</td><td>&nbsp;</td><td>A<sub>11</sub></td><td>A<sub>12</sub></td><td>A<sub>13</sub></td></tr>
+<tr bgcolor="#f0f0f0"><td>&nbsp;</td><td>A<sub>21</sub></td><td>A<sub>22</sub></td><td>A<sub>23</sub></td><td>&nbsp;</td></tr>
+<tr bgcolor="#f0f0f0"><td>A<sub>31</sub></td><td>A<sub>32</sub></td><td>A<sub>33</sub></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+</td>
+
+</tr>
+<tr>
+
+<td align="center">&nbsp; <img src="media/cannon/panahatas.gif"> &nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+
+</tr>
+<tr>
+
+<td>
+<table border="0" cellspacing="1" cellpadding="5" bgcolor="#606060">
+<tr bgcolor="#f0f0f0"><td>&nbsp;</td><td>&nbsp;</td><td>B<sub>13</sub></td></tr>
+<tr bgcolor="#f0f0f0"><td>&nbsp;</td><td>B<sub>12</sub></td><td>B<sub>23</sub></td></tr>
+<tr bgcolor="#f0f0f0"><td>B<sub>11</sub></td><td>B<sub>22</sub></td><td>B<sub>33</sub></td></tr>
+<tr bgcolor="#f0f0f0"><td>B<sub>21</sub></td><td>B<sub>32</sub></td><td>&nbsp;</td></tr>
+<tr bgcolor="#f0f0f0"><td>B<sub>31</sub></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+</td>
+<td>&nbsp;</td>
+<td valign="top"><i>Diagram 1</i></td>
+
+</tr>
+</table>
+<br><br>
+
+<p>
+Matriks A dan matriks B yang akan dikalikan, terlebih dahulu di-<i>skew</i> seperti pada diagram 1. Pada proses perkaliannya, matriks B digeser ke arah atas, dan matriks A digeser ke arah kiri, sehingga kedua matriks melewati matriks C. Nilai awal dari semua elemen matriks C adalah 0. Langkah demi langkah yang terjadi, dapat dilihat seperti pada tabel berikut ini. Setiap hasil perkalian yang terjadi pada satu elemen matriks C, langsung ditambahkan ke nilai elemen matriks C tersebut.
+</p>
+
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#606060" style="font-size:13px">
+<tr bgcolor="#d0d0d0"><td>&nbsp;</td><td>Langkah 1</td><td>Langkah 2</td><td>Langkah 3</td><td>Langkah 4</td><td>Langkah 5</td><td>Langkah 6</td><td>Langkah 7</td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>11</sub></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>A<sub>11</sub> x B<sub>11</sub></td><td>A<sub>12</sub> x B<sub>21</sub></td><td>A<sub>13</sub> x B<sub>31</sub></td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>12</sub></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>A<sub>11</sub> x B<sub>12</sub></td><td>A<sub>12</sub> x B<sub>22</sub></td><td>A<sub>13</sub> x B<sub>32</sub></td><td>&nbsp;</td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>13</sub></td><td>&nbsp;</td><td>&nbsp;</td><td>A<sub>11</sub> x B<sub>13</sub></td><td>A<sub>12</sub> x B<sub>23</sub></td><td>A<sub>13</sub> x B<sub>33</sub></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>21</sub></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>A<sub>21</sub> x B<sub>11</sub></td><td>A<sub>22</sub> x B<sub>21</sub></td><td>A<sub>23</sub> x B<sub>31</sub></td><td>&nbsp;</td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>22</sub></td><td>&nbsp;</td><td>&nbsp;</td><td>A<sub>21</sub> x B<sub>12</sub></td><td>A<sub>22</sub> x B<sub>22</sub></td><td>A<sub>23</sub> x B<sub>32</sub></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>23</sub></td><td>&nbsp;</td><td>A<sub>21</sub> x B<sub>13</sub></td><td>A<sub>22</sub> x B<sub>23</sub></td><td>A<sub>23</sub> x B<sub>33</sub></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>31</sub></td><td>&nbsp;</td><td>&nbsp;</td><td>A<sub>31</sub> x B<sub>11</sub></td><td>A<sub>32</sub> x B<sub>21</sub></td><td>A<sub>33</sub> x B<sub>31</sub></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>32</sub></td><td>&nbsp;</td><td>A<sub>31</sub> x B<sub>12</sub></td><td>A<sub>32</sub> x B<sub>22</sub></td><td>A<sub>33</sub> x B<sub>32</sub></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr bgcolor="#f0f0f0"><td>C<sub>33</sub></td><td>A<sub>31</sub> x B<sub>13</sub></td><td>A<sub>32</sub> x B<sub>23</sub></td><td>A<sub>33</sub> x B<sub>33</sub></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+<br><br>
+
+<p>
+Dengan menggunakan asumsi-asumsi berikut ini, akan dilihat berapa banyak proses yang terjadi pada perkalian matriks tersebut :
+</p>
+
+<ul>
+<li>Matriks A, B, dan C adalah matriks n x n</li>
+<li>Untuk proses paralel, digunakan sebanyak n<sup>2</sup> prosesor</li>
+<li>Perkalian dihitung sebagai satu buah proses</li>
+<li>Penjumlahan dihitung sebagai satu buah proses</li>
+<li>Menerima satu data dihitung sebagai satu buah proses</li>
+<li>Mengirim satu data dihitung sebagai satu buah proses</li>
+<li>Proses yang terjadi dibatasi hanya pada penjumlahan, perkalian, menerima data, mengirim data</li>
+</ul>
+
+<h3>Banyaknya proses yang terjadi bila menggunakan 1 prosesor</h3>
+
+<p>
+Kita lihat terlebih dahulu, jika perkalian ini dilakukan oleh 1 buah prosesor. Dengan menggunakan satu buah prosesor, proses komunikasi antar prosesor tidak ada, jadi yang dihitung hanyalah proses perkalian dan penjumlahan. Banyaknya perkalian untuk satu elemen matriks C yang dihasilkan adalah <b>n</b> kali perkalian. Banyaknya penjumlahan dihitung sebanyak <b>n</b> kali penjumlahan juga, bukan (n - 1). Karena ada sebanyak <b>n<sup>2</sup></b> elemen matriks C yang akan dihasilkan, maka banyaknya proses yang terjadi adalah <b>(2n)n<sup>2</sup></b> pada satu prosesor tersebut.
+</p>
+
+<h3>Perkalian matriks dilakukan paralel dengan n<sup>2</sup> prosesor</h3>
+
+<p>
+Masing-masing prosesor melakukan proses untuk satu buah elemen matriks C. Kita lihat proses untuk mendapatkan hasil satu elemen matriks C yang terjadi di elemen matriks C<sub>33</sub>
+</p>
+
+<div style="border-left:5px solid #a0a0a0; margin:0px 0px 15px 25px; padding-left: 10px">
+Terima data A<sub>31</sub><br>
+Terima data B<sub>13</sub><br>
+Perkalian  (A<sub>31</sub> x B<sub>13</sub>)<br>
+Jumlahkan ke C<sub>33</sub><br>
+Kirim data A<sub>31</sub> ke C<sub>32</sub><br>
+Kirim data B<sub>13</sub> ke C<sub>23</sub><br>
+</div>
+
+<div style="border-left:5px solid #a0a0a0; margin:0px 0px 15px 25px; padding-left: 10px">
+Terima data A<sub>32</sub><br>
+Terima data B<sub>23</sub><br>
+Perkalian  (A<sub>32</sub> x B<sub>23</sub>)<br>
+Jumlahkan ke C<sub>33</sub><br>
+Kirim data A<sub>32</sub> ke C<sub>32</sub><br>
+Kirim data B<sub>23</sub> ke C<sub>23</sub><br>
+</div>
+
+<div style="border-left:5px solid #a0a0a0; margin:0px 0px 15px 25px; padding-left: 10px">
+Terima data A<sub>33</sub><br>
+Terima data B<sub>33</sub><br>
+Perkalian (A<sub>33</sub> x B<sub>33</sub>)<br>
+Jumlahkan ke C<sub>33</sub><br>
+Kirim data A<sub>33</sub> ke C<sub>32</sub><br>
+Kirim data B<sub>33</sub> ke C<sub>23</sub><br>
+</div>
+
+<p>
+Terlihat di sini, muncul proses komunikasi berupa menerima dan mengirim data yang cukup banyak. Proses komputasi yang dilakukan adalah 3 kali perkalian, dan 3 kali penjumlahan = 6 kali proses. Proses komunikasi yang dilakukan adalah 6 kali menerima data, dan 6 kali mengirim data = 12 kali proses. Sementara terlihat proses komunikasi lebih banyak dilakukan dibanding proses komputasi, yaitu proses komunikasi 2 kali dari proses komputasi. Ini merupakan kerugian yang cukup besar ketika dilakukan perkalian secara paralel.
+</p>
+
+<p>
+Jika kita ambil asumsi bahwa waktu yang diperlukan untuk masing-masing proses adalah sama sebesar t, bisa dilihat perbandingan waktu yang diperlukan antara proses paralel dengan n<sup>2</sup> prosesor dibanding dengan 1 prosesor.
+</p>
+
+<ul>
+
+<li>
+Untuk 1 prosesor waktu yang diperlukan adalah : <b>2n<sup>3</sup>t</b>
+<br><br></li>
+
+<li>
+Untuk proses paralel dengan n<sup>2</sup> prosesor dengan meniadakan waktu komunikasi, waktu yang diperlukan adalah :<br>
+Langkah yang diperlukan sebanyak : 3n - 2<br>
+Untuk satu langkah dilakukan : 2 buah proses [1 perkalian dan 1 penjumlahan]<br>
+Jadi waktu yang diperlukan adalah : <b>(3n - 2) x 2t</b>
+<br><br></li>
+
+<li>
+Untuk proses paralel dengan n<sup>2</sup> prosesor, dengan memperhitungkan waktu komunikasi, waktu yang diperlukan adalah :<br>
+Langkah yang diperlukan sebanyak : 3n - 2<br>
+Untuk satu langkah dilakukan : 6 buah proses<br>
+Jadi waktu yang diperlukan adalah : <b>(3n - 2) x 6t</b>
+</li>
+
+</ul>
+
+<p>
+Untuk keperluan melihat pengaruh proses komunikasi, hasil tersebut ditulis ulang sebagai berikut :
+</p>
+
+<pre>
+  (3n - 2) = L
+  6t = 4tcomm + 2tcomp   [comm = komunikasi , comp = komputasi]
+  (4tcomm)L + (2tcomp)L
+</pre>
+
+<p>
+Dengan keadaan satu proses komunikasi membutuhkan waktu yang sama dengan satu proses komputasi, sebesar 66% waktu yang diperlukan untuk perkalian matriks ini adalah untuk komunikasi.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Utilitas Sederhana di Linux</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 5 Agustus 2004, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Utilitas Sederhana di Linux</h2>
+
+<p>
+Untuk sebagian pemula di sistem operasi Linux biasanya kebingungan ketika harus mencari informasi yang sebenarnya sederhana menurut ukuran kebanyakan pengguna komputer. Seperti berapa sisa ruang yang ada pada sebuah partisi harddisk, berapa besar ukuran sebuah folder beserta isinya, tanggal berapa sekarang ini, bagaimana melakukan perhitungan matematis sederhana, dan hal lain yang sedemikian.
+</p>
+
+<p>
+Dalam paket distribusi Linux seperti Redhat, Mandrake, Suse, dan yang lainnya, biasanya disertakan beberapa program kecil dan sederhana, namun memberikan fungsi yang penting pada suatu saat. Utilitas/program yang akan diulas disini adalah program yang berjalan pada mode konsol.
+</p>
+
+<p><b>cal</b></p>
+
+<p>
+cal adalah sebuah program yang dapat menampilkan kalender sesuai dengan bulan dan tahun yang kita tentukan. Dengan memberikan perintah cal tanpa argumen, kita akan memperoleh tampilan kalender bulan sekarang pada layar. Bisa juga dihasilkan kalender sebanyak 3 bulan, yaitu bulan sebelumnya, bulan sekarang, dan bulan sesudahnya. Atau kalender dalam periode satu tahun.
+</p>
+
+<pre>
+cal 3 1998   --> menampilkan kalender bulan Maret tahun 1998
+cal -3       --> menampilkan kalender 3 bulan
+cal -y       --> menampilkan kalender tahun sekarang
+</pre>
+
+<p><b>du</b></p>
+
+<p>
+du merupakan program untuk mengetahui jumlah ruangan disk yang digunakan oleh file atau direktori. Nama program du merupakan singkatan dari disk usage. Opsi yang disediakan cukup banyak. Penggunaan sederhana untuk mengetahui berapa jumlah disk yang terpakai oleh sebuah direktori beserta seluruh isinya dapat menggunakan perintah seperti berikut :
+</p>
+
+<pre>
+du -sh databuku   --> menampilkan ukuran disk yang terpakai oleh
+                      direktori databuku
+                      dalam ukuran yang mudah dibaca
+</pre>
+
+<p><b>stat</b></p>
+
+<p>
+stat adalah program untuk mengetahi informasi lengkap tentang sebuah file. Informasi yang diberikan sangat detil, seperti hak akses terhadap file, pemilik, grup, tanggal/waktu terakhir diakses, tanggal/waktu terakhir dimodifikasi, ukuran file, dan beberapa informasi lainnya yang menyangkut sebuah file. Dengan menggunakan program ini tanpa opsi, maka akan ditampilkan dengan lengkap informasi tentang sebuah file.
+</p>
+
+<pre>
+stat srtizin.txt  --> menampilkan informasi secara detil tentang
+                      file srtizin.txt
+</pre>
+
+<p><b>bc</b></p>
+
+<p>
+bc sebenarnya bukanlah sebuah utiliti sederhana, namun hampir berupa kalkulator yang sangat lengkap. Tentu saja untuk keperluan sederhana dalam melakukan perhitungan matematis, program ini akan bisa membantu kita. Jika kita memanggil program ini tanpa argumen, maka program akan menunggu kita menulis sebuah ekspresi matematika, yang akan dihitung hasilnya, misalnya dengan menekan tombol enter. Jika kita tertarik dengan pemrograman, bc bisa diprogram untuk melakukan perhitungan yang cukup rumit. Sintaks yang digunakan pada bc memiliki kesamaan dengan bahasa C. Berikut ini contoh sederhana menggunakan bc.
+</p>
+
+<pre>
+bc                --> memanggil program bc tanpa argumen
+(100+20)/3        --> menulis sebuah ekspresi matematika
+40                --> hasil yang ditampilkan bc
+quit              --> keluar dari program bc
+</pre>
+
+<p><b>df</b></p>
+
+<p>
+df digunakan untuk menampilkan status dari sebuah filesystem. Kira-kira maksudnya adalah untuk menampilkan informasi partisi harddisk yang sedang digunakan. Misalnya harddisk kita mempunyai 3 partisi /dev/hda1 /dev/hda3 /dev/hda5, maka dengan program df kita bisa melihat berapa ukuran masing-masing partisi, berapa yang terisi, dan berapa sisa yang masih kosong. Opsi yang tersedia juga cukup banyak, dengan memberi opsi -h maka kita bisa melihat ukuran dalam bentuk yang mudah dibaca.
+</p>
+
+<pre>
+df -h             --> menampilkan informasi semua partisi
+                      dalam ukuran yang mudah dibaca
+</pre>
+
+<p>
+Untuk melihat kegunaan masing-masing program lebih detil, lihat manual yang tersedia pada sistem Linux yang kita gunakan, dengan memakai perintah man diikuti nama program.
+</p>
+
+<pre>
+man du            --> menampilkan manual program du
+</pre>
+
+<p>
+Masih banyak program kecil lainnya yang bisa memberi informasi yang kita perlukan. Misalnya <b>date</b> untuk menampilkan tanggal sekarang. <b>uptime</b> untuk menampilkan <i>running time</i> komputer yang sedang kita gunakan. <b>top</b> menampikan status proses yang ada dalam komputer. <b>wc</b> program yang berguna untuk menghitung jumlah karakter, baris, kata yang ada dalam sebuah file. <b>kernelversion</b> untuk melihat versi kernel yang digunakan oleh sistem Linux anda.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Daftar Hitam, Daftar Putih, Daftar Abu-abu</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 29 Juli 2004, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Daftar Hitam, Daftar Putih, Daftar Abu-abu</h2>
+
+<pre>Blacklist, Whitelist, Greylist</pre>
+
+<p>
+Dalam berbagai program yang pernah dibuat, sebagian memiliki fitur untuk melakukan pembatasan/penyaringan. Mungkin dalam bentuk pembatasan penggunaan, penyaringan terhadap data, dan pembatasan lainnya yang mungkin dilakukan untuk maksud tertentu. Umumnya hal ini bersangkutan dengan masalah keamanan sebuah sistem.
+</p>
+
+<p>
+Contoh yang kita bisa ambil misalnya adalah program email yang dapat melakukan penyaringan terhadap email yang masuk. Sebuah program email yang memiliki fitur untuk penyaringan dapat menentukan apakah sebuah email akan diterima, atau ditolak. Cara penyaringan ini sudah umum sekali kita temui dalam banyak program. Misalnya pada proxy server, web server, atau sejumlah server lainnya yang menerapkan aturan terhadap akses yang diizinkan atau ditolak.
+</p>
+
+<p>
+Cara yang dilakukan bisa menggunakan berbagai macam teknik. Di sini saya menggunakan tiga kelompok penyaringan yang mungkin dilakukan dalam melakukan pembatasan, yaitu daftar hitam, daftar putih, dan daftar abu-abu. Yang umumnya ditemui, adalah istilah daftar hitam (Blacklist) dan daftar putih (Whitelist).
+</p>
+
+<p><b>Daftar Hitam</b></p>
+
+<p>
+Daftar hitam adalah sebuah daftar yang berisikan informasi tentang sesuatu yang dilarang. Ini bisa berupa nama user, alamat komputer, tipe data, alamat situs, kata, dan berbagai objek yang berkaitan dengan fungsi program yang menerapkan penyaringan ini.
+</p>
+
+<p>
+Untuk melakukan penyaringan, maka program akan melihat ke dalam daftar, apabila ditemukan objek yang dimaksud, maka akan diberlakukan aksi pelarangan, atau aksi yang ditentukan untuk menangani objek tersebut.
+</p>
+
+<p>
+Penggunaan daftar hitam sangat mudah jika objek yang akan dimasukkan ke dalam daftar hitam ini diketahui dengan pasti, dan tidak bersifat dinamis. Apabila tidak mempunyai sifat demikian, maka penanganan daftar hitam bisa menjadi sulit.
+</p>
+
+<p><b>Daftar Putih</b></p>
+
+<p>
+Sama halnya dengan daftar hitam, daftar putih juga berupa daftar yang berisi informasi tentang sesuatu. Hanya saja ini berkebalikan dengan daftar hitam, yang terdapat dalam daftar putih adalah hal yang dibolehkan. Penggunaan daftar putih juga memiliki sifat yang sama dengan daftar hitam, yaitu sesuatu yang pasti dan tidak dinamis.
+</p>
+
+<p>
+Keuntungan daftar hitam dan daftar putih adalah hasil yang didapatkan akurat, tidak mengandung kesalahan. Tetapi dalam sistuasi dimana persyaratan untuk membuat daftar hitam atau daftar putih tidak dimiliki, maka kita jatuh pada model kelompok ketiga, yaitu daftar abu-abu.
+</p>
+
+<p><b>Daftar Abu-abu</b></p>
+
+<p>
+Daftar abu-abu yang dimaksud disini adalah sesuatu yang belum termasuk ke dalam kedua daftar di atas. Ini berlaku pada sistem yang harus menyaring sesuatu yang sifatnya dinamis, dan belum mungkin ditempatkan dalam daftar putih dan daftar hitam. Untuk contoh ini, kita bisa melihat pada program email dan proxy server.
+</p>
+
+<p>
+Misalkan kita akan melakukan penyaringan terhadap email yang tidak kita inginkan. Pada kasus ini yang paling sering terjadi adalah apa yang disebut dengan spam. Kita tidak bisa memiliki informasi yang pasti apakah sebuah email tergolong spam atau bukan, karena pertumbuhan alamat email yang cepat, dan sangat banyaknya elamat yang ada di internet. Mungkin hari ini kita bisa menentukan dalam sebuah daftar hitam, tetapi besok ada lagi email yang lain yang kita belum punya informasinya. Untuk keadaan ini, kita akan masukkan email tersebut ke dalam daftar abu-abu.
+</p>
+
+<p>
+Daftar abu-abu ini kemudian harus masuk ke salah satu aksi yang dipilih. Apakah akan dibolehkan, atau akan dilarang. Disinilah kemudian muncul berbagai teknik untuk menentukan, apakah objek yang masuk ke dalam daftar abu-abu ini akan ditentukan sebagai sesuatu yang "aman" atau akan jatuh pada kriteria "dilarang".
+</p>
+
+<p>
+Teknik yang digunakan, secara umum dapat dikatakan sebagai teknik yang dapat "berfikir". Data yang terdapat dalam objek akan dilihat dan diperiksa oleh program yang akan mengambil keputusan. Ada beberapa istilah seperti: heuristic filtering, bayesian filtering, challenge/response filtering. Kesemuanya melakukan sebuah proses untuk mengambil keputusan terhadap objek yang masuk daftar abu-abu tadi, apakah akan diizinkan atau dilarang.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

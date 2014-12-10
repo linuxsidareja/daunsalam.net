@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Kalau Bisa Statis, Mengapa Harus Dinamis</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 27 Agustus 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Kalau Bisa Statis, Mengapa Harus Dinamis</h2>
+
+<p>
+Judul di atas tak sepenuhnya tepat untuk isi tulisan ini. Namun tak usah ragu, bahwa apa yang akan disampaikan juga tak akan melenceng jauh dari perkiraan Anda.
+</p>
+
+<p>
+Dengan adanya berbagai bahasa pemrograman untuk membuat halaman situs, bisa jadi akan jarang orang menggunakan halaman HTML statis untuk keperluan tersebut. Namun dalam beberapa waktu terakhir, saya kembali berusaha menggunakan halaman HTML statis jika memungkinkan.
+</p>
+
+<p>
+Saya akan bercerita untuk satu contoh di sini, misalnya sebuah aplikasi berbasis web, dengan bahasa PHP, serta data yang disimpan dalam database. Aplikasi ini memiliki sebuah daftar kode kelompok barang, yang tersimpan dalam sebuah tabel di database.
+</p>
+
+<p>
+Daftar kode barang ini diperlukan setiap kali pengguna memasukkan data barang dalam formulir tertentu, misalnya formulir pengeluaran barang. Misalnya barang berupa kertas, yang termasuk dalam kode 21001. Dalam kasus ini kode 21001 tidak diketik oleh pengguna, namun diambil dari sebuah daftar yang dimunculkan secara popup.
+</p>
+
+<p>
+Salah satu cara yang digunakan untuk menampilkan isi halaman popup tersebut tentu dengan mengambil data dari database dengan mengirim sebuah query ke tabel daftar kode, lalu menampilkan halaman HTML dengan bahasa PHP.
+</p>
+
+<p>
+Sekian waktu diamati untuk keadaan ini, ternyata data untuk daftar kelompok barang ini tidaklah sering berubah. Daripada setiap kali menampilkan daftar kode barang harus mengambil data ke database, bukankah lebih baik halaman untuk daftar kode kelompok barang ini dibuat saja dengan HTML statis? Jadi mengurangi proses query ke database, dan tidak perlu melakukan eksekusi PHP. Akhirnya bisa melakukan sebuah "penghematan".
+</p>
+
+<p>
+Lalu bagaimana kalau data dalam tabel kode kelompok barang berubah? Nah, pada bagian inilah ditambahkan sebuah script yang akan menghasilkan halaman HTML statis untuk daftar kode kelompok barang. Jika ada penambahan/pengurangan/perubahan data pada tabel kelompok barang, maka script ini akan menulis ulang halaman HTML statis sesuai dengan data yang terbaru. Dan proses ini hanya sesekali terjadi.
+</p>
+
+<p>
+Dari contoh sederhana ini, mungkin banyak kemungkinan lain untuk tetap memanfaatkan halaman HTML statis, sehingga aplikasi yang dibuat bisa "tidak terlalu boros".
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+untuk teman2 semua yang menggunakan CPU intel mohon jangan membuka situs yang
+berkaitan dengan google seperti search engine atau googletalk karena server
+google di thailand ternyata memiliki bugs yg dikenal dgn nth-cycle complexity yg
+akan mengakibatkan kerusakan permanen pada CPU dan cache memori dalam jangka
+panjang. menurut APJII jaringan google di indonesia lewat Indonesia Internet
+Exchange (IIX) tidak memiliki proteksi yang cukup dalam mengantisipasi flaw ini.
+Sampaikan surat ini ke setiap orang dalam list YM Anda

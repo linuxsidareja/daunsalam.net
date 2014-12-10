@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Analisa Kebutuhan Perangkat Lunak</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, Oktober 2004, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Analisa Kebutuhan Perangkat Lunak</h2>
+Sebuah Pengalaman Praktis<br><br>
+
+<p>
+<b>Abstrak</b><br>
+<i>Pembuatan sebuah perangkat lunak melalui beberapa tahap. Tahap awal yang dilakukan adalah analisa kebutuhan. Analisa kebutuhan menjadi kunci utama untuk mendapatkan informasi tentang perangkat lunak yang dibutuhkan klien/pengguna. Kesalahan dalam analisa kebutuhan akan menghasilkan perangkat lunak yang salah. Untuk mendapatkan analisa yang baik, diperlukan cara yang tepat. Ada beberapa faktor yang perlu diperhatikan untuk menghasilkan analisa yang benar dan sesuai dengan kebutuhan klien/pengguna. Pengalaman praktis dalam melakukan analisa kebutuhan bisa menjadi pedoman yang baik bagi pihak yang akan melakukan analisa kebutuhan perangkat lunak.</i>
+</p>
+
+<p>Kata kunci: analisa kebutuhan, perangkat lunak, tinjauan praktis</p>
+
+<h3>1. Pendahuluan</h3>
+
+<p>
+Analisa kebutuhan merupakan langkah awal untuk menentukan perangkat lunak seperti apa yang akan dihasilkan, ketika kita melaksanakan sebuah proyek pembuatan perangkat lunak. Perangkat lunak yang baik dan sesuai dengan kebutuhan pengguna sangat bergantung kepada keberhasilan dalam melakukan analisa kebutuhan. Tidak peduli bagaimana hebatnya seseorang dalam menulis kode perangkat lunak, atau membuat antar muka yang menawan, jika terjadi kesalahan dalam analisa kebutuhan, itu artinya perangkat lunak yang dibuat menjadi tak berguna.
+</p>
+
+<p>
+Analisa kebutuhan yang baik belum tentu menghasilkan perangkat lunak yang baik. Tetapi analisa kebutuhan yang tidak tepat sudah pasti menghasilkan perangkat lunak yang tidak berguna. Ini adalah sebuah pernyataan sederhana. Namun pernyataan ini tidaklah terlalu jauh dari kesimpulan yang sebenarnya.
+</p>
+
+<p>
+Adalah jauh lebih baik mengetahui ada kesalahan tentang analisa kebutuhan ketika masih dalam tahap awal ini. Kurang hati-hati dan pelaksanaan yang tidak teliti, sehingga mengakibatkan terjadinya kesalahan analisa kebutuhan sungguh menimbulkan banyak kerugian. Kesalahan analisa kebutuhan yang diketahui ketika sudah memasuki penulisan kode, atau pengujian, bahkan hampir pada tahap penyelesaian, adalah malapetaka besar bagi sebuah kelompok pembuat perangkat lunak. Biaya dan waktu yang diperlukan menjadi banyak yang tersia-sia.
+</p>
+
+<p>
+Biaya yang diperlukan untuk memperbaiki sebuah kesalahan karena analisa kebutuhan yang tidak benar, bisa menjadi dua puluh lima kali lipat, jika kesalahan tersebut ditemukan pada tahap pengujian fungsi perangkat lunak. (1)
+</p>
+
+<p>
+Ketika dalam tahap awal ini, sungguh diperlukan pelaksanaan analisa dengan hati-hati dan sebaik-baiknya. Dengan diperolehnya kebutuhan yang jelas dan benar sesuai dengan apa yang dimaksud oleh klien, menunjukkan langkah awal yang baik, yang akan membantu ketika kita melanjutkan kepada tahap berikutnya dalam pembuatan perangkat lunak.
+</p>
+
+<p>
+Dalam berbagai buku yang membahas tetang rekayasa perangkat lunak, analisa kebutuhan merupakan bab tersendiri yang selalu dibahas dengan baik. Banyak cara yang diuraikan untuk menghasilkan analisa kebutuhan yang akurat, sehingga penulisan perangkat lunak juga menjadi tepat. Yang menjadi hambatan utama di sini adalah ketika melakukan analisa kebutuhan yang sesungguhnya di lapangan. Penerapan dari teori-teori yang ada ternyata tidak bisa begitu saja dapat dilaksanakan. Banyak ditemui hal yang perlu diantisipasi dengan cara-cara yang lebih tepat, dan baru diketahui ketika kita sudah berada dalam situasi yang sesungguhnya dalam sebuah proyek pembuatan perangkat lunak.
+</p>
+
+<p>
+Dengan tidak mengabaikan faktor teknis, sejumlah faktor non teknis menjadi kunci dalam keberhasilan kita memperoleh analisa kebutuhan yang benar.
+</p>
+
+<h3>2. Analisa Kebutuhan</h3>
+
+<p>
+Analisa kebutuhan adalah sebuah proses untuk mendapatkan informasi, model, spesifikasi tentang perangkat lunak yang diinginkan klien/pengguna. Kedua belah pihak, yaitu klien dan pembuat perangkat lunak terlibat aktif dalam tahap ini. (2) Informasi yang diperoleh dari klien/pengguna inilah yang menjadi acuan untuk melakukan desain perangkat lunak.
+</p>
+
+<p>
+Ada 3 faktor yang harus dipenuhi ketika melakukan analisa kebutuhan ini yaitu : lengkap, detail, dan benar. Lengkap artinya semua yang diharapkan oleh klien telah didapatkan oleh pihak yang melakukan analisa. Sedangkan detail maksudnya adalah berhasil mengumpulkan informasi yang rinci sampai hal-hal yang kecil. Semua data dari analisa kebutuhan ini haruslah benar, sesuai apa yang dimaksud oleh klien, bukan benar menurut apa yang difikirkan oleh pihak yang melakukan analisa. Sebuah kutipan anonim yang sering disampaikan mengenai hal ini adalah : "Saya percaya anda sangat mengerti dengan apa yang saya katakan, namun saya tidak yakin bahwa apa yang anda dengar adalah sama dengan apa yang saya maksud".
+</p>
+
+<h3>3. Pengalaman Praktis</h3>
+
+<p>
+Dalam melakukan analisa kebutuhan yang sesungguhnya di lapangan, kita akan sering menemukan hal-hal yang kurang diharapkan. Misalnya, klien yang meminta pembuatan perangkat lunak tidak memiliki pengetahuan yang cukup tentang hal yang berkaitan dengan komputer, pemrograman, dan yang berhubungan dengan teknologi informasi. Ini cukup merepotkan, karena akan memerlukan usaha yang banyak untuk menggali apa keinginan mereka sesungguhnya.
+</p>
+
+<p>
+Persoalan lain yang juga cukup kerap ditemui adalah cara klien dalam mengungkapkan keinginan mereka. Banyak kasus memperlihatkan bahwa informasi yang disampaikan sangat tidak terstruktur, sehingga cukup merepotkan dalam memahami maksud dari keinginan mereka. Bahkan ada informasi yang semestinya dijelaskan tidak diberikan, dan informasi yang tak berguna malah dipaparkan.
+</p>
+
+<p>
+Masalah waktu juga menjadi penghalang lainnya. Banyak klien tidak memberi waktu yang cukup. Waktu yang kurang dalam proses analisa kebutuhan perangkat lunak, jelas akan menyebabkan tidak terkumpulnya dengan lengkap apa yang diinginkan oleh klien. Masalah penyediaan waktu ini bisa terjadi pada kedua belah pihak.
+</p>
+
+<p>
+Beberapa langkah yang akan digambarkan berikut ini, dapat dilakukan ketika melakukan analisa kebutuhan. Cara-cara tersebut bisa memberikan bantuan yang cukup berarti untuk memperoleh analisa kebutuhan yang baik, dan diharapkan dapat memenuhi tiga faktor utama yang mesti dipenuhi dalam membuat analisa kebutuhan.
+</p>
+
+<h4>3.1 Komunikasi yang Baik</h4>
+
+<p>
+Salah satu hal yang diperlukan adalah membangun hubungan yang baik dengan klien. Kemampuan seorang analis dalam menciptakan hubungan sosial dengan pihak lain, dalam situasi ini adalah dengan  klien, menjadi bantuan yang signifikan. Hubungan sosial yang baik dengan klien akan menjadikan komunikasi yang terbuka dan lancar. Dan ini sudah mengurangi banyak masalah, ketika berada dalam proses mendapatkan  informasi dari klien.
+</p>
+
+<p>
+Mengenal lebih dekat klien anda, artinya akan bisa menciptakan komunikasi yang lebih lancar dan tidak terlalu formal. Dengan keadaan yang bisa dibuat seperti ini, maka banyak hal yang bisa diketahui dengan baik, sehingga kemungkinan kesalahan dalam berkomunikasi bisa direduksi.
+</p>
+
+<p>
+Apabila ada informasi yang disampaikan oleh klien yang kurang terstruktur, atau sulit dipahami, bisa ditanyakan lebih lanjut lagi, tanpa harus kesulitan karena masalah komunikasi yang kurang lancar.  Biasanya analis akan malas bertanya lebih jauh, jika komunikasi yang terbangun kurang baik. Ini pasti mejadi salah satu penyebab kegagalan dalam mengetahui apa yang dibutuhkan klien.
+</p>
+
+<h4>3.2 Mengetahui "Apa"</h4>
+
+<p>
+Yang perlu diketahui dari klien adalah tentang apa yang dikerjakannya, apa data yang menjadi masukan, apa yang dihasilkan. Jangan terburu-buru menanyakan bagaimana cara mengerjakannya. Jika kita bisa mengetahui apa sebenarnya yang dihasilkan dan apa yang menjadi masukan, ini adalah langkah baik untuk memperoleh gambaran tentang kebutuhan akan sebuah perangkat lunak.
+</p>
+
+<p>
+Kumpulkan dokumen-dokumen yang selama ini digunakan oleh klien. Bisa jadi itu berupa tabel, formulir, laporan, daftar, dan semua "apa" yang berkaitan dengan perangkat lunak yang akan membantu pekerjaan mereka nantinya.
+</p>
+
+<h4>3.3 Gunakan Istilah yang Sederhana</h4>
+
+<p>
+Dalam berkomunikasi dengan klien, terutama ketika dalam proses analisa kebutuhan, jangan menggunakan istilah yang sulit dimengerti. Kebiasaan menggunakan istilah yang sulit, atau sangat spesifik dalam bidang komputer mungkin akan menjadikan orang kagum dengan anda, tapi ini bisa menjadi sebuah bencana. Komunikasi bisa menjadi tidak lancar, dan berpeluang menimbulkan kesalahpahaman. Tidaklah menjadi soal jika klien adalah orang yang cukup familiar dan juga bergelut dengan keahlian yang sama dengan pihak yang melakukan analisa.
+</p>
+
+<h4>3.4 Terbuka dengan Langkah yang Dilakukan</h4>
+
+<p>
+Bersikap terbuka tentang apa saja yang kita lakukan selama proses pembuatan perangkat lunak, adalah tindakan yang cukup membantu. Untuk sebuah pilihan yang diminta oleh klien, kita dapat juga memberitahu konsekuensinya. Ini akan membantu kedua belah pihak dalam memperoleh sebuah keputusan jika ada berbagai pilihan.
+</p>
+
+<p>
+Dengan cara ini, klien akan mengerti mengapa satu hal harus begini, dan mengapa hal lain harus dengan cara tertentu juga. Klien yang ikut memahami sejumlah langkah dan konsekuensi terhadap pilihan tertentu, akan lebih kooperatif dalam menyampaikan kebutuhan mereka. Ini mengurangi tuntutan yang yang tidak perlu ketika perangkat lunak yang akan dihasilkan tersebut mulai digunakan.
+</p>
+
+<h4>3.5 Menampilkan Contoh Nyata</h4>
+
+<p>
+Tampilkan contoh yang nyata ketika klien memberitahu apa yang akan dimintanya. Bisa jadi contoh nyata ini dibuat oleh analis, atau juga contohnya dilihat dari apa yang sudah dimiliki klien. Misalkan untuk proses entri data. Klien dan analis sama-sama menyaksikan bagaimana proses entri data tersebut. Dengan cara ini akan sangat jelas apa yang dimaksud oleh klien.
+</p>
+
+<p>
+Jika hanya disampaikan dengan deskripsi, kemungkinan interpretasi yang salah cukup terbuka lebar. Sedangkan dengan langsung menyaksikan, akan banyak mengurangi kesalahpahaman.
+</p>
+
+<h3>4. Kesimpulan</h3>
+
+<p>
+Beberapa pengalaman praktis di lapangan tentang cara melakukan analisa kebutuhan, dapat memberikan bantuan dan gambaran bagi pihak yang akan melakukan proses yang sama. Tentu saja ini bisa menjadi pertimbangan ketika akan melakukan proses analisa kebutuhan perangkat lunak pada masa yang akan datang.
+</p>
+
+<p>
+Ketrampilan komunikasi, penggunaan istilah yang sederhana, terbuka terhadap klien, serta menyaksikan sejumlah contoh nyata tentang apa yang dibutuhkan klien,  menjadi faktor yang berguna dalam proses analisa kebutuhan perangkat lunak.
+</p>
+
+<p>
+Daftar Pustaka<br>
+1. Steve McConnell, Code Complete, A Practical Handbook of Software Construction, Microsoft Press, 1994.<br>
+2. Roger S. Pressman, Software Engineering, A Practitioner's Approach, McGraw-Hill, 1992
+</p>
+
+<p>
+<font size=2><i>Dipresentasikan di Konferensi Nasional Sistem Informasi 2005, ITB, Januari 2005</i></font>
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

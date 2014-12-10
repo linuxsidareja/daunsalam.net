@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Tentang Bilangan Random pada Javascript</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+<style type="text/css">
+.bar { background : #ffc080; padding : 3px; font-size : 12px; font-family : monospace; margin : 0px 0px 1px 0px; }
+</style>
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 2 November 2009, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Tentang Bilangan Random pada Javascript</h2>
+
+<p>
+Permulaanya ketika saya membuat sebuah fungsi yang menggunakan javascript
+untuk menampilkan gambar secara random di halaman HTML.
+Ketika sudah selesai, tentu saja dicoba dengan cara alakadarnya,
+yaitu menampilkan halaman HTML tersebut berulang-ulang pada web browser,
+dan mengamati gambar yang muncul.
+</p>
+
+<p>
+Setelah sekian kali diamati, ada sesuatu yang rasanya kurang pas.
+Gambar yang berada pada posisi pertama dan paling akhir dalam daftar gambar
+yang akan ditampilkan secara random tersebut, sangat jarang terpilih untuk tampil.
+Menurut perkiraan saya, semua gambar memiliki kesempatan yang sama untuk muncul.
+Jika misalnya ada 10 gambar, maka masing-masing mempunyai kesempatan untuk
+tampil adalah sebesar 10%. Tetapi dalam pengujian alakdarnya itu,
+dua gambar ini serasa "kurang diberi kesempatan" :-)
+Pasti ada sesuatu! Maka curigalah saya.
+</p>
+
+<p>
+Dibuatlah sebuah program untuk meyakinkan, bahwa memang ada sesuatu dengan
+fungsi random yang dimiliki javascript.
+Program ini akan membuat bilangan random antara 1 sampai 10.
+Bilangan random dibuat sebanyak 10 ribu bilangan.
+Frekuensi kemunculan masing-masing bilangan dicatat, lalu ditampilkan.
+Lagi-lagi, sebelum melihat hasil program ini, menurut saya,
+setiap angka dari 1 sampai 10, memiliki persentase frekuensi kemunculan yang berdekatan.
+Tetapi ketika dijalankan, hasilnya memang tidak seperti harapan.
+Jadi terbukti bahwa memang ada "sesuatu" dengan fungsi random javascipt.
+Pengujian ini saya lakukan menggunakan 2 buah web browser,
+yaitu Firefox 2.0.0.18, dan Opera 9.62, pada Slackware 11.
+Kedua web browser menunjukkan hasil yang sama, yaitu angka 1 dan angka 10 hanya
+mendapat porsi sekitar setengah dari bilangan lainnya.
+</p>
+
+<p>
+Namun, sebelum saya betul-betul merasa yakin dengan dugaan ini,
+ada satu lagi yang hampir saya lupakan.
+Bisa jadi, cara saya dalam menghasilkan bilangan random antara 1 sampai 10
+yang sebenarnya punya masalah.
+Berikut ini adalah bagian yang digunakan untuk menghasilkan bilangan random.
+Mungkin bisa jadi, inilah sumber masalah itu.
+Tapi, rasanya bukan itu :-)
+</p>
+
+<pre>
+a = Math.round((Math.random() * 9) + 1);
+</pre>
+
+<p>
+Silahkan mencobanya melalui program yang saya sertakan dalam halaman ini.
+Klik pada tombol di bawah untuk membuat 10.000 angka random antara 1 sampai 10.
+Hasilnya akan langsung ditampilkan menggunakan grafik batang.
+Jika ingin mengulang, klik lagi pada tombol.
+Source code bisa langsung dilihat dengan cara melihat source halaman ini.
+</p>
+
+
+<form action=# onSubmit="return false()">
+<tt>Bilangan random dengan pembulatan menggunakan round</tt><br>
+<input type=button value="Buat Bilangan Random" onClick="buatrandom()">
+</form><br>
+<div id="hasil">
+</div>
+
+<script type="text/javascript">
+function buatrandom() {
+    hasil = "";
+    total = new Array (0,0,0,0,0,0,0,0,0,0,0);
+    for (i = 0; i < 10000; i++) {
+        a = Math.round((Math.random() * 9) + 1);
+        total[a] = total[a] + 1;
+    }
+    for (i = 1; i <= 10; i++) {
+        x = Math.round(total[i] / 4);
+        persentase = Math.round((total[i] / 10000) * 100);
+        hasil = hasil + "<div class=bar style=\"width:" + x + "px\"><b>" + i + "</b> (" + total[i] + ") " + persentase + "%</div>";
+    }
+    document.getElementById("hasil").innerHTML = hasil;
+}
+</script>
+
+<br><hr size=1><br>
+
+<p>
+Setelah mendapat tanggapan dari rekan di mailing list PHP,
+fungsi round yang digunakan pada cara di atas, diganti dengan fungsi floor.
+Hasilnya, tidak ada lagi bilangan yang "dianaktirikan" :-)
+Semua bilangan mendapat kesempatan sama untuk muncul.
+Silahkan lihat pada bagian berikut.
+</p>
+
+<form action=# onSubmit="return false()">
+<tt>Bilangan random dengan pembulatan menggunakan fungsi floor</tt><br>
+<input type=button value="Buat Bilangan Random" onClick="buatrandom2()">
+</form><br>
+<div id="hasil2">
+</div>
+
+<script type="text/javascript">
+function buatrandom2() {
+    hasil = "";
+    total = new Array (0,0,0,0,0,0,0,0,0,0,0);
+    for (i = 0; i < 10000; i++) {
+        a = Math.floor((Math.random() * 10) + 1);
+        total[a] = total[a] + 1;
+    }
+    for (i = 1; i <= 10; i++) {
+        x = Math.round(total[i] / 4);
+        persentase = Math.round((total[i] / 10000) * 100);
+        hasil = hasil + "<div class=bar style=\"width:" + x + "px\"><b>" + i + "</b> (" + total[i] + ") " + persentase + "%</div>";
+    }
+    document.getElementById("hasil2").innerHTML = hasil;
+}
+</script>
+
+<br><br>
+
+<p>
+Jika ditelusuri dengan baik, akan diperoleh di mana penyebabnya.
+fungsi <tt>Math.round()</tt> yang ada pada javascript adalah fungsi yang
+menghasilkan bilangan random antara 0 sampai 1, dalam bentuk pecahan.
+Dalam penggunaan secara umum, bilangan random yang diinginkan biasanya
+dalam bentuk bilangan bulat, misalnya antara 1 sampai 100.
+Bilangan yang dihasilkan oleh <tt>Math.round()</tt> tentu perlu dikalikan
+terlebih dahulu. Setelah dikalikan, karena masih dalam bentuk bilangan pecahan,
+diperlukan lagi proses pembulatan, agar diperoleh bilangan bulat.
+Pembulatan bisa dilakukan dengan tiga cara, yaitu <tt>floor</tt> untuk pembulatan
+ke bawah, <tt>ceil</tt> untuk pembulatan ke atas, dan <tt>round</tt> untuk pembulatan
+ke bilangan bulat terdekat.
+</p>
+
+<p>
+Disinilah masalah itu timbul. Jika menggunakan <tt>round</tt>,
+maka bilangan terbawah dan tertinggi akan lebih sedikit muncul,
+dibanding bilangan yang berada di antara keduanya.
+Mari kita lihat ilustrasi berikut :
+</p>
+
+<pre>
+0----0.5----1----1.5----2----2.5----3----3.5----4----4.5----5
+______|___________|___________|___________|___________|______
+</pre>
+
+<p>
+Apabila dilakukan pembulatan, maka pembulatan yang akan menghasilkan bilangan
+0 dan 5 kesempatannya lebih sedikit dibanding hasil pembulatan yang akan
+menghasilkan bilangan 1, 2, 3, atau 4. Pembulatan yang menghasilkan bilangan 0
+hanyalah jika hasil random berada di rentang 0 sampai 0.5.
+Demikian juga pembulatan yang akan menghasilkan 5 jika bilangan random yang
+muncul adalah dari 4.5 sampai 5. Sedangkan, misal diambil contoh untuk hasil
+pembulatan menjadi 2, berada dalam rentang yang lebih luas, yaitu dari 1.5
+sampai 2.5. Hal ini sudah cukup menjelaskan mengapa kemunculan bilangan terkecil
+dan terbesar lebih sedikit dibanding yang lainnya.
+</p>
+
+<p>
+Sedangkan jika menggunakan fungsi <tt>floor</tt>, mari kita lihat ilustrasi berikut :
+</p>
+
+<pre>
+0--------1--------2--------3--------4--------5
+________|________|________|________|________|
+</pre>
+
+<p>
+Kesempatan untuk hasil pembulatan pada semua bilangan menjadi rata.
+Yang perlu diperhatikan adalah, batas atas perlu dilakukan penyesuaian.
+Misalnya jika akan mendapatkan bilangan random dari 1 sampai 100,
+bisa menggunakan rumus seperti berikut :
+</p>
+
+<pre>
+a = Math.floor((Math.random() * 100) + 1);
+</pre>
+
+<br><br>
+<p style="background:#fff0c0;padding:15px;">
+Terima kasih untuk tanggapan dari Siyam Junianto, dan Enggal Mandiri.
+Link berikut memberi penjelasan yang sama, menggunakan tabel
+yang lebih jelas <a href="http://imonky.com/j/randomjs.html">http://imonky.com/j/randomjs.html</a>
+</p>
+
+</body>
+</html>

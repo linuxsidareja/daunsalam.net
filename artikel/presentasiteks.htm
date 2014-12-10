@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Presentasi dengan Teks</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 4 Juni 2007, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Presentasi dengan Teks</h2>
+
+<p>
+Untuk membuat atau menampilkan sebuah presentasi dengan komputer, lazimnya menggunakan software presentasi. Misalnya Powerpoint yang merupakan produk Microsoft, program presentasi dari OpenOffice atau KOffice, atau yang agak beda cara pembuatannya seperti MagicPoint. Tampilan yang dibuat dengan program tersebut bisa sangat bagus, apalagi di tangan orang yang kreatif.
+</p>
+
+<p>
+Program-program di atas tentu saja tampil dalam mode grafis. Dan umumnya komputer sekarang sudah tampil dalam mode tersebut. Dan sekarang saya menyajikan ide sederhana untuk membuat presentasi dalam mode teks. Presentasi ini tampil pada konsol Linux, dan hanya terdiri dari file teks biasa. Sangat primitif. Lalu, apa alasannya membuat seperti ini ? Tidak Ada :)
+</p>
+
+<p>
+Begini kira-kira cara kerjanya. Setiap halaman presentasi dibuat dalam satu buah file teks. Misalnya halaman 1 berisi judul presentasi, maka buat sebuah file dengan nama <b>1</b>, lalu isilah dengan teks biasa yang menunjukkan judul presentasi. Demikian seterusnya. Setiap satu file menyajikan satu halaman. Nama file urut dari 1 sampai sejumlah halaman yang diperlukan.
+</p>
+
+<p>
+Untuk menambah bagus tampilan, bisa digunakan program <b>figlet</b> untuk mendapatkan huruf yang menarik sebagai judul. Apabila memungkinkan, bisa ditambahkan ASCII ART untuk grafis atau ornamen pemanis. Nah, file ini kemudian ditampilkan pada layar menggunakan script BASH. Fungsi script ini juga amat sederhana, yaitu menerima input dari keyboard, lalu menampilkan halaman presentasi yang kita buat sebelumnya. Jika ditekan tombol n, akan menampilkan halaman berikutnya, dan tombol p untuk halaman sebelumnya. Tombol q untuk selesai. Variabel JML yang ada dalam script ini diisi dengan jumlah halaman presentasi yang dibuat. Tempatkan script ini pada direktori yang sama dengan file-file presentasi. Buat hak akses menjadi executable, maka jadilah presentasi dengan tampilan teks. Tentu saja bisa dibuat script yang lebih baik untuk keperluan ini.
+</p>
+
+<p>
+Berikut ini adalah script yang digunakan untuk menampilkan file presentasi.
+</p>
+
+
+
+<pre>
+#!/bin/bash
+
+clear
+Z="a"
+JML=3
+I=1
+
+while [ $Z != "q" ] ; do
+
+read -s -n 1 -a Z
+
+if [ $Z = "p" ] ; then
+  if [ $I -gt 1 ] ; then
+    I=$(( $I - 1))
+    clear
+    more $I
+  fi
+fi
+
+if [ $Z = "n" ] ; then
+  if [ $I -lt $JML ] ; then
+    I=$(( $I + 1))
+    clear
+    more $I
+  fi
+fi
+
+done
+
+clear
+echo "Terima Kasih"
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

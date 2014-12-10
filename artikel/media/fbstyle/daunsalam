@@ -1,0 +1,138 @@
+# style name : daunsalam
+# created by : yanmarshus
+# email      : yan@daunsalam.net
+# date       : december 2, 2005
+
+
+# ---------------------------------------------------------------------
+# global section
+# ---------------------------------------------------------------------
+
+*font: glisp-15
+*borderWidth: 1
+*borderColor: #043624
+*bevelWidth: 0
+
+
+# ---------------------------------------------------------------------
+# toolbar section
+# ---------------------------------------------------------------------
+
+toolbar: flat
+toolbar.color: #7da18f
+toolbar.textColor: #ffffff
+toolbar.height: 32
+toolbar.justify: center
+
+toolbar.workspace: parentrelative
+toolbar.workspace.borderWidth: 0
+
+toolbar.button: parentrelative
+toolbar.button.borderWidth: 0
+toolbar.button.picColor: #245644
+
+toolbar.button.pressed: sunken
+toolbar.button.pressed.color: #b2aa4a
+toolbar.button.pressed.picColor: #000000
+
+toolbar.clock: sunken
+toolbar.clock.borderWidth: 0
+toolbar.clock.color: #c8c478
+toolbar.clock.textColor: #245644
+
+
+# ---------------------------------------------------------------------
+# menu section
+# ---------------------------------------------------------------------
+
+menu.title: flat gradient vertical interlaced
+menu.title.color: #a2bcac
+menu.title.colorTo: #143e30
+menu.title.textColor: #ffffff
+menu.title.justify: center
+
+menu.frame: flat gradient vertical
+menu.frame.color: #e4f0e4
+menu.frame.colorTo: #a2bcac
+menu.frame.textColor: #042e20
+menu.frame.disableColor: #669280
+menu.frame.justify: left
+
+menu.bullet: square
+menu.bullet.position: right
+
+menu.hilite: sunken
+menu.hilite.color: #b2aa4a
+menu.hilite.textColor: #ffffff
+
+
+# ---------------------------------------------------------------------
+# window section
+# ---------------------------------------------------------------------
+
+window.justify: center
+window.handleWidth: 3
+window.title.height: 24
+
+! focus ---------------------------------------------------------------
+
+window.title.focus: flat gradient vertical
+window.title.focus.color: #a2bcac
+window.title.focus.colorTo: #143e30
+
+window.label.focus: parentrelative
+window.label.focus.textColor: #ffffff
+
+window.handle.focus: flat
+window.handle.focus.color: #a3bdad
+
+window.grip.focus: flat
+window.grip.focus.color: #839d8d
+
+window.button.focus: parentrelative
+window.button.focus.picColor: #ffffff
+
+window.button.pressed: sunken
+window.button.pressed.color: #b2aa4a
+window.button.pressed.picColor: #042e20
+
+window.frame.focus: flat solid
+window.frame.focus.color: #ffffff
+
+window.tab.justify: center
+window.tab.label.focus: flat gradient vertical
+window.tab.label.focus.color: #a2bcac
+window.tab.label.focus.colorTo: #143e30
+window.tab.label.focus.textColor: #ffffff
+
+! unfocus -------------------------------------------------------------
+
+window.title.unfocus: flat solid
+window.title.unfocus.color: #a2bcac
+
+window.label.unfocus: flat solid
+window.label.unfocus.color: #a2bcac
+window.label.unfocus.textColor: #042e20
+
+window.handle.unfocus: flat solid
+window.handle.unfocus.color: #a2bcac
+
+window.grip.unfocus: flat solid
+window.grip.unfocus.color: #a2bcac
+
+window.button.unfocus: parentrelative
+window.button.unfocus.picColor: #042e20
+
+window.frame.unfocus: flat solid
+window.frame.unfocus.color: #ffffff
+
+window.tab.label.unfocus: flat solid
+window.tab.label.unfocus.color: #a2bcac
+window.tab.label.unfocus.textColor: #042e20
+
+
+# ---------------------------------------------------------------------
+# rootCommand section
+# ---------------------------------------------------------------------
+
+rootCommand: bsetroot -solid rgb:14/48/34

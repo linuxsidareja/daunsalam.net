@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Php 5 dan SQLite</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 16 Oktober 2004, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Php 5 dan SQLite</h2>
+
+<p>
+Mulai versi 5, php menyertakan SQLite sebagai salah satu database yang didukung oleh bahasa pemrograman ini. Pada versi sebelumnya, sudah cukup banyak database yang didukung oleh php, seperti MySql, Postgresql, Oracle, dBase, DBPlus, Informix, Interbase, dll. Dengan penambahan SQLite pada versi 5, semakin kaya dukungan php terhadap database. Pilihan yang banyak tidak selalu berarti menguntungkan. Adakalanya malah menyulitkan untuk memutuskan akan menggunakan database yang mana untuk sebuah aplikasi yang akan dibuat.
+</p>
+
+<p>
+SQLite merupakan sebuah <i>embedded library</i> yang menggunakan sebagian besar standar SQL 92. Sesuai namanya (Lite), memang mempunyai tujuan sebuah sistem database yang kecil, sederhana, dan bisa menghasilkan respon yang cepat. SQLite menyimpan data hanya dalam sebuah file. Dibanding dengan server database yang kompleks seperti Postgresql atau MySql, pada kebutuhan sederhana, SQLite memiliki kemampuan yang lebih cepat.
+</p>
+
+<p>
+Untuk aplikasi yang dibangun dengan php, dan membutuhkan sebuah penyimpanan data, SQLite bisa menjadi pilihan yang menarik. Jika dilihat dari modelnya yang sederhana, kita mengambil kesimpulan sederhana bahwa SQLite dapat digunakan untuk aplikasi yang "tak terlalu berat" dalam menggunakan database. Tapi mungkin saja "sesuatu yang lebih kompleks" bisa juga ditangani dengan SQLite.
+</p>
+
+<p>
+Sebagai contoh, aplikasi seperti guestbook, weblog pribadi, atau yang sejenis, bisa mengambil keuntungan dengan menggunakan SQLite. Keuntungan dari SQLite diantaranya adalah :
+</p>
+
+<ul>
+<li>Tidak perlu membuka sebuah koneksi seperti penggunaan pada server database. Dengan tidak adanya komunikasi antara client-server, ini meningkatkan kecepatan akses terhadap database.</li>
+<li>Data disimpan dalam sebuah file. Memudahkan penanganan file data.</li>
+<li>Tidak perlu adanya sebuah proses server database berjalan pada komputer. Ini artinya penghematan sumber daya komputer.</li>
+</ul>
+
+<p>
+Seperti juga kebanyakan hal, SQLite juga memiliki kekurangan. Tipe data yang didukung tidaklah banyak. Dalam beberapa kasus, hal ini bisa menyebabkan query yang lambat. Penyimpanan data dalam satu file, yang di satu sisi adalah hal yang menguntungkan, untuk keadaan lain menjadi sebuah kekurangan. Melakukan fungsi lock, bisa jadi hal yang sulit pada SQLite.
+</p>
+
+<p>
+Apakah SQLite menjadi pilihan ? Itu sangat tergantung pada kebutuhan kita dalam membuat sebuah aplikasi. Informasi selengkapnya SQLite dapat dilihat di www.sqlite.org. Untuk php dapat dilihat di www.php.net.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

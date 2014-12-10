@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: kalender</title>
+
+<!-- style untuk mengatur tampilan form kalender -->
+<style type="text/css">
+.pt_tu { border:solid 1px; border-color:#889490; background-color:#B8C4C0; }
+.pt_hb { width:27px; font-size:10px; text-align:center; background-color:#C8D4D0; border-top:solid 1px #F0F0F0; border-right:solid 1px #808080; border-bottom:solid 1px #606060; border-left:solid 1px #F0F0F0; }
+.pt_hm { width:27px; font-size:10px; text-align:center; background-color:#D0A0A0; border-top:solid 1px #F0F0F0; border-right:solid 1px #808080; border-bottom:solid 1px #606060; border-left:solid 1px #F0F0F0; }
+.pt_kb { width:54px; font-size:10px; text-align:center; background-color:#B8C4C0; border:0px; }
+.pt_hi { width:27px; font-size:10px; text-align:center; background-color:#78B3E0; border-top:solid 1px #F0F0F0; border-right:solid 1px #808080; border-bottom:solid 1px #606060; border-left:solid 1px #F0F0F0; }
+.pt_nh { font-size:12px; text-align:center; height:20px;}
+</style>
+
+
+<script type="text/javascript">
+<!-- yanmarshus (yan[at]daunsalam[dot]net) (c)2004 -->
+
+<!-- fungsi untuk mengisi form kalender dengan bulan dan tahun yang dipilih -->
+function buatkalender(bulan,tahun) {
+  tanggalku = new Date(tahun,bulan,1);
+  haripertama = tanggalku.getDay();
+  jhsb = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+  jmlhari = jhsb[bulan];
+  if (((0 == (tahun % 4)) && ( (0 != (tahun % 100)) || (0 == (tahun % 400)))) && bulan == 1) { jmlhari = 29; }
+
+  tanggalsekarang = new Date();
+  tgl_s = tanggalsekarang.getDate();
+  bln_s = tanggalsekarang.getMonth();
+  thn_s = tanggalsekarang.getFullYear();
+
+  j = 1;
+  for (i = 0; i < 42; i++) {
+    k = i + 8;
+    if ((k % 7) == 1) {
+      document.kalender.elements[k].className = "pt_hm";
+    } else {
+      document.kalender.elements[k].className = "pt_hb";
+    }
+    if (i < haripertama) {
+      document.kalender.elements[k].value = "";
+    } else {
+      if (j <= jmlhari) {
+        document.kalender.elements[k].value = j;
+        if ((tgl_s == j) && (bln_s == bulan) && (thn_s == tahun)) {
+          document.kalender.elements[k].className = "pt_hi";
+        }
+        j = j + 1;
+      } else {
+        document.kalender.elements[k].value = "";
+      }
+    }
+  }
+  document.kalender.bulan.value = bulan;
+  document.kalender.tahun.value = tahun;
+  lnb = new Array("Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des");
+  document.kalender.namabulantahun.value = lnb[bulan] + " " + tahun;
+}
+
+<!-- fungsi untuk mengambil data bulan dan tahun sekarang -->
+function bulansekarang() {
+  tanggalskrg = new Date();
+  bulan = tanggalskrg.getMonth();
+  tahun = tanggalskrg.getFullYear();
+  buatkalender(bulan,tahun);
+}
+
+<!-- fungsi untuk mengambil data bulan berikut -->
+function bulanberikut() {
+  bulan = document.kalender.bulan.value;
+  tahun = document.kalender.tahun.value;
+  bulan = ++bulan;
+  if (bulan > 11) {
+    bulan = 0;
+    tahun = ++tahun;
+  }
+  buatkalender(bulan,tahun);
+}
+
+<!-- fungsi untuk mengambil data tahun berikut -->
+function tahunberikut() {
+  bulan = document.kalender.bulan.value;
+  tahun = document.kalender.tahun.value;
+  tahun = ++tahun;
+  buatkalender(bulan,tahun);
+}
+
+<!-- fungsi untuk mengambil data bulan sebelum -->
+function bulansebelum() {
+  bulan = document.kalender.bulan.value;
+  tahun = document.kalender.tahun.value;
+  bulan = --bulan;
+  if (bulan < 0) {
+    bulan = 11;
+    tahun = --tahun;
+  }
+  buatkalender(bulan,tahun);
+}
+
+<!-- fungsi untuk mengambil data tahun sebelum -->
+function tahunsebelum() {
+  bulan = document.kalender.bulan.value;
+  tahun = document.kalender.tahun.value;
+  tahun = --tahun;
+  buatkalender(bulan,tahun);
+}
+
+<!-- fungsi yang akan dieksekusi ketika tanggal tertentu di-klik pada kalender -->
+<!-- silahkan diganti sesuai dengan keperluan anda -->
+function kliktgl(nilai) {
+  bulan = document.kalender.bulan.value;
+  tahun = document.kalender.tahun.value;
+  bulan = ++bulan;
+  if (nilai != "") {
+    alert("Anda klik tanggal " + nilai + " " + bulan + " " + tahun);
+  }
+}
+
+</script>
+
+</head>
+
+
+<!-- ketika halaman di-load eksekusi fungsi bulansekarang -->
+<!-- bisa juga untuk bulan tertentu dengan fungsi buatkalender(??,????) -->
+<body onload="bulansekarang()">
+
+
+<!-- awal form untuk kalender -->
+<form name="kalender" action="#">
+<input type="hidden" name="bulan">
+<input type="hidden" name="tahun">
+<table class="pt_tu" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td><input class="pt_hb" type="button" value="<<" onclick="tahunsebelum()"></td>
+<td><input class="pt_hb" type="button" value="<" onclick="bulansebelum()"></td>
+<td><input class="pt_hb" type="button" value="o" onclick="bulansekarang()"></td>
+<td><input class="pt_hb" type="button" value=">" onclick="bulanberikut()"></td>
+<td><input class="pt_hb" type="button" value=">>" onclick="tahunberikut()"></td>
+<td colspan=2><input class="pt_kb" type="text" name="namabulantahun" readonly></td>
+</tr>
+<tr class="pt_nh"><td>M</td><td>S</td><td>S</td><td>R</td><td>K</td><td>J</td><td>S</td></tr>
+<tr>
+<td><input class="pt_hm" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+</tr>
+<tr>
+<td><input class="pt_hm" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+</tr>
+<tr>
+<td><input class="pt_hm" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+</tr>
+<tr>
+<td><input class="pt_hm" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+</tr>
+<tr>
+<td><input class="pt_hm" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+</tr>
+<tr>
+<td><input class="pt_hm" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+<td><input class="pt_hb" type="button" onclick="kliktgl(this.value)"></td>
+</tr>
+</table>
+</form>
+<!-- akhir form untuk kalender -->
+
+
+
+<pre>
+.---------------------------------------------.
+: Kalender dengan JavaScript                  :
+: Yanmarshus ( yan at daunsalam dot net )     :
+: Silahkan digunakan sesuai kebutuhan anda.   :
+: ------------------------------------------- :
+: Untuk melihat kode javascript kalender,     :
+: lihat saja source dari halaman html ini.    :
+`---------------------------------------------'
+</pre>
+<a href="../index.htm">daunsalam.net [home]</a>
+
+</body>
+</html>

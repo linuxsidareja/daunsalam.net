@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: atc : "old school game"</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 18 April 2007, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>atc : "old school game"</h2>
+
+<p>
+Judulnya memang bermaksud untuk gaya-gaya-an :)<br>
+atc adalah singkatan dari air traffic controller. Dan atc yang disini adalah
+sebuah game yang merupakan bagian dari BSDGames. Game ini berupa simulasi.
+Kita seolah-olah menjadi seorang yang bertugas mengatur lalu lintas pesawat
+yang terdeteksi dalam layar radar. Tugasnya sederhana. Mengarahkan pilot pesawat
+sesuai tujuan pesawat bersangkutan. Jika ada pesawat yang salah arah,
+atau mendarat tidak pada tempatnya, maka permainan ini berakhir.
+</p>
+
+<p>
+Jika dalam tugas atc yang sebenarnya, komunikasi dilakukan dengan peralatan
+radio, dan disampaikan dalam bahasa lisan, maka dalam game ini, instruksi
+yang disampaikan pada pilot pesawat melalui sejumlah perintah yang ditulis.
+Game ini berjalan dalam mode konsol. Tampilan yang kita lihat di layar
+menggunakan karakter. Screenshot game ini bisa dilihat pada gambar berikut :
+</p>
+
+<script type="text/javascript">
+gbr1 = new Image();
+gbr2 = new Image();
+gbr1.src = "media/atc/radar1.jpg";
+gbr2.src = "media/atc/radar2.jpg";
+i = 1;
+function ganti() {
+  if (i == 0) {
+    document.ssatc.src = gbr1.src;
+    i = 1;
+  } else {
+    document.ssatc.src = gbr2.src;
+    i = 0;
+  }
+}
+</script>
+<img name="ssatc" src="media/atc/radar1.jpg">
+<form action="" onSubmit="return false">
+<input type="button" value="Tampil/Sembunyi" onClick="ganti()"> Keterangan
+</form>
+<br>
+
+<p>
+Ada beberapa bagian dalam tampilan game ini.<br>
+&bull; <b>Radar</b> Merupakan tampilan utama dari radar. Dalam radar terlihat
+sejumlah objek, seperti pesawat, airport, exit point, dan beacon.
+Dari tampilan radar inilah kita bisa melihat situasi lalu lintas pesawat.<br>
+&bull; <b>Information Area</b> Menampilkan sejumlah informasi.
+Berada di bagian kanan atas. Paling atas menampilkan waktu permainan,
+dan jumlah pesawat yang sudah berhasil "diselamatkan" sesuai tujuan.
+Kemudian di bawahnya ada daftar pesawat dan tujuannya.<br>
+&bull; <b>Input Area</b> Adalah tempat mengetikkan perintah yang akan
+ditujukan pada pesawat tertentu. Bagian ini berada di bawah radar.
+</p>
+
+<p>
+Ketika awal permainan, biasanya belum ada pesawat yang tampil di radar.
+Sesaat kemudian akan muncul pesawat pertama yang memasuki area radar.
+Pesawat ini akan ditampilkan dalam daftar di sebelah kanan, dalam bentuk
+<pre>
+a7 E3
+</pre>
+Daftar pesawat ini yang memberi informasi pada pemain untuk menentukan
+perintah apa yang akan diberikan pada pesawat tersebut.
+Pada contoh di atas, artinya, pesawat <u>a</u> dengan ketinggian <u>7</u>000 kaki.
+Pesawat ini akan menuju ke exit point <u>E3</u>. a7 adalah informasi kode pesawat
+dan ketinggiannya. a7 artinya pesawat dengan kode a, dan ketinggian 7000 kaki.
+Sedangkan E3 adalah tujuan pesawat, yaitu exit point nomor 3.
+</p>
+
+<p>
+Setiap pesawat memiliki satu kode menggunakan karakter A sampai Z.
+Jika menggunakan huruf kapital (A-Z) menunjukkan pesawat propeler,
+sedangkan kode pesawat dengan huruf kecil (a-z) adalah pesawat jet.
+Pesawat jet memiliki kecepatan lebih tinggi dari pesawat propeler.
+Kemudian satu kode pesawat diiringi dengan kode ketinggian.
+Contoh : <b>B7</b> artinya pesawat propeler berkode B dengan ketinggian 7000 kaki.
+</p>
+
+<p>
+Exit point selalu berada di garis pinggir radar. Exit point menggunakan
+kode angka. Kode <b>E3</b> artinya exit point nomor 3.
+Airport juga menggunakan kode angka, namun disertai sebuah tanda (<tt>^,V,<,></tt>).
+Tanda (<tt>^,V,<,></tt>) menunjukkan arah pesawat jika lepas landas dari airport ini.
+Kode <b>^2</b> artinya airport nomor 2 dengan arah lepas landas ke utara.
+Beacon juga menggunakan kode angka yang disertai dengan tanda *.
+Kode <b>*1</b> artinya beacon nomor 1.
+</p>
+
+<p>
+Ada sejumlah perintah yang bisa diberikan pada pesawat.
+Misalnya menentukan arah dan menentukan ketinggian.
+Contoh perintah yang diberikan seperti berikut ini :
+<pre>
+aa9       (pesawat a ke ketinggian 9000 kaki)
+mtq       (pesawat m ke arah 315)
+dtwab2    (pesawat d ke arah utara pada beacon nomor 2)
+</pre>
+</p>
+
+<p>
+Untuk keterangan lengkap tentang game atc ini, tinggal lihat manual
+dengan perintah <b>man atc</b>. Informasi tentang perintah yang bisa
+diberikan, dan keterangan lengkap permainan ini sudah ada pada
+halaman manual tersebut.
+</p>
+
+<p>
+Dengan perintah-perintah seperti inilah kita bisa mengatur lalu lintas
+pesawat yang ada dalam radar permainan ini. Selama tidak ada pesawat
+yang salah arah atau salah dalam pendaratan, maka simulasi akan berjalan
+terus. Makin banyak pesawat yang bisa "diselamatkan", dan makin panjang
+waktu bermain anda, kemungkinan anda cocok untuk bekerja di menara atc :)
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Format Angka dengan JavaScript</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 26 Oktober 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Format Angka dengan JavaScript</h2>
+
+<p>
+Input textbox pada HTML, adalah sebuah form input yang cukup sederhana. Karena sederhana, maka apa yang kita tulis dalam textbox tersebut, maka demikian pula tampilnya. Kalau untuk teks sederhana, seperti nama, alamat email, nomor telepon, tentu textbox ini sudah cukup memadai.
+</p>
+
+<p>
+Namun, ketika kita memasukkan angka, maka bentuk textbox sederhana seperti ini agak kurang membantu. Kalkulator adalah salah satu contoh yang menarik dalam menampilkan angka yang kita tulis melalui keypad-nya. Sebagian besar kalkulator bisa menampilkan tanda pemisah untuk setiap 3 angka (<i>thousand separator</i>). Dengan adanya pemformatan seperti ini, kita lebih mudah dalam melihat angka yang kita tulis.
+</p>
+
+<p>
+Atas model seperti di atas, maka saya membuat sebuah fungsi dalam JavaScript yang bisa memformat angka yang dimasukkan dalam textbox secara <i>realtime</i>. Angka akan diformat dengan memberi pemisah ribuan, saat kita mengetikkan angka tersebut.
+</p>
+
+<p>
+Fungsinya cukup sederhana. Nilai (value) yang ada dalam textbox akan diambil oleh fungsi. Kemudian dengan regex, semua yang tidak berupa angka dihapus. Setelah itu dilakukan pemformatan untuk menambahkan tanda pemisah untuk setiap 3 angka. Hasil pemformatan ini dikembalikan ke textbox yang bersangkutan. Fungsi formatangka ini akan dieksekusi setiap sebuah tombol selesai ditekan, yaitu dengan event onkeyup.
+</p>
+
+<p>
+Ketika data dikirim, maka script yang menerima variabel ini, perlu membersihkan dulu data yang dikirim dari karakter yang digunakan sebagai pemisah ribuan. Atau dapat juga memanfaatkan JavaScript lagi sebelum form di-submit.
+</p>
+
+<p>
+Agar angka dalam textbox rata kanan, maka digunakan CSS untuk menjadikan teks dalam textbox menjadi rata kanan. Untuk contoh lengkap, silahkan lihat script di bawah. Hasil dari script ini bisa dicobakan pada textbox berikut ini.
+</p>
+
+<script type="text/javascript">
+function formatangka(objek) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + "." + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
+}
+</script>
+<form action="" onSubmit="return false">
+<input type="text" onkeyup="formatangka(this)" style="text-align : right; font-size : 28px">
+</form>
+<br>
+
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+
+&lt;style&gt;
+.ratakanan { text-align : right; }
+&lt;/style&gt;
+
+&lt;script language="JavaScript"&gt;
+function formatangka(objek) {
+   a = objek.value;
+   b = a.replace(/[^\d]/g,"");
+   c = "";
+   panjang = b.length;
+   j = 0;
+   for (i = panjang; i &gt; 0; i--) {
+     j = j + 1;
+     if (((j % 3) == 1) && (j != 1)) {
+       c = b.substr(i-1,1) + "." + c;
+     } else {
+       c = b.substr(i-1,1) + c;
+     }
+   }
+   objek.value = c;
+}
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;form name="f"&gt;
+&lt;input type="text"
+       name="a"
+       onkeyup="formatangka(this)"
+       class="ratakanan"&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

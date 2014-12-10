@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Fungsi Kalender</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+
+<style type="text/css">
+.tr_judul {
+  font-weight : bold;
+  text-align : center;
+  background : #d0d0d0;
+}
+.tr_terang {
+  text-align : center;
+  background : #f0f0f0;
+}
+.tabel_data {
+  background : #d0d0d0;
+}
+</style>
+
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, Januari 2004, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Fungsi Kalender</h2>
+
+<p>
+Fungsi kalender ini berguna untuk menampilkan sebuah kalender pada bulan tertentu. Dibuat dalam bahasa PHP (<i>untuk kalender dengan javascript <a href="kaljs.htm">lihat di sini</a></i>). Jika anda membutuhkan sebuah kalender sederhana pada halaman situs, maka fungsi ini bisa jadi cukup berguna untuk keperluan tersebut.
+</p>
+
+<p>
+<a href="media/kalender.txt">kalender.txt</a> : File yang berisi source code fungsi kalender. Download file tersebut, dan simpan dengan nama fkalender.php
+</p>
+
+<p>Berikut ini adalah contoh penggunaan fungsi tersebut :</p>
+
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+.tr_judul {
+  font-weight : bold;
+  text-align : center;
+  background : #d0d0d0;
+}
+.tr_terang {
+  text-align : center;
+  background : #f0f0f0;
+}
+.tabel_data {
+  background : #d0d0d0;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;?php
+include "fkalender.php";
+echo buatkalender(12,3,2005); /* menampilkan kalender */
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Dari contoh di atas Untuk menampilkan kalender, digunakan :</p>
+
+<pre>
+echo buatkalender(12,3,2005);
+</pre>
+
+<p>
+Argumen pertama dari fungsi buatkalender (pada contoh di atas 12) merupakan tanggal. Argumen kedua adalah bulan, yaitu 3, dan argumen terakhir adalah tahun. Sehingga pemanggilan fungsi buatkalender(12,3,2005) akan menghasilkan kalender bulan Maret 2005, dengan menampilkan tanggal 12 secara bold. Hasilnya seperti berikut ini.
+</p>
+
+<table cellspacing="1" cellpadding="2" border="0" class="tabel_data">
+<tr class="tr_judul"><td>M</td><td>S</td><td>S</td><td>R</td><td>K</td><td>J</td><td>S</td></tr>
+<tr align="center" class="tr_terang"><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+<tr align="center" class="tr_terang"><td><font color="#900000">6</font></td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td><b>12</b></td></tr>
+<tr align="center" class="tr_terang"><td><font color="#900000">13</font></td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+<tr align="center" class="tr_terang"><td><font color="#900000">20</font></td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+<tr align="center" class="tr_terang"><td><font color="#900000">27</font></td><td>28</td><td>29</td><td>30</td><td>31</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+<br>
+
+<p>
+Untuk mengganti tampilan kalender, dapat dilakukan melalui perubahan pada style. Kalender ini selanjutnya bisa dikembangkan dengan menambahkan fungsi navigasi, serta menampilkan nama bulan dan tahun dari kalender tersebut. Fungsi kalender ini memang belum menampilkan nama bulan dan tahun dari kalender yang ditampilkan.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

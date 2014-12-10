@@ -1,0 +1,177 @@
+<html>
+<head>
+<title>daunsalam.net :: JSChord</title>
+
+<style type="text/css">
+body  { margin : 25px; }
+select { font-size : 24px; }
+input { font-size : 24px; }
+li { margin : 0px 0px 15px 0px; }
+li:first-line { font-weight : bold; }
+.th   { height : 80px; z-index : 2; position : absolute; }
+.thh  { width : 24px; background : #000000; border : 1px solid #000000; }
+.thtb { width : 34px; }
+.thtk { width : 16px; }
+.thts { width : 12px; }
+.tp   { height : 120px; }
+.tpp  { width : 32px; background : #FFFFFF; border : 1px solid #000000; }
+.info { display : none; border : 1px solid #808080; background : #F0F0F0; padding : 25px; font-family : sans-serif; }
+</style>
+
+<script type="text/javascript">
+
+var a = 0;
+var b = 0;
+var c = 0;
+var i = 0;
+idtombol = new Array("","t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13","t14","t15","t16","t17","t18","t19","t20","t21","t22","t23","t24");
+cltombol = new Array("","#FFFFFF","#000000","#FFFFFF","#000000","#FFFFFF","#FFFFFF","#000000","#FFFFFF","#000000","#FFFFFF","#000000","#FFFFFF","#FFFFFF","#000000","#FFFFFF","#000000","#FFFFFF","#FFFFFF","#000000","#FFFFFF","#000000","#FFFFFF","#000000","#FFFFFF");
+
+function buat_chord() {
+  reset_warna_tombol();
+  basis = document.selektor.root.value;
+  jenis = document.selektor.varian.value;
+  a = parseInt(basis);
+  switch (jenis) {
+    case "mayor" : b = a + 4; c = a + 7; break;
+    case "minor" : b = a + 3; c = a + 7; break;
+    case "aug"   : b = a + 4; c = a + 8; break;
+    case "6"     : b = a + 4; c = a + 9; break;
+    case "7"     : b = a + 4; c = a + 10; break;
+    case "dim"   : b = a + 3; c = a + 6; break;
+    case "sus"   : b = a + 5; c = a + 7; break;
+  }
+  ida = "t" + a;
+  idb = "t" + b;
+  idc = "t" + c;
+  if (basis != "0") {
+    document.getElementById(ida).style.background = "#C08080";
+    document.getElementById(idb).style.background = "#C08080";
+    document.getElementById(idc).style.background = "#C08080";
+  }
+}
+
+function reset_warna_tombol() {
+  for (i = 1; i <= 24; i++) {
+    warna = cltombol[i];
+    idtbl = idtombol[i];
+    document.getElementById(idtbl).style.background = warna;
+  }
+}
+
+function tampilkan_info() {
+  if (document.getElementById("ket").style.display == "block") {
+    document.getElementById("ket").style.display = "none";
+  } else {
+    document.getElementById("ket").style.display = "block";
+  }
+}
+
+</script>
+
+</head>
+<body>
+
+<!-- tampilan untuk tombol piano/keyboard yang hitam --> 
+<table border="0" cellspacing="0" cellpadding="0" class="th">
+<tr>
+<td          class="thtk">&nbsp;</td>
+<td id="t2"  class="thh" >&nbsp;</td>
+<td          class="thtk">&nbsp;</td>
+<td id="t4"  class="thh" >&nbsp;</td>
+<td          class="thtb">&nbsp;</td>
+<td id="t7"  class="thh" >&nbsp;</td>
+<td          class="thts">&nbsp;</td>
+<td id="t9"  class="thh" >&nbsp;</td>
+<td          class="thts">&nbsp;</td>
+<td id="t11" class="thh" >&nbsp;</td>
+<td          class="thtb">&nbsp;</td>
+<td id="t14" class="thh" >&nbsp;</td>
+<td          class="thtk">&nbsp;</td>
+<td id="t16" class="thh" >&nbsp;</td>
+<td          class="thtb">&nbsp;</td>
+<td id="t19" class="thh" >&nbsp;</td>
+<td          class="thts">&nbsp;</td>
+<td id="t21" class="thh" >&nbsp;</td>
+<td          class="thts">&nbsp;</td>
+<td id="t23" class="thh" >&nbsp;</td>
+</tr>
+</table>
+
+<!-- tampilan untuk tombol piano/keyboard yang putih -->
+<table border="0" cellspacing="0" cellpadding="0" class="tp">
+<tr>
+<td id="t1"  class="tpp">&nbsp;</td>
+<td id="t3"  class="tpp">&nbsp;</td>
+<td id="t5"  class="tpp">&nbsp;</td>
+<td id="t6"  class="tpp">&nbsp;</td>
+<td id="t8"  class="tpp">&nbsp;</td>
+<td id="t10" class="tpp">&nbsp;</td>
+<td id="t12" class="tpp">&nbsp;</td>
+<td id="t13" class="tpp">&nbsp;</td>
+<td id="t15" class="tpp">&nbsp;</td>
+<td id="t17" class="tpp">&nbsp;</td>
+<td id="t18" class="tpp">&nbsp;</td>
+<td id="t20" class="tpp">&nbsp;</td>
+<td id="t22" class="tpp">&nbsp;</td>
+<td id="t24" class="tpp">&nbsp;</td>
+</tr>
+</table>
+
+<br><br>
+
+<!-- form untuk memilih jenis chord -->
+<form name="selektor" action="" onSubmit="return false">
+<select name="root" onChange="buat_chord()">
+<option value="0">-</option>
+<option value="1">C</option>
+<option value="2">C# (Db)</option>
+<option value="3">D</option>
+<option value="4">D# (Eb)</option>
+<option value="5">E</option>
+<option value="6">F</option>
+<option value="7">F# (Gb)</option>
+<option value="8">G</option>
+<option value="9">G# (Ab)</option>
+<option value="10">A</option>
+<option value="11">A# (Bb)</option>
+<option value="12">B</option>
+</select>
+<select name="varian" onChange="buat_chord()">
+<option value="mayor">Maj</option>
+<option value="minor">Min</option>
+<option value="aug">Aug</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="dim">Dim</option>
+<option value="sus">Sus</option>
+</select>
+&bull;
+<input type="button" value="Lihat Info" onClick="tampilkan_info()">
+</form>
+
+<!-- Cuap-cuap apa saja tentang program alakadar ini -->
+<div id="ket" class="info">
+<ul>
+<li>
+Tentang JSChord<br>
+Program ini dibuat karena saya tak berhasil menemukan sebuah program sederhana untuk menampilkan chord piano/keyboard. Ada sejumlah diagram lengkap, tapi karena terlalu besar ukurannya, cukup repot untuk dilihat pada layar komputer. Ada juga beberapa program, tapi tampaknya terlalu ribet. Akhirnya saya putuskan untuk membuat sebuah program yang bisa menampilkan chord piano/keyboard yang hanya memerlukan satu buah file html yang dilihat dengan webbrowser. Jika anda menemukan kesalahan, ingin membantu mengembangkan, atau sekedar ucapan terima kasih, silahkan kirim email ke yan@daunsalam.net 
+</li>
+<li>
+Perjalanan<br>
+<u>11-07-2007</u> : Penambahan sus pada jenis chord<br> 
+<u>09-07-2007</u> : Pertama kali dipublikasikan. Masih sedikit jenis chord yang diimplementasikan. Hanya diuji pada Firefox 1.5.0.7 dan Opera 9.21
+</li>
+<li>
+Alat Bantu<br>
+jEdit 4.2<br>
+Firefox 1.5.0.7<br>
+Opera 9.21<br>
+Yamaha E403<br>
+Buku Teori Musik Kontemporer, Pra B Dharma<br>
+</li>
+</ul>
+</div>
+
+</body>
+</html>

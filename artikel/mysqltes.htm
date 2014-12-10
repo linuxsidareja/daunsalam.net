@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Catatan Ringan Tentang Pengujian MySQL Secara Sederhana</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 3 Agustus 2009, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Catatan Ringan Tentang Pengujian MySQL Secara Sederhana</h2>
+
+<p>
+Mengapa pengujian ini saya lakukan, tak jelas benar alasannya.
+Setidaknya bagi yang tersasar sampai di halaman ini, ada beberapa paragraf
+yang bisa dikunyah-kunyah. Kalau terasa enak, bisa dinikmati.
+Andai sebaliknya, mohon maaf jika pembaca budiman merasa rugi.
+</p>
+
+<p>
+Pengujian ini sederhana. Melakukan insert sejumlah data ke dalam sebuah tabel
+pada database MySQL. Tabel yang menjadi tempat menyimpan data juga dalam
+bentuk sederhana. Dua field, satu berupa primary key autoincrement,
+satu field lagi adalah varchar. Insert data melalui sebuah script PHP.
+Untuk mengisi sejumlah data, dilakukan proses insert query dalam loop.
+Pengujian dilakukan 6 kali dengan concurrent connection yang berbeda.
+</p>
+
+<p>
+Seperti apa barang yang terlibat dalam pengujian ini? Nah ini daftarnya :
+<ul>
+<li>Komputer dengan processor AMD Athlon XP 1,8 GHz, memory 1 GB</li>
+<li>Sistem Operasi Slackware 11</li>
+<li>MySQL 4.1.22 (download paket binary untuk Linux dari MyQSL)</li>
+<li>Switch D-Link 8 port 100 Mbps</li>
+<li>Script PHP dijalankan pada laptop Intel Celeron, memory 1 GB, Slackware 11,
+PHP 4.3.11 (kompilasi dari source)</li>
+</ul>
+</p>
+
+<p>
+Tidak ada pengaturan khusus pada file konfigurasi MySQL.
+Hanya mengisi opsi max_connections = 500.
+Kemudian pada file php.ini untuk interpreter PHP,
+timeout untuk mysql connection diset jadi -1 (tidak terbatas)
+</p>
+
+<p>
+Ada dua buah tabel yang digunakan dalam pengujian ini.
+Satu tabel untuk tempat data yang diinsert.
+Satu tabel sebagai pencatat lamanya waktu yang digunakan dalam pengujian.
+Struktur tabel sebagai berikut :
+</p>
+
+<pre>
+CREATE TABLE data (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  isi VARCHAR(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (id)
+)
+
+CREATE TABLE waktu (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  apa CHAR(1) NOT NULL DEFAULT '',
+  nomor TINYINT(2) UNSIGNED NOT NULL DEFAULT '0',
+  ts INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (id)
+)
+</pre>
+
+<p>
+Keterangan field pada tabel waktu. Field <tt>apa</tt> berisi data untuk
+catatan waktu mulai atau waktu selesai.
+Apabila field <tt>apa</tt> diisi "m" artinya waktu mulai, dan jika diisi "s"
+adalah waktu selesai.
+Field <tt>nomor</tt> berisi informasi pengujian yang ke berapa.
+Field <tt>ts</tt> berisi timestamp dari waktu.
+</p>
+
+<p>
+Berikut ini adalah script PHP yang digunakan untuk melakukan loop insert data
+ke dalam tabel <tt>data</tt>. File untuk script ini diberi nama <tt>myt.php</tt>
+</p>
+
+<pre>
+&lt;?php
+
+$pengujianke = $argv[1];
+$jloop = $argv[2];
+
+$dbid = mysql_connect("192.168.1.33","aku","aku") or die(mysql_error());
+mysql_select_db("tes") or die(mysql_error());
+
+// menunggu sampai ada file bendera
+while (!file_exists("bendera")) usleep(200);
+
+// catat waktu mulai melakukan loop
+$sql = "INSERT INTO waktu (apa,nomor,ts) " .
+       "VALUES('m','$pengujianke',UNIX_TIMESTAMP())";
+$hsl = mysql_query($sql) or die(mysql_error());
+
+// loop untuk mengisi data
+for ($i = 0; $i &lt; $jloop; $i++) {
+    $sql = "INSERT INTO data (isi) VALUES('abcdefghijklmnopqrstuvwxyz')";
+    $hsl = mysql_query($sql) or die(mysql_error());
+}
+
+// catat waktu selesai melakukan loop
+$sql = "INSERT INTO waktu (apa,nomor,ts) " .
+       "VALUES('s','$pengujianke',UNIX_TIMESTAMP())";
+$hsl = mysql_query($sql) or die(mysql_error());
+
+// proses loop selesai, tulis ke file bendera
+exec ('echo "ok" &gt;&gt; bendera');
+
+// menunggu sampai file bendera tidak ada
+while (file_exists("bendera")) usleep(200);
+
+?&gt;
+</pre>
+
+<p>
+Untuk menjalankan script PHP di atas, dilakukan melalui sebuah shell script,
+seperti di bawah ini. File shell script ini diberi nama <tt>mytrun.sh</tt>
+</p>
+
+<pre>
+#! /bin/bash
+
+rm -f bendera
+I=0
+C=$2
+while [ $I -lt $C ]; do
+    /usr/local/bin/php -f /home/tes/myt.php $1 $3 &
+    let I=$I+1
+done
+touch bendera
+E="$C bendera"
+while [[ $E != `wc -l bendera` ]]; do
+    sleep 1
+done
+</pre>
+
+<p>
+Shell script ini berguna untuk memanggil file PHP sebanyak yang diinginkan,
+sehingga menciptakan concurrent connection ke MySQL.
+Pada script PHP ada proses menunggu, sampai ada sebuah file yang diberi nama
+<tt>bendera</tt>. Jika file bendera sudah ada, baru loop insert dijalankan,
+untuk memastikan bahwa proses insert berjalan dalam keadaan MySQL sedang menerima
+sejumlah n koneksi secara bersamaan.<br>
+File bendera ini dibuat setelah n buah script PHP dijalankan.<br>
+Setelah loop selesai dikerjakan dalam script PHP, script tersebut mengisi status
+ke dalam file bendera. Kemudian juga ada proses menunggu sampai file bendera ini
+dihapus, baru script PHP berhenti, yang artinya juga memutuskan koneksi ke MySQL.
+File bendera dihapus oleh shell script setelah memeriksa bahwa jumlah OK dalam
+file bendera sama dengan jumlah script PHP dijalankan, yang artinya semua loop
+telah selesai dijalankan.
+</p>
+
+<p>
+Sebelum pengujian dilakukan, tabel data dan waktu dalam keadaan kosong.
+Pengujian dilakukan dengan menjalankan script PHP pada laptop.
+Script PHP melakukan koneksi dan mengisi data ke MySQL
+yang ada pada komputer satu lagi.<br>
+Untuk melakukan pengujian dengan menjalankan file mytrun.sh seperti berikut<br>
+<tt>./mytrun.sh 1 100 10000</tt><br>
+Artinya menjalankan tes pertama dengan 100 concurrent connection
+dan loop pengisian data sebanyak 10.000. Hasilnya adalah insert 1.000.000 data.<br>
+Menjalankan seperti berikut<br>
+<tt>./mytrun.sh 2 50 20000</tt><br>
+Artinya menjalankan tes kedua dengan 50 concurrent connection
+dan loop pengisian data sebanyak 20.000. Hasilnya adalah insert 1.000.000 data.
+</p>
+
+<p>
+Pengujian dilakukan sebanyak 6 kali, yaitu :<br>
+<tt>./mytrun.sh 1 100 10000</tt><br>
+<tt>./mytrun.sh 2 50 20000</tt><br>
+<tt>./mytrun.sh 3 20 50000</tt><br>
+<tt>./mytrun.sh 4 10 100000</tt><br>
+<tt>./mytrun.sh 5 5 200000</tt><br>
+<tt>./mytrun.sh 6 1 1000000</tt><br>
+Untuk pengujian ke-6 tidak dilakukan melalui laptop, tetapi di komputer yang
+sama dengan MySQL berjalan. Jadi proses insert langsung dengan 1 script PHP,
+loop sebanyak 1.000.000
+</p>
+
+<p>
+Berikut ini adalah waktu yang diperlukan untuk masing masing pengujian.
+Setiap pengujian mengisi sebanyak 1.000.000 data.
+Angka insert/detik diperoleh melalui jumlah data dibagi waktu.
+</p>
+
+<pre>
+---------------------------------------------
+pengujian ke  :  waktu(detik)  : insert/detik
+---------------------------------------------
+    1                425             2.352
+    2                171             5.847
+    3                101             9.900
+    4                102             9.803
+    5                 95            10.526
+    6                 57            17.543
+---------------------------------------------
+</pre>
+
+<p>
+Sebagai tambahan, secara tak sengaja, dan juga tanpa rencana dari awal,
+saya mengamati monitoring yang dilakukan oleh conky pada komputer dimana MySQL
+dijalankan.
+Pada saat concurrent connection dibuat sebanyak 100, processor hanya berjalan
+sekitar 20% sampai 30%. Tetapi ketika concurrent connection diturunkan pada 10,
+processor berjalan sampai 100%.
+Memory tidak mengalami perubahan signifikan di antara 6 percobaan tersebut,
+yaitu digunakan sekitar 140 MB.
+Bagian yang menarik adalah pada grafik kecepatan data yang melalui
+ethernet card. Silahkan dimaknai sesuai penglihatan pembaca sekalian.<br><br>
+<img width=640 src="media/myt.jpg"><br>
+<tt>untuk melihat gambar lebih besar, klik kanan pada gambar, lalu pilih view image<br>
+dengan catatan anda pakai firefox versi 2. kalau browser lain, cari sendiri caranya :-)
+</tt><br><br>
+</p>
+
+<p>
+Seperti di awal tulisan ini, saya tidak tidak punya maksud spesial
+dengan pengujian yang tidak bisa dipertanggungjawabkan secara ilmiah ini <tt>:p</tt>
+Semoga data yang dihasilkan memberi manfaat.
+Kesimpulan? Silahkan dibuat dalam kepala masing-masing.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

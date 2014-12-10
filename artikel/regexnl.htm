@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: CR, LF, dan Regex</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 28 September 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>CR, LF, dan Regex</h2>
+
+<p>
+Ini hanyalah sebuah catatan singkat tentang penggunaan karakter CR (Carriage Return) dan LF (Line Feed), serta kasus pada regular expression. Catatan ini saya buat karena pengalaman kegagalan dalam penggunaan regular expression. Kegagalan di sini terjadi karena perbedaan penggunaan tanda baris baru (Newline) di beberapa sistem operasi.
+</p>
+
+<p>
+Untuk DOS/Windows, tanda baris baru menggunakan kedua karakter tersebut, yaitu CR dan LF. Untuk sistem UNIX/Linux dan keluarganya, hanya menggunakan karakter LF. Sedangkan MAC hanya menggunakan CR.
+</p>
+
+<p>
+Untuk contoh kasus ini, terjadi ketika akan melakukan pencarian terhadap baris baru yang berurutan satu atau lebih. Regular expression yang umum digunakan adalah seperti berikut :
+</p>
+
+<pre>
+\n+
+</pre>
+
+<p>
+Kita misalkan sebuah fungsi yang menggunakan regex untuk mencari dan mengganti (search and replace) adalah :
+</p>
+
+<pre>
+  regex_replace(s,r,string).
+    s : string yang akan dicari
+    r : string pengganti
+    string : adalah string yang menjadi objek proses
+  --------------------------------------------------
+  contoh penggunaannya adalah :
+
+  regex_replace("\n+","\n",string)
+</pre>
+
+<p>
+Contoh penggunaan di atas akan mengganti semua baris baru yang berurutan satu atau lebih, menjadi satu baris baru saja. Di sinilah masalahnya muncul. Jika file berasal dari sistem DOS/Windows, bisa jadi fungsi di atas tidak akan berhasil. Salah satu caranya adalah dengan membuang terlebih dahulu tanda CR dengan :
+</p>
+
+<pre>
+  regex_replace("\r","",string)
+</pre>
+
+<p>kemudian baru menggunakan</p>
+
+<pre>
+  regex_replace("\n+","\n",string)
+</pre>
+
+<p>
+Demikian juga halnya dengan file yang menggunakan format sistem MAC. Perlu diperhatikan penggunaan tanda baris baru pada sistem tersebut.
+</p>
+
+<p>
+<i>
+Kasus seperti ini tergantung berbagai faktor. Misalnya regular expression yang digunakan berada dalam platform apa, dan implementasi terhadap ketentuan regex itu sendiri.
+</i>
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

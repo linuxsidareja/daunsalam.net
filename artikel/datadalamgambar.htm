@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Menyembunyikan Data Dalam Gambar</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 8 Februari 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Menyembunyikan Data Dalam Gambar</h2>
+
+<p>
+Ada banyak cara untuk menyembunyikan data. Misalnya dengan menyandikan dengan kode tertentu. Atau menggunakan teori kriptografi, atau berbagai cara lainnya. Salah satu cara, adalah dengan menyembunyikan data dalam sebuah file gambar. Ketika dilihat dengan cara biasa, file gambar ini akan menampilkan gambar seperti apa adanya. Namun bila diambil data yang disembunyikan dalam file ini, maka kita dapatkan data tertentu yang ada dalam file tersebut. Untuk informasi selanjutnya, bisa dicari di internet dengan memakai kata kunci <i>steganography</i>.
+</p>
+
+<p>
+Dalam artikel ini, akan diuraikan salah satu cara untuk menyembunyikan data dalam file gambar. Kemudian ditampilkan sebuah contoh kode program dengan Php yang bisa menyembunyikan data dalam file gambar PNG. Dan sebuah file gambar PNG yang telah berisi data yang disembunyikan di dalamnya.
+</p>
+
+<p>
+Cara yang digunakan untuk menyembunyikan data dalam file gambar adalah sebagai berikut :
+</p>
+
+<ul>
+<li>Data disembunyikan dalam tiap piksel gambar</li>
+<li>Satu piksel gambar menampung satu bit data yang disembunyikan</li>
+<li>Bit yang digunakan untuk menyembunyikan data adalah bit terkecil dari sebuah piksel (<i>LSB : Least Significant Bit</i>)</li>
+</ul>
+
+<p>
+Misalnya kita akan menyembunyikan huruf A dengan kode Biner 01000001. Karena huruf A terdiri dari 8 bit, maka kita membutuhkan 8 piksel untuk menyembunyikan satu huruf A ini. Lihat ilustrasi berikut ini. Misalkan data satu piksel menggunakan 8 bit.
+</p>
+
+<pre>
+                             Data gambar
+                             setelah
+             Data asli       diisi huruf A
+------------------------------------------
+piksel 1 :   01011010        0101101<u>0</u>
+piksel 2 :   01011011        0101101<u>1</u>
+piksel 3 :   01011011        0101101<u>0</u>
+piksel 4 :   01011010        0101101<u>0</u>
+piksel 5 :   01011011        0101101<u>0</u>
+piksel 6 :   01011011        0101101<u>0</u>
+piksel 7 :   01011011        0101101<u>0</u>
+piksel 8 :   01011010        0101101<u>1</u>
+------------------------------------------
+</pre>
+
+<p>
+Lihat bit terkecil pada data gambar yang sudah diisi huruf A. Bit terkecil ini berisi kode huruf A yaitu 01000001. Perubahan pada bit terkecil (<i>LSB : Least Significant Bit</i>) tidak akan menimbulkan perubahan signifikan pada gambar, sehingga gambar tetap tampil dengan baik. Namun sekarang, gambar tersebut sudah dimuati oleh data lain.
+</p>
+
+<p>
+Dengan asumsi bahwa satu data yang akan disembunyikan terdiri dari 8 bit, maka dengan cara ini, untuk menyembunyikan 100 karakter/data diperlukan gambar sebanyak 8 x 100 = 800 piksel. Sebuah gambar dengan ukuran 20x40 piksel akan bisa menyembunyikan data tersebut.
+</p>
+
+<p>
+Untuk mendapatkan kembali data yang telah disembunyikan dalam gambar, maka caranya adalah dengan mengambil bit terkecil dari setiap piksel, kemudian di<i>decode</i> kembali untuk mendapatkan data yang sebenarnya.
+</p>
+
+<p>
+Berikut ini sebuah contoh kode program dalam PHP untuk menyembunyikan data ke dalam file gambar PNG. Satu karakter/data menggunakan 5 bit. Karena program ini melakukan proses terhadap gambar, diperlukan library GD yang mendukung PNG.
+</p>
+
+<pre>
+&lt;?php
+
+$kalimat = 'isi dengan kalimat yang akan disembunyikan';
+
+// fungsi untuk mengubah huruf ke dalam kode bilangan
+// karena satu karakter hanya 5 bit, maka maksimal hanya
+// bisa 32 jenis karakter
+// karakter '|' nanti didecode menjadi baris baru
+
+function huruf2kode($huruf) {
+  $kode = 0x1D;
+  switch ($huruf) {
+    case '~' : $kode = 0x00; break;
+    case 'a' : $kode = 0x01; break;
+    case 'b' : $kode = 0x02; break;
+    case 'c' : $kode = 0x03; break;
+    case 'd' : $kode = 0x04; break;
+    case 'e' : $kode = 0x05; break;
+    case 'f' : $kode = 0x06; break;
+    case 'g' : $kode = 0x07; break;
+    case 'h' : $kode = 0x08; break;
+    case 'i' : $kode = 0x09; break;
+    case 'j' : $kode = 0x0A; break;
+    case 'k' : $kode = 0x0B; break;
+    case 'l' : $kode = 0x0C; break;
+    case 'm' : $kode = 0x0D; break;
+    case 'n' : $kode = 0x0E; break;
+    case 'o' : $kode = 0x0F; break;
+    case 'p' : $kode = 0x10; break;
+    case 'q' : $kode = 0x11; break;
+    case 'r' : $kode = 0x12; break;
+    case 's' : $kode = 0x13; break;
+    case 't' : $kode = 0x14; break;
+    case 'u' : $kode = 0x15; break;
+    case 'v' : $kode = 0x16; break;
+    case 'w' : $kode = 0x17; break;
+    case 'x' : $kode = 0x18; break;
+    case 'y' : $kode = 0x19; break;
+    case 'z' : $kode = 0x1A; break;
+    case ' ' : $kode = 0x1B; break;
+    case ',' : $kode = 0x1C; break;
+    case '.' : $kode = 0x1D; break;
+    case '"' : $kode = 0x1E; break;
+    case '|' : $kode = 0x1F;
+  }
+  return $kode;
+}
+
+// bagian untuk menjadikan kalimat ke dalam kode biner
+// dalam bentuk array
+
+$panjangkalimat = strlen($kalimat);
+$totaldata = $panjangkalimat * 5;
+for ($i = 0; $i < $panjangkalimat; $i++) {
+  $karakter = substr($kalimat,$i,1);
+  $kode = huruf2kode($karakter);
+  $j = $i * 5;
+  $data[$j]   = ($kode >> 4) & 0x01;
+  $data[$j+1] = ($kode >> 3) & 0x01;
+  $data[$j+2] = ($kode >> 2) & 0x01;
+  $data[$j+3] = ($kode >> 1) & 0x01;
+  $data[$j+4] = $kode        & 0x01;
+}
+
+
+$namafile1 = "tux1.png"; // file gambar asli
+$namafile2 = "tux2.png"; // file gambar hasil
+$img = imagecreatefrompng($namafile1);
+$lebar = imagesx($img);
+$tinggi = imagesy($img);
+$imhasil = imagecreatetruecolor($lebar,$tinggi);
+
+// proses membuat data gambar baru yang memuat
+// data yang akan disembunyikan
+// data gambar asli diambil setiap piksel
+// kemudian bit terkecil piksel tersebut diganti
+// dengan bit data yang akan disembunyikan, kemudian
+// data piksel baru dimasukkan ke gambar baru
+
+$j = 0;
+for ($y = 0; $y < $tinggi; $y++) {
+  for ($x = 0; $x < $lebar; $x++) {
+    $warna = imagecolorat($img,$x,$y);
+    if ($j < $totaldata) {
+      if (($warna % 2) == 1) { $warna = $warna - 1; }
+      $warna = $warna | $data[$j];
+      $j = $j + 1;
+    }
+    imagesetpixel($imhasil,$x,$y,$warna);
+  }
+}
+
+imagepng($imhasil,$namafile2);
+
+?&gt;
+</pre>
+
+<p>
+Berikut ini adalah gambar asli dan gambar hasil yang telah berisi data yang disembunyikan. Gambar tersebut menggunakan program seperti kode di atas. Jika ingin mengetahui apa data yang ada dalam gambar hasil, maka perlu dibuat sebuah program yang bisa mengambil data yang tersembunyi tersebut, yang bersesuaian dengan contoh kode program di atas.
+</p>
+
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td><img src="media/sembunyi/tux1.png"></td><td width="25">&nbsp;</td><td><img src="media/sembunyi/tux2.png"></td></tr>
+<tr><td align="center">Gambar Asli</td><td width="25">&nbsp;</td><td align="center">Gambar Hasil</td></tr>
+</table>
+
+<!-- isi selesai -->
+
+</body>
+</html>

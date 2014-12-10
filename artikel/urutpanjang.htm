@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Mengurutkan String Berdasarkan Panjangnya</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 15 Maret 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Mengurutkan String Berdasarkan Panjangnya</h2>
+
+<p>
+Tulisan ini berawal dari sebuah posting di mailing-list phpug@yahoogroups.com. Seorang anggota mailing-list bertanya tentang cara untuk mengurutkan string berdasarkan panjang string tersebut. Akhirnya beliau menemukan sendiri solusinya. Hanya saja setelah itu saya merasa ada sebuah gagasan lain, yang saya anggap tak lazim untuk melakukan pengurutan tersebut. Namun bisa jadi sudah ada orang lain yang melakukannya, dan saya tak mengetahuinya. Dan gagasan ini bukanlah gagasan "ilmiah" yang memiliki sekian banyak alasan dan kehebatan. Malah cenderung main-main.
+</p>
+
+<p>
+Maksud pengurutan di sini adalah, kita akan mendapatkan hasil string yang urut berdasar panjangnya. Misalnya kita punya data seperti berikut :
+</p>
+
+<pre>
+kucing, ayam, kelelawar, hiu, kambing, dinosaurus
+</pre>
+
+<p>
+Hasilnya setelah diurutkan adalah :
+</p>
+
+<pre>
+hiu
+ayam
+kucing
+kambing
+kelelawar
+dinosaurus
+</pre>
+
+<p>
+Dengan asumsi bahwa data yang akan diurutkan ada dalam sebuah array, maka cara yang saya gunakan untuk ide ini adalah seperti berikut :
+</p>
+
+<ul>
+<li>Setiap data dalam array diambil, dan dihitung panjangnya</li>
+<li>Angka panjang data, di<i>pad</i> sesuai panjang tertentu</li>
+<li>Angka panjang ini di <i>concatenate</i> pada data tersebut<br>
+Misalnya data ikan yang memiliki panjang 4, maka 4 di<i>pad</i> menjadi 004.
+Setelah itu baru disambungkan ke data, sehingga menjadi <u>004ikan</u>.</li>
+<li>Data yang telah dimodifikasi ini, dimasukkan dalam array baru</li>
+<li>Array baru di<i>sort</i> dengan fungsi sort yang sudah ada</li>
+<li>Setelah di<i>sort</i>, isi array baru ini diambil. Data panjang array yang disambungkan lalu dibuang kembali, seperti contoh di atas, maka untuk data <u>004ikan</u> 004-nya dibuang, sehingga kembali menjadi <u>ikan</u></li>
+<li>Dari data yang sudah dibersihkan ini dibentuk array final yang sudah berisi data terurut berdasarkan panjang string</li>
+</ul>
+
+<p>
+Untuk langkah di atas, contoh fungsi berikut dibuat dalam bahasa Php.
+</p>
+
+<pre>
+&lt;?php
+
+function urut_panjang($array) {
+
+  // nilai ini untuk panjang pad
+  // perlu disesuaikan dengan panjang maksimum
+  // dari data string
+  $pad = 5;
+
+  // membuat array tmp yang berisi data dari $array
+  // data ditambahkan dengan panjang string bersangkutan
+  $i = 0;
+  $arraytmp = array();
+  while (list($index,$isi) = each($array)) {
+    $panjang = strlen($isi);
+    $panjang = str_pad($panjang,$pad,"0",STR_PAD_LEFT);
+    $isi = $panjang . $isi;
+    $arraytmp[$i] = $isi;
+    $i++;
+  }
+
+  // array tmp disort
+  sort($arraytmp);
+
+  // membuat array baru lagi dari array tmp
+  // data panjang yang sebelumnya ditambahkan
+  // dibuang terlebih dahulu
+  // sehingga kembali seperti data semula
+  $i = 0;
+  $array = array();
+  while (list($index,$isi) = each($arraytmp)) {
+    $isi = substr($isi,$pad);
+    $array[$i] = $isi;
+    $i++;
+  }
+
+  return($array);
+
+}
+
+////////////////////////////
+// berikut contoh penggunaan
+////////////////////////////
+
+$data = array('satu','dua','tiga','empat','lima',
+              'enam','tujuh','delapan','sembilan','sepuluh');
+$hasil = urut_panjang($data);
+print_r($hasil);
+
+?&gt;
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

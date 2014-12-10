@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Membuat Style untuk Fluxbox</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 5 Desember 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Membuat Style untuk Fluxbox</h2>
+
+<p>
+Fluxbox adalah sebuah window manager yang sederhana, dan juga berukuran cukup kecil, dibanding dengan beberapa window manager lainnya. Tidak seperti KDE, Gnome, atau XFCE yang berupa Desktop Manager, fluxbox hanyalah berupa window manager. Namun walaupun sederhana dan kecil, fluxbox sudah cukup baik dipakai untuk memudahkan pengguna dalam mode grafis.
+</p>
+
+<p>
+Fluxbox memiliki toolbar, menu, dan window. Dan, satu lagi, tampilan dari window manager ini dapat diatur melalui sebuah file style. Fluxbox secara default sudah menyertakan berbagai style. Kita tinggal memilih style mana yang sesuai dengan keinginan kita. Kalau kurang suka, kita dapat membuat style sendiri. Dalam tulisan ini, akan diuraikan cara membuat sebuah style untuk fluxbox.
+</p>
+
+<p>
+Style untuk fluxbox diletakkan dalam sebuah file. Umumnya berada di direktori /usr/X11/share/fluxbox/styles. Untuk pengaturan pada masing-masing user, juga ada di direktori ~/.fluxbox/styles. Direktori ini mungkin berbeda, tergantung dari sistem operasi yang digunakan. File style ini adalah sebuah file text biasa, yang berisi komponen beserta nilai yang akan diatur untuk komponen bersangkutan.
+</p>
+
+<p>
+Sebagai contoh, kita akan memberi warna hijau sebagai latar belakang jam yang ada pada toolbar. Untuk hal ini kita tulis seperti berikut pada file style
+</p>
+
+<pre>
+toolbar.clock.color: green
+</pre>
+
+<p>
+toolbar.clock.color adalah komponen untuk jam yang ada di toolbar. Sedangkan green adalah nilai yang diberikan untuk komponen ini.
+</p>
+
+<h3>Komponen</h3>
+
+<p>
+Ada 3 buah komponen utama untuk style fluxbox ini, yaitu <b>toolbar</b>, <b>menu</b>, dan <b>window</b>. Masing-masing komponen dapat memiliki sub-komponen. Pemisahan untuk sub-komponen menggunakan tanda titik. Sebuah sub-komponen bisa memiliki sub-komponen lagi. Misalnya :
+</p>
+
+<pre>
+toolbar.button       tombol yang berada pada toolbar
+toolbar.clock        jam yang berada pada toolbar
+menu.title.color     warna untuk judul pada menu
+</pre>
+
+<h3>Nilai untuk Komponen</h3>
+
+<p>
+Nilai yang diberikan pada masing-masing komponen ada beberapa jenis. Nilai ini bisa berupa tekstur, warna, angka, posisi, atau nama huruf, tergantung dari komponen yang akan diatur. Misalnya untuk contoh komponen berikut ini :
+</p>
+
+<pre>
+toolbar              tekstur
+toolbar.color        warna
+window.justify       posisi
+toolbar.borderWidth  angka
+</pre>
+
+<h3>Latar Belakang untuk Layar</h3>
+
+<p>
+Untuk mengatur warna latar belakang layar, atau ingin menampilkan sebuah gambar sebagai wallpaper, juga dapat dilakukan melalui file style ini. Caranya adalah seperti berikut :
+</p>
+
+<pre>
+rootCommand: bsetroot -solid rgb:ffff/0000/0000
+</pre>
+
+<p>
+Dengan menulis baris di atas pada file style, maka layar akan diberi warna merah. Komponen rootCommand akan menyebabkan eksekusi terhadap sebuah program. Nilai untuk komponen rootCommand ini adalah sebuah program yang akan dijalankan. Pada contoh di atas program yang dieksekusi adalah bsetroot yang berguna untuk mengganti warna layar. Apabila akan menampilkan sebuah gambar sebagai wallpaper dapat menggunakan fbsetbg.
+</p>
+
+<p>
+Berikut ini sebuah contoh untuk sebuah file style. Jika ingin digunakan sebagai style pada fluxbox, silahkan download file <a href="media/fbstyle/daunsalam">daunsalam style</a>. Simpan file ini di direktori style fluxbox, setelah itu nama style ini akan tampil pada menu fluxbox. Screenshot dari style ini seperti gambar berikut
+</p>
+
+<p><img src="media/fbstyle/daunsalam.jpg"></p>
+
+<p>
+Tanda # atau ! pada awal baris menyebabkan baris bersangkutan tidak diproses, umumnya digunakan sebagai komentar. Penggunaan tanda * adalah untuk menyingkat penulisan beberapa komponen. Misalnya *borderColor, akan menjadikan semua komponen yang memiliki sub-komponen borderColor menggunakan nilai yang sama. Penulisan menu*color akan menyebabkan semua komponen menu dan sub-komponen menu menggunakan nilai warna yang sama.
+</p>
+
+<p>
+Untuk daftar selengkapnya mengenai komponen pada style dapat melihat manual fluxbox, atau dokumentasi di situs <a href="http://fluxbox.sourceforge.net">http://fluxbox.sourceforge.net</a>
+</p>
+
+<pre>
+
+# style name : daunsalam
+# created by : yanmarshus
+# email      : yan[at]daunsalam[dot]net
+# date       : december 2, 2005
+
+
+# --------------
+# global section
+# --------------
+
+*font: glisp-15
+*borderWidth: 1
+*borderColor: #043624
+*bevelWidth: 0
+
+
+# ---------------
+# toolbar section
+# ---------------
+
+toolbar: flat
+toolbar.color: #7da18f
+toolbar.textColor: #ffffff
+toolbar.height: 32
+toolbar.justify: center
+
+toolbar.workspace: parentrelative
+toolbar.workspace.borderWidth: 0
+
+toolbar.button: parentrelative
+toolbar.button.borderWidth: 0
+toolbar.button.picColor: #245644
+
+toolbar.button.pressed: sunken
+toolbar.button.pressed.color: #b2aa4a
+toolbar.button.pressed.picColor: #000000
+
+toolbar.clock: sunken
+toolbar.clock.borderWidth: 0
+toolbar.clock.color: #c8c478
+toolbar.clock.textColor: #245644
+
+
+# ------------
+# menu section
+# ------------
+
+menu.title: flat gradient vertical interlaced
+menu.title.color: #a2bcac
+menu.title.colorTo: #143e30
+menu.title.textColor: #ffffff
+menu.title.justify: center
+
+menu.frame: flat gradient vertical
+menu.frame.color: #e4f0e4
+menu.frame.colorTo: #a2bcac
+menu.frame.textColor: #042e20
+menu.frame.disableColor: #669280
+menu.frame.justify: left
+
+menu.bullet: square
+menu.bullet.position: right
+
+menu.hilite: sunken
+menu.hilite.color: #b2aa4a
+menu.hilite.textColor: #ffffff
+
+
+# --------------
+# window section
+# --------------
+
+window.justify: center
+window.handleWidth: 3
+window.title.height: 24
+
+! focus ---
+
+window.title.focus: flat gradient vertical
+window.title.focus.color: #a2bcac
+window.title.focus.colorTo: #143e30
+
+window.label.focus: parentrelative
+window.label.focus.textColor: #ffffff
+
+window.handle.focus: flat
+window.handle.focus.color: #a3bdad
+
+window.grip.focus: flat
+window.grip.focus.color: #839d8d
+
+window.button.focus: parentrelative
+window.button.focus.picColor: #ffffff
+
+window.button.pressed: sunken
+window.button.pressed.color: #b2aa4a
+window.button.pressed.picColor: #042e20
+
+window.frame.focus: flat solid
+window.frame.focus.color: #ffffff
+
+window.tab.justify: center
+window.tab.label.focus: flat gradient vertical
+window.tab.label.focus.color: #a2bcac
+window.tab.label.focus.colorTo: #143e30
+window.tab.label.focus.textColor: #ffffff
+
+! unfocus ---
+
+window.title.unfocus: flat solid
+window.title.unfocus.color: #a2bcac
+
+window.label.unfocus: flat solid
+window.label.unfocus.color: #a2bcac
+window.label.unfocus.textColor: #042e20
+
+window.handle.unfocus: flat solid
+window.handle.unfocus.color: #a2bcac
+
+window.grip.unfocus: flat solid
+window.grip.unfocus.color: #a2bcac
+
+window.button.unfocus: parentrelative
+window.button.unfocus.picColor: #042e20
+
+window.frame.unfocus: flat solid
+window.frame.unfocus.color: #ffffff
+
+window.tab.label.unfocus: flat solid
+window.tab.label.unfocus.color: #a2bcac
+window.tab.label.unfocus.textColor: #042e20
+
+
+# -------------------
+# rootCommand section
+# -------------------
+
+rootCommand: bsetroot -solid rgb:14/48/34
+
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Mencetak dengan Pdq</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 6 Januari 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Mencetak dengan Pdq</h2>
+
+<p>
+Untuk mencetak dokumen pada sistem Gnu/Linux umumnya menggunakan CUPS atau lpd. Program tersebut cukup kompleks dan sudah berumur lama. Bagi yang hanya melakukan proses pencetakan sederhana, serta printer yang langsung tersambung pada komputer yang digunakan, bisa mencoba untuk memakai pdq. Program ini dapat diambil di <a href="http://pdq.sourceforge.net">pdq.sourceforge.net</a>. Source code dalam keadaan terkompresi hanya berukuran sekitar 120 KB.
+</p>
+
+<p>
+Proses kompilasi dan instalasi program ini juga cukup mudah. Setelah source code diekstrak, lalu masuk ke direktori hasil ekstrak tersebut. Dengan langkah umum berikut, maka program sudah terinstal.
+</p>
+
+<pre>
+./configure
+make
+make install
+</pre>
+
+<p>
+Program yang dihasilkan adalah <b>pdq</b> untuk command line, dan <b>xpdq</b> untuk GUI. Program ini memerlukan library GTK untuk mode grafisnya. Direktori konfigurasi ada di /etc/pdq<br>
+Jika belum ada file printrc dalam direktori tersebut, salin file printrc.example untuk dijadikan file printrc
+</p>
+
+<h3>Printer Driver</h3>
+
+<p>
+Masalah yang umum timbul dalam pencetakan adalah ketersediaan <i>printer driver</i>. Ketika diinstal pertama kali, pdq hanya menyertakan sedikit driver. Jika driver yang disertakan tidak sesuai dengan printer yang akan digunakan, maka kita bisa memperoleh di <a href="http://www.linuxprinting.org">www.linuxprinting.org</a>. Cari driver yang sesuai dengan printer, lalu download file PPD (printer description) yang sesuai dengan printer tersebut.
+</p>
+
+<p>
+Setelah itu, download juga program <b>foomatic-rip</b> dari situs yang sama. foomatic-rip ini berupa <i>perl script</i> yang berukuran sekitar 100 KB. Program ini diperlukan untuk membuat printer driver dan proses pencetakan. Setelah foomatic-rip didownload, chmod 755 file ini, lalu copy ke direktori /usr/bin
+</p>
+
+<p>
+Langkah selanjutnya adalah membuat printer driver untuk pdq dari file PPD yang telah didownload sebelumnya. Misalnya file PPD yang kita ambil adalah Canon-BJC2100.ppd<br>
+Untuk membuat driver yang akan digunakan oleh pdq, gunakan perintah berikut
+</p>
+
+<pre>
+foomatic-rip --ppd Canon-BJC2100.ppd --genpdq canonbjc2100.pdq
+</pre>
+
+<p>
+Setelah melakukan langkah ini, maka kita sudah memiliki driver untuk Canon BJC2100, dengan nama file canonbjc2100.pdq. Salin file ini ke direktori /etc/pdq/drivers
+</p>
+
+<h3>Menggunakan xpdq</h3>
+
+<p>
+Sekarang kita jalankan program xpdq. Dengan program ini kita bisa menambahkan printer, mengatur setting printer, melihat status pencetakan, serta mencetak dokumen ke printer tertentu. Tampilan program xpdq cukup sederhana dan mudah dimengerti. Berikut ini tampilan program xpdq
+</p>
+
+<p>
+<img src="media/pdq.jpg">
+</p>
+
+<p>
+Untuk melakukan pencetakan dari program lain, misalnya dari Abiword, maka cukup isikan perintah pencetakan seperti berikut pada form <u>Printer command</u>
+</p>
+
+<pre>
+pdq -d canon
+</pre>
+
+<p>
+Opsi -d adalah untuk pilihan nama printer. Nama printer adalah nama yang kita buat ketika melakukan penambahan printer melalui xpdf. Misalnya nama printer kita isi hpdeskjet, maka isi opsi -d dengan hpdeskjet.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Melihat Halaman man di Web Browser</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 21 Mei 2009, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Melihat Halaman man di Web Browser</h2>
+
+<p>
+Jika ingin tahu penggunaan sebuah program pada Linux, secara tradisional rujukannya
+adalah halaman manual yang bisa dilihat menggunakan perintah <tt>man nama_program</tt>
+dari command line. Jika pada mode grafis, tentu saja membaca manual melalui perintah man
+dilakukan melalui terminal emulator, atau program seperti xman.
+Alternatif lain adalah membaca halaman manual melalui web browser,
+tapi bagaimana caranya? Berikut ini adalah cara yang saya tempuh.
+</p>
+
+<p>
+Agar bisa membaca halaman manual melalui web browser, saya menggunakan dua program,
+yaitu <b>man2web</b> (http://man2web.sourceforge.net/) sebagai konverter yang memproses
+halaman man ke HTML, dan program <b>mongoose</b> (http://code.google.com/p/mongoose/)
+sebagai web server sederhana.
+</p>
+
+<p>
+mongoose saya pilih sebagai web server untuk keperluan ini karena cukup kecil
+dan sederhana. Jika akan menggunakan web server lain yang sudah tersedia pada
+komputer, tentu juga bisa. Agar bisa membaca halaman manual melalui web browser,
+caranya tak sulit. Donwnload program man2web, lakukan kompilasi,
+kemudian letakkan dalam direktori yang mengizinkan menjalankan cgi script pada web server.
+Jalankan web server, lalu buka web browser dan isikan ke alamat man2web
+yang sudah disimpan pada web server, misalnya http://localhost/cgi/man2web.cgi
+</p>
+
+<p>
+Untuk yang menggunakan mongoose, setelah mongoose terinstal, jalankan web server
+mongoose. Simpan program man2web dengan nama man2web.cgi pada direktori
+yang menjadi direktori web untuk program mongoose.
+Setelah itu tinggal mengetik alamat http://localhost:8080/man2web.cgi pada
+address bar web browser, maka halaman manual bisa disajikan pada web browser.
+</p>
+
+<p>
+Untuk saya, membaca halaman manual melalui web browser (memakai Firefox) lebih enak.
+Hurufnya bisa ditampilkan lebih besar, mencari sebuah teks pada halaman
+manual yang sedang dibaca juga cukup mudah, dengan memanfaatkan pencarian
+yang ada pada web browser.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

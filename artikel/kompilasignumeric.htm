@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Kompilasi Gnumeric pada Slackware 11</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 20 Februari 2007, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Kompilasi Gnumeric pada Slackware 11</h2>
+
+<p>
+Pada Slackware 11, software Gnumeric tidak lagi disertakan dalam CD resmi distro tersebut.
+Entah apapun penyebabnya, hal itu tidak dibicarakan di sini.
+Jika kita memerlukan software ini, maka bisa dengan cara mendownload dari internet dalam bentuk paket binary,
+atau jika cukup punya waktu dan sedikit keberanian, tentu bisa dengan cara kompilasi dari source code.
+</p>
+
+<p>
+Saya melakukan kompilasi dari source code, dan ternyata memang menghabiskan cukup banyak waktu,
+dan untuk melengkapi berbagai dependensi juga cukup melelahkan. Gnumeric yang digunakan adalah versi 1.6.3
+dan ketika kompilasi tidak menyertakan integrasi dengan Gnome.
+</p>
+
+<p>
+Dari situs Gnumeric sudah dituliskan library yang diperlukan untuk software ini.
+Dalam proses kompilasi ini library yang digunakan adalah :
+</p>
+
+<pre>
+- glib              2.10.3 (sudah ada dalam paket slackware 11)
+- gtk+              2.8.20 (sudah ada dalam paket slackware 11)
+- pango             1.12.4 (sudah ada dalam paket slackware 11)
+- libgnomeprint     2.12.1 (download dari situs gnome)
+- libgnomeprintui   2.12.1 (download dari situs gnome)
+- libgsf 	    1.13.2 (download dari situs gnome)
+- GOffice 	    1.14.3 (download dari situs gnome)
+- libglade 	    2.5.1  (sudah ada dalam paket slackware 11)
+- intltool 	    0.34.2 (download dari situs gnome)
+- gnome-xml 	    2.5.11 (download dari situs gnome)
+- libart 	    2.3.17 (sudah ada dalam paket slackware 11)
+</pre>
+
+<p>
+Itu adalah library yang disebutkan agar bisa melakukan kompilasi source code Gnumeric.
+Namun, ada beberapa library lagi yang diperlukan karena dibutuhkan oleh sebagian library di atas.
+Untuk selngkapnya, diperlukan library berikut :
+</p>
+
+<pre>
+- libgnomecups          0.2.2   (dari situs gnome)
+- libgnomecanvas        2.14.0  (dari situs gnome)
+- gnome-icon-themes     2.17.91 (dari situs gnome)
+- icon-naming-utils     0.8.2   (dari freedesktop.org)
+- Modul Perl XML Simple 2.16    (dari situs CPAN)
+</pre>
+
+<p>
+Sebelum melakukan kompilasi Gnumeric, maka semua library yang diperlukan sudah harus
+diinstal dengan baik. Apabila semua library yang diperlukan tersebut dikompilasi dari
+source code juga, jangan lupa menjalankan ldconfig. Konfigurasi sebelum kompilasi,
+yaitu dengan menjalankan <b>./configure</b> menggunakan opsi <b>--without-gnome</b>
+karena Gnumeric tidak diintegrasikan dengan Gnome. Setelah selesai make, dan make install,
+maka jalankan <b>gnumeric</b> sambil berdoa bahwa semuanya akan berjalan dengan baik :)
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

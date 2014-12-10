@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Menghitung Selisih Bulan</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 12 Agustus 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Menghitung Selisih Bulan</h2>
+
+<p>
+Ada kalanya dalam sebuah program yang kita buat, membutuhkan perhitungan terhadap waktu yang berkaitan dengan tanggal. Misalnya umur seseorang, masa kerja seorang karyawan, atau hal lainnya yang seperti ini. Dan sering juga kebutuhan itu ingin dihasilkan dalam "bahasa" yang umumnya digunakan, atau mudah dipahami, misalnya, umur Amin adalah 3 tahun 4 bulan.
+</p>
+
+<p>
+Berikut ini adalah sebuah "rumus" sederhana untuk mendapatkan jumlah bulan antara sebuah tanggal awal dengan tanggal akhir yang diketahui.
+</p>
+
+<pre>
+######################################################################
+#  untuk contoh ini, misalnya
+#  awal  = 15 agustus 2001
+#  akhir = 17 maret 2004
+######################################################################
+
+thn_awal = 2001;
+bln_awal = 8;
+tgl_awal = 15;
+
+thn_akhir = 2004;
+bln_akhir = 3;
+tgl_akhir = 17;
+
+jumlah_bulan = ((thn_akhir - thn_awal) * 12) + (bln_akhir - bln_awal);
+if (tgl_akhir < tgl_awal) {
+  jumlah_bulan = jumlah_bulan - 1;
+}
+</pre>
+
+<p>Dari contoh di atas akan diperoleh hasil seperti berikut :</p>
+
+<pre>
+jumlah_bulan = ((2004 - 2001) * 12) + (3 - 8);
+</pre>
+
+<p>
+Sampai di sini jumlah bulan yang didapat adalah 31. Kemudian memasuki pengujian tanggal, karena tgl_akhir lebih besar dari tgl_awal, maka tidak dilakukan lagi pengurangan jumlah bulan. Kalau tgl_akhir lebih kecil dari tgl_awal, tentu seharusnya jumlah bulan yang diperoleh harus dikurangi satu.
+</p>
+
+<p>
+Dengan "rumus" di atas, hasil yang diperoleh tidak terpengaruh apakah sebuah tahun merupakan tahun kabisat atau bukan. Dari jumlah bulan yang diperoleh, kita juga bisa mendapatkan bentuk "sekian tahun dan sekian bulan" dengan menggunakan operator div dan mod. Disini maksud operator div adalah pembagian yang menghasilkan bilangan yang dibulatkan ke bawah. Sedangkan mod adalah operator untuk mendapatkan sisa pembagian. Dengan bentuk seperti berikut ini :
+</p>
+
+<pre>
+tahun = jumlah_bulan div 12;
+bulan = jumlah_bulan mod 12;
+</pre>
+
+<p>
+Jika dilanjutkan dari contoh di atas, maka kita mendapatkan "2 tahun 7 bulan".
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

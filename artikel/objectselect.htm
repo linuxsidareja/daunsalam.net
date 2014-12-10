@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Object Select Ndablect</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 9 November 2007, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Object Select Ndablect</h2>
+
+<p>
+Semula saya mau menulis judulnya "Internet Explorer Sucks".
+Tapi kok kelihatannya terlalu sangar. Lagipula kurang sopan gitu :)
+</p>
+
+<p>
+Begini ceritanya. Saya membuat sebuah aplikasi berbasis web.
+Semua proses pengembangan dilakukan pada komputer dengan sistem operasi Linux.
+Browser utama yang digunakan adalah Firefox. Sesekali dilihat juga pakai Opera.
+Semua berjalan lancar termasuk tampilan yang sebagian memanfaatkan CSS 2.
+Setelah aplikasi selesai dan siap untuk dipasang di server,
+saya sempatkan melihat dengan Internet Explorer, karena memang klien
+sebagian besar menggunakan Internet Explorer.
+Celaka tigabelas! Tampilan pada Internet Explorer menjadi berantakan.
+</p>
+
+<p>
+Jelas salah saya sendiri. Sudah tahu klien banyak menggunakan Internet Explorer,
+kok malah pengujian dengan browser tersebut dianaktirikan.
+Ups! Tunggu dulu. Saya mau membela diri.
+Style Sheet yang saya buat cukup sederhana. Tak ada yang aneh-aneh.
+Ketika membuat Style Sheet tersebut juga mengikuti standar CSS 2 dari W3C.
+Dengan alasan demikian dan prasangka baik, tentunya Internet Explorer yang
+dibuat oleh perusahaan software raksasa tersebut akan menampilkan halaman
+dengan baik dan benar. Ternyata tidak demikian adanya.
+</p>
+
+<p>
+Salah satu perkara itu muncul pada <b>&lt;select&gt;</b>.
+Objek &lt;select&gt; ini tidak mau berada di layer bawah ketika
+sebuah blok &lt;div&gt; hendak ditempatkan di layer yang lebih atas.
+Saya bermaksud menempatkan sebuah blok &lt;div&gt; dengan posisi absolute,
+berada di layer lebih atas dengan menggunakan attribut z-index.
+Nah, jika ada objek &lt;select&gt; di layer bawahnya, objek ini tetap menampakkan diri.
+Seharusnya tentu tidak tampil, karena sudah ditimpa oleh sebuah blok div
+yang ditempatkan pada layer di atasnya.
+</p>
+
+<p>
+Untuk contoh, silahkan buat sebuah file HTML dengan isi seperti berikut.
+</p>
+
+<pre>
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;style type="text/css"&gt;
+body {
+  margin : 0px;
+}
+.zzz {
+  position : absolute;
+  left : 0px;
+  top : 0px;
+  width : 200px;
+  background : #FF0000;
+  z-index : 99;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class="zzz"&gt;
+Ini adalah bagian yang berada di layer atas.
+Menutup objek select yang ada di bawahnya.
+Apakah objek select masih terlihat ?
+&lt;/div&gt;
+
+&lt;form action="#"&gt;
+&lt;select&gt;
+&lt;option&gt;11 Januari&lt;/option&gt;
+&lt;/select&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<p>
+Tampilan menggunakan Firefox (versi 1.5, versi 2.0) dan Opera (versi 9)<br>
+<img src="media/select/b.jpg"><br><br>
+
+Tampilan menggunakan Internet Explorer (versi 6)<br>
+<img src="media/select/a.jpg">
+</p>
+
+
+<!-- isi selesai -->
+
+</body>
+</html>

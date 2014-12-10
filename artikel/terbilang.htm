@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Fungsi Terbilang</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 2 September 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Fungsi Terbilang</h2>
+
+<p>
+Banyak program, terutama yang berhubungan dengan keuangan membutuhkan fungsi untuk menyebutkan nilai sebuah angka. Seperti kita lihat dalam sebuah kuitansi, faktur, atau yang lainnya. Disini akan diuraikan sebuah fungsi sederhana yang berguna untuk menghasilkan kalimat dari sebuah angka. Contoh yang dibuat menggunakan bahasa PHP. Dan fitur yang dimiliki amatlah sederhana.
+</p>
+
+<p>
+Fungsi ini hanya bisa menyebutkan bilangan maksimal sepanjang 15 angka. Bilangan bulat. Tidak bisa menyebutkan negatif. Dan angka yang dimasukkan ke dalam fungsi tidak dilakukan pengujian apapun, kecuali panjang angka. Jadi dianggap angka yang digunakan terhadap fungsi ini berupa angka bulat sederhana, tanpa format apapun.
+</p>
+
+<p>
+Cara yang ditempuh untuk menyebut sebuah bilangan adalah dengan membuat sebuah tabel kata dari angka 1 sampai 9. Satu buah tabel tingkat bilangan (ribu, juta, milyar, triliun). Tabel ini dibuat dalam bentuk array. Ketika melakukan proses penyebutan angka, bilangan yang akan disebutkan, akan diurai menjadi array angka. Misalnya 6745, akan diurai menjadi array,
+</p>
+
+<pre>
+    angka[1] = 5
+    angka[2] = 4
+    angka[3] = 7
+    angka[4] = 6
+</pre>
+
+<p>
+Selanjutnya, dilakukan iterasi untuk menyebut angka. Iterasi dilakukan terhadap sebuah blok  yang terdiri dari 3 angka, mulai dari kanan, atau dari larik angka terkecil. Untuk contoh di atas, pada iterasi pertama, akan diambil tiga buah elemen array, yaitu angka[1], angka[2], dan angka[3].
+</p>
+
+<p>
+Tiga buah angka ini "diterjemahkan" menggunakan tabel yang sudah dibuat terlebih dahulu. Diperhatikan juga posisi angka untuk ratusan, puluhan, dan satuan. Selesai menterjemahkan satu blok, diperiksa, dan diberi kata untuk tingkatan, yaitu ribu, atau juta, atau milyar, atau triliun. Setelah itu dilanjutkan ke blok berikutnya, yaitu angka[4], angka[5], dan angka[6].
+</p>
+
+<p>
+Demikian dilakukan sampai sebanyak angka yang ada dalam bilangan yang akan disebutkan. Berikut adalah fungsi terbilang yang ditulis dalam bahasa PHP. Budi Adiono (iKode.net) membuat fungsi ini dalam JavaScript. Silahkan lihat <a href="media/terbilang_js.txt">fungsi terbilang dengan JavaScript</a>. Terima kasih kepada pak Budi atas usaha konversi ke dalam JavaScript, dan izin publikasi script tersebut.
+</p>
+
+<pre>
+&lt;?php
+
+function terbilang($bilangan) {
+
+  $angka = array('0','0','0','0','0','0','0','0','0','0',
+                 '0','0','0','0','0','0');
+  $kata = array('','satu','dua','tiga','empat','lima',
+                'enam','tujuh','delapan','sembilan');
+  $tingkat = array('','ribu','juta','milyar','triliun');
+
+  $panjang_bilangan = strlen($bilangan);
+
+  /* pengujian panjang bilangan */
+  if ($panjang_bilangan &gt; 15) {
+    $kalimat = "Diluar Batas";
+    return $kalimat;
+  }
+
+  /* mengambil angka-angka yang ada dalam bilangan,
+     dimasukkan ke dalam array */
+  for ($i = 1; $i <= $panjang_bilangan; $i++) {
+    $angka[$i] = substr($bilangan,-($i),1);
+  }
+
+  $i = 1;
+  $j = 0;
+  $kalimat = "";
+
+
+  /* mulai proses iterasi terhadap array angka */
+  while ($i <= $panjang_bilangan) {
+
+    $subkalimat = "";
+    $kata1 = "";
+    $kata2 = "";
+    $kata3 = "";
+
+    /* untuk ratusan */
+    if ($angka[$i+2] != "0") {
+      if ($angka[$i+2] == "1") {
+        $kata1 = "seratus";
+      } else {
+        $kata1 = $kata[$angka[$i+2]] . " ratus";
+      }
+    }
+
+    /* untuk puluhan atau belasan */
+    if ($angka[$i+1] != "0") {
+      if ($angka[$i+1] == "1") {
+        if ($angka[$i] == "0") {
+          $kata2 = "sepuluh";
+        } elseif ($angka[$i] == "1") {
+          $kata2 = "sebelas";
+        } else {
+          $kata2 = $kata[$angka[$i]] . " belas";
+        }
+      } else {
+        $kata2 = $kata[$angka[$i+1]] . " puluh";
+      }
+    }
+
+    /* untuk satuan */
+    if ($angka[$i] != "0") {
+      if ($angka[$i+1] != "1") {
+        $kata3 = $kata[$angka[$i]];
+      }
+    }
+
+    /* pengujian angka apakah tidak nol semua,
+       lalu ditambahkan tingkat */
+    if (($angka[$i] != "0") OR ($angka[$i+1] != "0") OR
+        ($angka[$i+2] != "0")) {
+      $subkalimat = "$kata1 $kata2 $kata3 " . $tingkat[$j] . " ";
+    }
+
+    /* gabungkan variabe sub kalimat (untuk satu blok 3 angka)
+       ke variabel kalimat */
+    $kalimat = $subkalimat . $kalimat;
+    $i = $i + 3;
+    $j = $j + 1;
+
+  }
+
+  /* mengganti satu ribu jadi seribu jika diperlukan */
+  if (($angka[5] == "0") AND ($angka[6] == "0")) {
+    $kalimat = str_replace("satu ribu","seribu",$kalimat);
+  }
+
+  return trim($kalimat);
+
+}
+
+?&gt;
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

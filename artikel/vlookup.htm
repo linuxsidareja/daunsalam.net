@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Memanfaatkan Fungsi VLOOKUP</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 28 Desember 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Memanfaatkan Fungsi VLOOKUP</h2>
+
+<p>
+Biasanya kita menggunakan program <i>spreadsheet</i> dalam mengolah data yang berupa tabel/daftar angka. Disini kita akan membahas sebuah fungsi yang tersedia dalam program OpenOffice.org Calc, salah satu program <i>spreadsheet</i> yang tersedia secara bebas. Fungsi yang akan dibahas kegunaannya adalah fungsi <b>vlookup</b>.
+</p>
+
+<p>
+Untuk contohnya, kita memiliki sebuah daftar nilai siswa. Kemudian daftar nilai ini akan dicetak dalam bentuk satu halaman untuk satu siswa. Cukup banyak cara yang bisa ditempuh untuk mendapatkan hasil seperti ini. Salah satu cara adalah dengan membuat satu <i>worksheet</i> yang berisi daftar nilai, dan satu buah <i>worksheet</i> yang disusun dalam bentuk laporan.
+</p>
+
+<p>
+Pada halaman daftar nilai, berisi daftar nilai dalam susunan yang sangat sederhana. Pada <i>worksheet</i> ini semua nilai dimasukkan. Kemudian untuk halaman laporan diatur sebaik mungkin, sesuai dengan bentuk yang akan dicetak. <i>worksheet</i> laporan ini hanya berisi satu format laporan. Jika kita memerlukan mencetak nilai satu orang siswa, maka cukup dengan mengisi nomor induk siswa pada sebuah sel, maka pada halaman laporan ini langsung tersaji nilai siswa tersebut.
+</p>
+
+<p>
+Langkah pertama, kita buat file baru yang berisi 2 buah <i>worksheet</i>. Kemudian <i>worksheet</i> pertama diberi nama daftar. <i>worksheet</i> kedua diberi nama laporan. Untuk mengganti nama <i>worksheet</i>, klik kanan pada nama <i>worksheet</i> yang ada di bagian bawah <i>worksheet</i> tersebut, seperti pada gambar berikut ini.
+</p>
+
+<p><img src="media/vlookup/renamesheet.png"></p>
+
+<p>
+Pada <i>worksheet</i> daftar, isi daftar nilai siswa seperti gambar berikut. Kolom nilai yang diperlukan bisa disesuaikan kebutuhan.
+</p>
+
+<p><img src="media/vlookup/sheetdaftar.png"></p>
+
+<p>
+Sedangkan di <i>worksheet</i> laporan, buat desain yang diinginkan untuk dicetak ke kertas. Gambar berikut sebagai contoh untuk halaman laporan.
+</p>
+
+<p><img src="media/vlookup/sheetlaporan.png"></p>
+
+<p>
+Sel yang berisi NIS (sel C6), nama (sel C7), dan sel yang berisi nilai siswa (sel D10 - D16), kosongkan terlebih dahulu. Sel tersebut akan diisi dengan rumus yang secara otomatis akan mengambil data ke <i>worksheet</i> daftar.
+</p>
+
+<p>
+Sekarang kita isi rumus untuk sel C7, yang akan memunculkan nama siswa. Rumus yang diisikan di sel C7 adalah :
+</p>
+
+<pre>
+=VLOOKUP(c6;daftar.a2:i10;2;0)
+</pre>
+
+<p>
+Apa gunanya rumus vlookup? Mari kita lihat apa yang dilakukan oleh rumus tersebut. Vlookup memerlukan 4 argumen yang dipisahkan oleh tanda titik koma (;). Masing-masing argumen tersebut adalah seperti berikut :
+</p>
+
+<pre>
+  argumen 1   :   c6
+  argumen 2   :   daftar.a2:i10
+  argumen 3   :   2
+  argumen 4   :   0
+</pre>
+
+<p>
+Argumen pertama yang berisi <b>c6</b>, adalah sesuatu yang akan dicari oleh fungsi ini. Jika kita isi sel c6 dengan 989911, maka fungsi ini akan mencari nilai 989911 tersebut. Jika sel c6 diisi "saya", maka fungsi vlookup akan mencari kata "saya". Lalu pertanyaannya, di manakah vlookup akan mencari data ini?
+</p>
+
+<p>
+Kita lihat argumen ke-2. Argumen ini berisi <b>daftar.a2:i10</b> Ini adalah daerah data yang berada dalam <i>worksheet</i> daftar, yang dimulai dari sel a2, sampai sel i10. Nah, di daerah inilah fungsi vlookup akan mencari data yang kita isi di sel c6 tadi. Dan pencarian data hanya dilakukan pada kolom paling kiri dari daerah data yang didefinisikan pada argumen kedua tersebut. Pada kasus ini, berarti vlookup akan mencari data pada kolom A dalam <i>worksheet</i> daftar, mulai dari a2 sampai a10. Pada contoh di atas kolom A pada <i>worksheet</i> daftar ini berisi data NIS.
+</p>
+
+<p>
+Kemudian argumen ke-3. Argumen ini berisi angka 2. Maksud angka 2 disini adalah, fungsi vlookup akan menampilkan hasil yang didapatkan pada kolom ke-2. Yaitu kolom ke-2 dari daerah data yang didefinisikan pada argumen ke-2. Argumen ke-2 berisi <b>daftar.a2:i10</b>, maka kolom ke-2 dari daerah data ini adalah sel b2 sampai b10. Dalam contoh ini, berisi nama siswa.
+</p>
+
+<p>
+Jadi, ketika kita isi di sel c6 angka <b>989923</b>, yaitu salah satu NIS siswa, maka fungsi vlookup akan mencari nilai dalam <i>worksheet</i> daftar, di sel A2 sampai A10 yang berisi data 989923. Setelah ditemukan, maka fungsi ini akan menampilkan data yang berada di kolom ke-2 dari daerah data tersebut, yang bersesuaian barisnya, yaitu <b>Heryana</b>. Jika kita isi angka 989945 pada sel c6, maka yang akan dihasilkan adalah Dedy Setiadi.
+</p>
+
+<p>
+Dengan cara seperti ini, maka sel yang berisi nilai siswa pada <i>worksheet</i> laporan juga diisi dengan rumus yang sama. Hanya perbedannya adalah kolom ke berapa yang akan ditampilkan oleh fungsi ini. Kita misalkan untuk sel d10, yang akan menampilkan nilai Agama. Kita lihat kembali argumen untuk daerah data yang akan dicari, yaitu <b>daftar.a2:i10</b>. Pada daerah ini, nilai agama berada di kolom ke-3. Maka argumen ke-3 untuk fungsi vlookup ini diisi dengan angka 3. Begitu seterusnya untuk nilai yang lain.
+</p>
+
+<p>
+Contoh selanjutnya yaitu untuk sel d14, yang akan menampilkan nilai Ekonomi. Maka untuk rumus vlookup yang dibuat di sel ini, argumen ke-3 harus diisi dengan angka 7. Yaitu kolom ke-7 dari daerah data <b>daftar.a2:i10</b>. Maka rumus untuk sel d14 :
+</p>
+
+<pre>
+=VLOOKUP(c6;daftar.a2:i10;7;0)
+</pre>
+
+<p>
+Dengan cara ini, kita cukup membuat satu buah desain laporan. Jika kita memerlukan pencetakan untuk nilai seorang siswa, maka tinggal diisi NIS pada sel c6, maka data yang lain secara otomatis akan terisi.
+</p>
+
+<p>
+Masih ada satu lagi argumen, yaitu argumen ke-4. Pada contoh rumus di atas diisi angka 0. Ini adalah penanda untuk keadaan data daerah pencarian. Jika data dalam daerah pencarian terurut, maka nilai argumen ke-4 diisi dengan 1. Jika data tidak terurut, maka disii dengan nilai 0. Jadi tidak ada keharusan untuk mengurutkan data dalam daerah yang akan dicari oleh fungsi ini.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

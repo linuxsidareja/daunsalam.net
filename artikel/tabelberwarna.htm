@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Membuat Tabel Data Berwarna</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+
+<style type="text/css">
+.tabeldata { border : 1px solid #909090; font-size : 12px; }
+.judul { font-weight : bold; text-align : center; background : #C0C0C0; }
+.terang { background : #E8E8E8; }
+.gelap { background : #D8D8D8; }
+.sorot { background : #E6B016; }
+</style>
+
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 27 Oktober 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Membuat Tabel Data Berwarna</h2>
+
+<p>
+Dalam menampilkan data, cukup sering kita menyajikannya dalam bentuk tabel. Untuk menghasilkan sebuah tabel dengan HTML sudah tersedia tag &lt;table&gt; yang memang berfungsi untuk pembuatan tabel. Untuk menghasilkan sebuah tabel yang lebih baik dalam visualisasinya, bisa dimanfaatkan kombinasi beberapa warna.
+</p>
+
+<p>
+Dalam tutorial singkat ini, akan diulas bagaimana menghasilkan sebuah tabel data yang sudah "dipoles" dengan warna untuk setiap baris data. Kemudian ditambahkan fungsi yang menonjolkan warna (<i>highlight</i>) baris yang dilewati kursor. Tutorial ini menggunakan PHP, HTML, dan CSS.
+</p>
+
+<p>
+Pertama kita akan membuat dulu sebuah CSS yang akan dipakai oleh tabel dalam menampilkan warna tertentu. Class yang diperlukan adalah untuk untuk tabel data, baris judul tabel, baris yang berwarna terang, baris yang berwarna gelap, dan baris yang sedang disorot. Contoh untuk CSS tersebut seperti berikut :
+</p>
+
+<pre>
+&lt;style&gt;
+.tabeldata { border: 1px solid #909090; font-size : 12px }
+.judul { font-weight: bold; text-align: center; background: #C0C0C0 }
+.terang { background: #E8E8E8 }
+.gelap { background: #D8D8D8 }
+.sorot { background: #E6B016 }
+&lt;/style&gt;
+</pre>
+
+<p>
+Umumnya data yang akan ditampilkan dalam tabel berupa data yang diambil dari database. Untuk contoh ini, kita akan menyusun data dalam sebuah variabel <i>array</i>, yang nanti akan ditampilkan pada tabel dengan warna yang berselang-seling pada tiap-tiap baris. Contohnya adalah sebagai berikut :
+</p>
+
+<pre>
+$data[1] = array("Budiman","Jl Cemara No 123 Jakarta");
+$data[2] = array("Joko Susanto","Kampung Indah Rt 24 Bandung");
+$data[3] = array("Insan Kamil","Jl Merpati No 456 Bogor");
+$data[4] = array("Hermawan","Jl Mawar No 3 Sukabumi");
+$data[5] = array("Susilawati","Kelurahan Jaya Bekasi");
+$data[6] = array("Nugroho","Desa Sukamaju Kecamatan Mandiri");
+$data[7] = array("Marni","Klebengan CT V No 33 Yogyakarta");
+</pre>
+
+<p>
+Proses untuk menampilkan data ke dalam tabel adalah seperti kode di bawah. Untuk melakukan pergantian warna untuk setiap baris (<i>row</i>), digunakan satu variabel, pada contoh adalah variabel $terang. Jika variabel $terang bernilai true, maka &lt;tr&gt; yang bersangkutan akan diberi class terang. Jika sebaliknya, maka &lt;tr&gt; tersebut diberi class gelap.
+</p>
+
+<p>
+Proses <i>highlight</i> terhadap sebuah row memanfaatkan event onMouseOver, dan onMouseOut. Aksi untuk onMouseOver adalah mengganti class &lt;tr&gt; bersangkutan dengan class sorot. Sedangkan aksi untuk onMouseOut adalah mengembalikan class &lt;tr&gt; tersebut ke class yang sesuai untuk barisnya.
+</p>
+
+<pre>
+$terang = true;
+echo "&lt;table border=0 cellspacing=1 cellpadding=3 class=tabeldata&gt;\n";
+for ($i = 1; $i &lt; 8; $i++) {
+  if ($terang) {
+    echo "&lt;tr class="terang"
+              onMouseOver="this.className='sorot'"
+              onMouseOut="this.className='terang'"&gt;";
+  } else {
+    echo "&lt;tr class="gelap"
+              onMouseOver="this.className='sorot'"
+              onMouseOut="this.className='gelap'"&gt;";
+  }
+  echo "&lt;td align=center&gt;" . $i . "&lt;/td&gt;" .
+       "&lt;td&gt;" . $data[$i][0] . "&lt;/td&gt;" .
+       "&lt;td&gt;" . $data[$i][1] . "&lt;/td&gt;&lt;/tr&gt;\n";
+  $terang = !$terang;
+}
+echo "&lt;/table&gt;\n";
+</pre>
+
+<p>
+Hasil dari kode program di atas adalah seperti berikut ini. Arahkan mouse ke salah satu baris data, maka baris tersebut akan jadi berganti warna.
+</p>
+
+<table border="0" cellspacing="1" cellpadding="3" class="tabeldata">
+<tr class="judul"><td>No</td><td>Nama</td><td>Alamat</td></tr>
+<tr class="terang" onMouseOver="this.className='sorot'" onMouseOut="this.className='terang'"><td align="center">1</td><td>Budiman</td><td>Jl Cemara No 123 Jakarta</td></tr>
+<tr class="gelap" onMouseOver="this.className='sorot'" onMouseOut="this.className='gelap'"><td align="center">2</td><td>Joko Susanto</td><td>Kampung Indah Rt 24 Bandung</td></tr>
+<tr class="terang" onMouseOver="this.className='sorot'" onMouseOut="this.className='terang'"><td align="center">3</td><td>Insan Kamil</td><td>Jl Merpati No 456 Bogor</td></tr>
+<tr class="gelap" onMouseOver="this.className='sorot'" onMouseOut="this.className='gelap'"><td align="center">4</td><td>Hermawan</td><td>Jl Mawar No 3 Sukabumi</td></tr>
+<tr class="terang" onMouseOver="this.className='sorot'" onMouseOut="this.className='terang'"><td align="center">5</td><td>Susilawati</td><td>Kelurahan Jaya Bekasi</td></tr>
+<tr class="gelap" onMouseOver="this.className='sorot'" onMouseOut="this.className='gelap'"><td align="center">6</td><td>Nugroho</td><td>Desa Sukamaju Kecamatan Mandiri</td></tr>
+<tr class="terang" onMouseOver="this.className='sorot'" onMouseOut="this.className='terang'"><td align="center">7</td><td>Marni</td><td>Klebengan CT V No 33 Yogyakarta</td></tr>
+</table>
+<br>
+
+<p>
+Script lengkap untuk contoh ini adalah sebagai berikut :
+</p>
+
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+.tabeldata { border: 1px solid #909090; font-size : 12px }
+.judul { font-weight: bold; text-align: center; background: #C0C0C0 }
+.terang { background: #E8E8E8 }
+.gelap { background: #D8D8D8 }
+.sorot { background: #E6B016 }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;?php
+
+$data[1] = array("Budiman","Jl Cemara No 123 Jakarta");
+$data[2] = array("Joko Susanto","Kampung Indah Rt 24 Bandung");
+$data[3] = array("Insan Kamil","Jl Merpati No 456 Bogor");
+$data[4] = array("Hermawan","Jl Mawar No 3 Sukabumi");
+$data[5] = array("Susilawati","Kelurahan Jaya Bekasi");
+$data[6] = array("Nugroho","Desa Sukamaju Kecamatan Mandiri");
+$data[7] = array("Marni","Klebengan CT V No 33 Yogyakarta");
+
+$terang = true;
+echo "&lt;table border=\"0\"
+             cellspacing=\"1\"
+             cellpadding=\"3\"
+             class=\"tabeldata\"&gt;\n";
+echo "&lt;tr class=\"judul\"&gt;&lt;td&gt;No&lt;/td&gt;
+                          &lt;td&gt;Nama&lt;/td&gt;
+                          &lt;td&gt;Alamat&lt;/td&gt;&lt;/tr&gt;\n";
+for ($i = 1; $i &lt; 8; $i++) {
+  if ($terang) {
+    echo "&lt;tr class=\"terang\"
+              onMouseOver=\"this.className='sorot'\"
+              onMouseOut=\"this.className='terang'\"&gt;";
+  } else {
+    echo "&lt;tr class=\"gelap\"
+              onMouseOver=\"this.className='sorot'\"
+              onMouseOut=\"this.className='gelap'\"&gt;";
+  }
+  echo "&lt;td align=\"center\"&gt;" . $i . "&lt;/td&gt;" .
+       "&lt;td&gt;" . $data[$i][0] . "&lt;/td&gt;" .
+       "&lt;td&gt;" . $data[$i][1] . "&lt;/td&gt;&lt;/tr&gt;\n";
+  $terang = !$terang;
+}
+echo "&lt;/table&gt;\n";
+
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

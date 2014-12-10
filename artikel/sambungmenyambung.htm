@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Sambung Menyambung</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 24 Februari 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Sambung Menyambung</h2>
+
+<p>
+Ketika membuat judul di atas, yang saya ingat adalah sebuah lagu nasional. Saya juga yakin pembaca yang budiman juga tahu lagu tersebut, yang sebagian liriknya berbunyi "sambung menyambung menjadi satu". Tapi saya tak sedang membahas lagu. Ini tentang sambungan komputer dengan beberapa peralatan lainnya.
+</p>
+
+<p>
+Awalnya saya ragu membuat tulisan ini. Takut dianggap narsis. Dianggap pamer barang-barang antik kepunyaan sendiri. Tapi saya gusur saja dulu perasaan itu. Maksud saya hanya sekedar menyampaikan bahwa dengan sistem operasi GNU/Linux bisa juga menyambungkan berbagai peranti elektronik. Sekaligus juga gambaran sebuah jaringan sederhana yang bisa membagi akses internet ke beberapa komputer.
+</p>
+
+<p>Diagram ini sebagai pembuka, yang semoga bisa menggambarkan dengan jelas</p>
+
+<p><img src="media/homenet.jpg"></p>
+
+<p>
+Koneksi internet menggunakan Telkom Speedy. Dengan memakai modem ADSL yang juga sekaligus memiliki fungsi router membuat akses internet cukup mudah. Setelah modem/router ini dikonfigurasi pertama kali, yang pernah saya ganti hanyalah password. Setelah itu cukup tombol on/off saja lagi yang disentuh. Modem/router inilah yang menjadi gerbang ke jaringan internet. Jika hanya memiliki satu komputer untuk akses ke internet, maka modem/router ini cukup disambungkan langsung ke komputer yang satu tersebut menggunakan kabel UTP. Pada komputer, kabel UTP ini masuk ke port RJ45 yang ada pada network card.
+</p>
+
+<p>
+Pada diagram di atas, modem/router disambungkan ke switch 8 port. Dengan cara ini, beberapa komputer bisa akses internet sekaligus melalui modem/router yang satu ini.
+</p>
+
+<p>
+Agar sambungan telepon biasa juga bisa digunakan bersamaan dengan koneksi internet, maka dari saluran kabel telepon terlebih dahulu masuk ke sebuah alat yang dalam gambar di atas disebut sebagai ADSL Splitter. Ada tiga port pada alat ini. Satu buah disambungkan ke jaringan telepon, satu ke pesawat telepon, dan satu lagi ke modem ADSL. Ketiga sambungan ini semuanya menggunakan kabel telepon biasa.
+</p>
+
+<p>
+Sambungan dari komputer ke switch, switch ke switch, dan switch ke access point semuanya menggunakan kabel UTP. Semua kabel yang digunakan disambung secara <i>straight</i>. Biasanya yang jadi masalah adalah sambungan antara switch dengan switch. Dulu kala, (sepertinya kok udah lama sekali...) sambungan dari switch ke switch haruslah cermat, dan lazim menggunakan kabel <i>cross</i>. Sekarang ini umumnya port RJ45 pada switch sudah <i>auto negotiation</i>, sehingga kita bisa menggunakan kabel <i>straight</i> saja.
+</p>
+
+<p>
+Ini diagram sederhana sambungan <i>straight</i><br>
+<tt>1 -------------------------------------- 1 biru</tt><br>
+<tt>2 -------------------------------------- 2 biru (strip putih)</tt><br>
+<tt>3 -------------------------------------- 3 oranye</tt><br>
+<tt>4 -------------------------------------- 4 coklat </tt><br>
+<tt>5 -------------------------------------- 5 coklat (strip putih)</tt><br>
+<tt>6 -------------------------------------- 6 oranye (strip putih)</tt><br>
+<tt>7 -------------------------------------- 7 hijau</tt><br>
+<tt>8 -------------------------------------- 8 hijau (strip putih)</tt>
+</p>
+
+<p>
+Pemberian IP address pada komputer, modem, access point semuanya dilakukan secara statik. Saya tidak menggunakan DHCP server dalam jaringan ini. DHCP server yang ada pada modem/router dan yang ada pada access point saya matikan. Apa alasannya, juga tidak jelas-jelas amat :-D Yang pasti saya senang aja dengan cara ini (menggunakan IP statik). Alamat IP yang digunakan seperti terlihat pada diagram. Gateway pada semua komputer dikonfigurasi ke IP 192.168.1.1 yang merupakan router ke internet. Alamat untuk DNS server bisa diisi dengan DNS Telkom Speedy, atau isi dengan IP 192.168.1.1. Pada modem/router yang saya miliki sudah ada DNS server/cache/forwarder, sehingga bisa berfungsi sebagai DNS server juga.
+</p>
+
+<p>
+Access point pertama kali digunakan perlu dikonfigurasi sedikit. Namun tak banyak yang saya ganti. Secara default sebenarnya sudah bisa langsung digunakan. Hanya sekedar mengetahui SSID pada access point tersebut, kemungkinan sudah bisa jalan dengan lancar. Untuk konfigurasi pertama kali ini, access point langsung disambungkan ke komputer menggunakan kabel UTP, tentu saja ke port RJ45 yang ada pada netwrok card di komputer. Untuk access point 3Com ini alamat defaultnya adalah 192.168.1.250/255.255.255.0. Pastikan juga komputer yang kita gunakan untuk melakukan konfigurasi access point ini juga memiliki subnet yang sama dengan access point. Misalnya IP komputer 192.168.1.50/255.255.255.0.
+Kemudian dengan webbrowser buka alamat http://192.168.1.250, dan selanjutnya akan masuk ke halaman konfigurasi access point.
+</p>
+
+<p>
+Umumnya yang perlu diperhatikan adalah IP access point, SSID, operation mode, konfigurasi DHCP server. Dalam jaringan pada diagram di atas, IP access point tetap default pada 192.168.1.250, SSID diisi dengan <b>3Com</b>, operation mode sebagai access point. Sedangkan DHCP server saya matikan, karena jaringan pakai IP statik saja. Jangan lupa ganti password.
+</p>
+
+<p>
+Untuk menyambung laptop ke access point saya menggunakan PCMCIA card, karena laptop kampungan yang tidak punya wireless card internal. Wireless card yang digunakan adalah PCMCIA card LynkSys WMP54G. Wireless card ini menggunakan chipset broadcom 43xx. Pada Slackware 12 sudah terdeteksi dan menggunakan modul bcm43xx. Sayangnya tak berjalan. Akhirnya terpaksa juga menggunakan ndiswrapper. Dengan ndiswrapper, dan file inf yang ada pada CDROM yang disertakan pada paket penjualan card ini, PCMCIA card wireless berjalan dengan aman dan terkendali.
+</p>
+
+<p>
+Sedikit catatan tentang penggunaan PCMCIA card ini. Kalau modul bcm43xx sudah diload oleh kernel, remove dulu.<br>
+<tt>rmmod bcm43xx</tt><br>
+Kalau driver yang akan digunakan ndiswrapper belum diinstal, instal dulu menggunakan<br>
+<tt>ndiswrapper -i nama_file_inf.inf</tt><br>
+Kemudian load modul dengan<br>
+<tt>modprobe ndiswrapper</tt><br>
+Set SSID dengan<br>
+<tt>iwconfig wlan0 essid 3Com</tt><br>
+Beri alamat IP ke wlan0 dengan<br>
+<tt>ifconfig wlan0 192.168.1.199 up</tt><br>
+Dan set routing ke alamat 192.168.1.1 untuk wlan0<br>
+<tt>route add default gw 192.168.1.1 dev wlan0</tt><br>
+Matikan eth0 jika tak diperlukan<br>
+<tt>ifconfig eth0 down</tt><br>
+Tes koneksi dengan ping.
+</p>
+
+<p>
+Untuk peralatan lain yang pernah saya gunakan, berjalan dengan baik sesuai kebutuhan pribadi. Printer LX-300 dapat berjalan melalui CUPS. Bahkan lebih banyak saya menggunakan mode paling sederhana, hanya langsung mengirim teks ke printer dengan <tt>cat fileteks > /dev/usb/lp0</tt> Kamera Finepix S5600 sama seperti menyambungkan flashdisk. Setelah kamera tersambung, tinggal copy file foto yang ada dalam xdcard di kamera ke harddisk komputer. Selanjutnya bisa diolah dengan Gimp. HP jadul Nokia 3210 disambungkan dengan kabel khusus untuk HP melalui port serial. Kemudian dengan menggunakan software Gnokii sudah bisa melakukan banyak hal terhadap HP tersebut. Jika ingin dijadikan SMS gateway juga bisa. Satu lagi, yaitu keyboard Yamaha. Disambungkan menggunakan kabel USB, bisa mengirim dan menerima MIDI event. Saya menggunakannya dengan software midish, yaitu software MIDI dalam mode konsol. Semuanya berjalan dengan Slackware.
+</p>
+
+<p>
+Hampir lupa. Kabel UTP yang menyambungkan antara dua buah switch berjarak sekitar 25 meter. Sumbangan dari seorang juragan bernama Bonnie Kurniawan. Walapun kabelnya sudah bulukan tapi berjalan dengan lancar. <i>Ping 0% loss</i>.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

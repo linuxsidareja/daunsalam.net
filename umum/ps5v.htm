@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Baterai Kamera Menggunakan Aki Kering</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 23 Oktober 2008, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Baterai Kamera Menggunakan Aki Kering</h2>
+
+<p>
+Jika pembaca yang budiman mengikuti cara yang saya ceritakan disini,
+maka segala akibat adalah tanggung jawab masing-masing.
+Mohon tidak melibatkan saya, karena ini adalah eksperimen sekenanya :-)
+</p>
+
+<p>
+Saya sering menggunakan kamera digital untuk menyalurkan hobi motret sana-sini
+yang kadang-kadang hasilnya bisa bagus, tapi sebagian besar memang jauh dari harapan.
+Karena ini hanya sebuah hobi, jadi dijalani saja dengan gembira.
+Kamera digital ini menggunakan 4 buah baterai ukuran AA sebagai sumber tenaganya.
+Bisa menggunakan baterai biasa, tetapi tidak tahan lama.
+Umumnya pemakai kamera seperti ini menggunakan baterai yang bisa diisi ulang
+(rechargeable battery).
+Ada banyak merek yang beredar di pasaran. Sayangnya, yang palsu juga tak kalah
+banyaknya. Baterai palsu ini benar-benar membuat kesal.
+Isinya cepat habis. Apakah ada orang yang mau memakai baterai yang hanya
+sanggup memberi tenaga untuk 3 kali memotret? Lalu harus dicas lagi.
+</p>
+
+<p>
+Entah apa pemancingnya, saya berfikir, bagaimana kalau pakai aki kering?
+Aki kering bisa diisi ulang, dayanya juga lebih besar.
+Aki kering digunakan pada <i>emergency lamp</i>, UPS, bahkan pada motor.
+Tentu saja dengan konsumsi tenaga yang tidak besar, aki kering akan dapat
+memberi tenaga lebih lama pada kamera digital. Begitu kesimpulan saya.
+Dengan rumus kira-kira, saya pilih aki kering 12V 7AH.
+</p>
+
+<p>
+Berbekal sedikit pengetahuan elektronik yang saya dapatkan semenjak kuliah,
+sebuah rangkaian regulator tegangan sederhana saya tambahkan untuk aki ini.
+Tegangan yang diperlukan untuk kamera adalah 5V. Regulator 7805 rasanya cukup
+tepat untuk keperluan ini. Silahkan lihat rangkaian di bawah ini.
+</p>
+
+<p><img src="media/reg.jpg"></p>
+
+<p>
+Input dari rangkaian adalah dari aki kering 12 volt. Tegangan output 5V, dengan
+arus maksimal 1 Ampere, sesuai dengan kemampuan IC 7805.
+Sebaiknya IC 7805 diberi pendingin, agar tidak terlalu panas ketika beroperasi.
+LED digunakan untuk memberi indikasi apakah ada tegangan pada output.
+Sebuah kapasitor 470 microfarad/16V dipasang pada bagian output.
+</p>
+
+<p>
+Berikut adalah foto setelah rangkaian ini selesai.
+Tampilannya memang tidak profesional :-)
+Jack DC digunakan untuk menyambungkan sumber tenaga ini ke kamera.
+Batere AA digunakan sebagai pembanding ukuran.
+</p>
+
+<p><img src="media/ps.jpg"></p>
+
+<p>
+Permasalahan utama menggunakan sumber tenaga untuk kamera dengan cara ini
+adalah beratnya. Aki kering beserta rangkaian ini perlu sebuah tas.
+Tentu saja akan menambah repot urusan potret-memotret.
+Untuk mengisi kembali jika aki sudah kosong juga diperlukan <i>charger</i>.
+Solusi yang saya gunakan adalah memanfaatkan UPS yang biasa digunakan untuk
+komputer. Keluarkan aki kering yang dalam UPS, lalu pasang aki kering yang
+kosong. Nyalakan UPS, maka aki tersebut akan diisi.
+Perlu diperhatikan, aki kering yang digunakan untuk sumber tenaga kamera ini
+sebaiknya sama dengan aki kering yang digunakan UPS.
+</p>
+
+<p>
+Saya sudah mencoba hasil prakarya di atas. Percobaan dilakukan dengan
+berjalan-jalan di dalam kebun raya Bogor sambil memotret apa saja.
+Mengapa sambil jalan-jalan? Supaya merasakan bahwa aki tersebut memang berat (Hahaha).
+Untuk tenaga yang diberikan pada kamera memang tidak mengecewakan.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

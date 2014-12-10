@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Menampilkan Data Per Halaman</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 8 Mei 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Menampilkan Data Per Halaman</h2>
+
+<p>
+Sering dijumpai pertanyaan dari seseorang yang baru menggunakan PHP dan MySQL bagaimana cara menampilkan data dari tabel dalam bentuk halaman per halaman. Untuk itulah tulisan ini dibuat. Dilengkapi dengan contoh sederhana yang langsung dapat dicoba, mudah-mudahan rekan yang memerlukan bisa mendapat sedikit "pencerahan" dari tulisan ini :)
+</p>
+
+<p>
+Pertama, kita akan menggunakan sebuah tabel dengan nama <b>buku</b>. Tabel ini memiliki field id, judul, pengarang. Dengan struktur seperti berikut :
+</p>
+
+<pre>
+CREATE TABLE buku (
+  id INT NOT NULL AUTO_INCREMENT ,
+  judul VARCHAR (100) NOT NULL ,
+  pengarang VARCHAR (100) NOT NULL ,
+  PRIMARY KEY (id)
+)
+</pre>
+
+<p>
+Untuk membantu mengisi data sampel ke dalam tabel tersebut, bisa menggunakan query berikut ini :
+</p>
+
+<pre>
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Pahlawan dan Tikus','Mustofa Bisri');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Layar Terkembang','STA');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Oples','Emha Ainun Nadjib');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Blok','Putu Wijaya');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Zat','Putu Wijaya');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Yel','Putu Wijaya');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Dar Der Dor','Putu Wijaya');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Kemilau Cahaya','Gus Tf Sakai');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Palestine','Joe Sacco');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('MAJOI','Taufiq Ismail');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Laba-laba','Gus Tf Sakai');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Bali','Putu Wijaya');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Rekayasa Sosial','Jalaluddin Rakhmat');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Robohnya Surau Kami','AA Navis');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Psikologi Komunikasi','Jalaluddin Rakhmat');
+INSERT INTO buku (judul,pengarang)
+          VALUES ('Psikologi Agama','Jalaluddin Rakhmat');
+</pre>
+
+<p>
+Ketika kita mengambil data dari sebuah tabel dalam database, biasanya cara berikut ini dapat digunakan. Dengan cara ini, maka semua data yang ada dalam tabel buku akan ditampilkan.
+</p>
+
+<pre>
+$query = "SELECT judul,pengarang FROM buku ORDER BY judul";
+$hasil_query = mysql_query($query);
+while ($record = mysql_fetch_row($hasil_query)) {
+  echo "$record[0] : $record[1] &lt;br&gt;\n";
+}
+</pre>
+
+<p>
+Untuk bisa menghasilkan data yang ditampilkan halaman per halaman, misalnya 5 data dalam satu halaman, maka kita bisa menggunakan LIMIT pada query di atas. Contoh berikut ini akan menampilkan 5 data, mulai data ke 11. Perlu diingat bahwa index data dimulai dari 0.
+</p>
+
+<pre>
+$query = "SELECT judul,pengarang FROM buku ORDER BY judul LIMIT 10,5";
+$hasil_query = mysql_query($query);
+while ($record = mysql_fetch_row($hasil_query)) {
+  echo "$record[0] : $record[1] &lt;br&gt;\n";
+}
+</pre>
+
+<p>
+Dengan cara menentukan batas awal data yang akan ditampilkan dan berapa banyak data yang akan ditampilkan, kita bisa membuat tampilan data halaman per halaman. Untuk keperluan ini, diperlukan sebuah variabel yang diterima oleh script sebagai penentu halaman berapa yang akan ditampilkan. Contoh pada script berikut ini sederhana saja, untuk memberi contoh bagaimana caranya menampilkan data dari tabel halaman per halaman. Silahkan copy script berikut ini, dan beri nama misalnya paging.php kemudian akses dengan browser anda.
+</p>
+
+<pre>
+&lt;?php
+
+$halaman = $HTTP_GET_VARS['halaman'];
+if (empty($halaman)) { $halaman = 1; }
+
+$namafileini = $_SERVER['PHP_SELF'];
+
+// isi sesuai dengan server anda
+$DB_SERVER   = 'localhost';
+$DB_USER     = 'root';
+$DB_PASSWORD = '';
+$DB_DATABASE = 'tes';
+
+$koneksi_db = mysql_connect($DB_SERVER, $DB_USER, $DB_PASSWORD)
+              or die(mysql_error());
+mysql_select_db($DB_DATABASE) or die(mysql_error());
+
+$data_perhalaman = 5;  // jumlah data per halaman
+$awal = ($halaman - 1) * $data_perhalaman;
+$nomor = $awal + 1;
+
+echo "&lt;h3&gt;Ini Halaman $halaman&lt;/h3&gt;\n";
+
+$query = "SELECT judul,pengarang FROM buku ORDER BY judul " .
+         "LIMIT $awal , $data_perhalaman";
+$hasil_query = mysql_query($query);
+while ($record = mysql_fetch_row($hasil_query)) {
+  echo "&lt;b&gt;$nomor&lt;/b&gt;. $record[0] : $record[1] &lt;br&gt;\n";
+  $nomor = $nomor + 1;
+}
+
+$halsebelum = $halaman - 1;
+if ($halsebelum == 0) { $halsebelum = 1; }
+$halberikut = $halaman + 1;
+
+echo "&lt;br&gt;&lt;hr&gt;\n";
+echo "&lt;a href=\"$namafileini?halaman=$halsebelum\"&gt;Hal $halsebelum&lt;/a&gt;\n";
+echo "Hal $halaman \n";
+echo "&lt;a href=\"$namafileini?halaman=$halberikut\"&gt;Hal $halberikut&lt;/a&gt;\n";
+
+?&gt;
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

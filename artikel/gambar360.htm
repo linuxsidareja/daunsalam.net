@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: </title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, , yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Gambar 360 Derajat</h2>
+
+<p>
+Ada banyak cara yang bisa ditempuh untuk menampilkan gambar 360 derajat, atau juga disebut dengan panorama. Bisa dengan software khusus yang memang dibuat untuk keperluan ini. Atau bisa juga dengan rekaman video yang menyorot sebesar 360 derajat. Saya ingat sekitar lima tahun lalu membuat hal yang sama, dengan memanfaatkan java applet. Dan sekarang saya mencoba dengan "akal-akalan" sederhana untuk menghasilkan gambar 360 derajat.
+</p>
+
+<p>
+Model ini hanya menggunakan fungsi yang ada pada HTML, CSS, dan Javascript. Gambar 360 derajat yang dihasilkan dengan cara ini memang tidak ideal, namun tidak diperlukan software khusus untuk menampilkannya. Cukup sebuah web browser.
+</p>
+
+<p>
+Pertama yang perlu disiapkan adalah sebuah gambar yang melingkupi 360 derajat. Saya mengambilnya dengan kamera digital, dengan cara memotret sekeliling lokasi yang diinginkan. Untuk memudahkan ketika menggabungkan foto, sebaiknya gunakan kecepatan rana yang sama untuk setiap arah pemotretan, sehingga kecerahan foto sesuai dengan keadaan sebenarnya pada arah tersebut. Lalu sambung foto-foto tersebut dengan software pengolah gambar, sehingga menjadi sebuah gambar yang panjang yang meliputi sekeliling lokasi (360<sup>o</sup>).
+</p>
+
+<p>
+Ketika menggabungkan foto kita akan mengalami kesulitan dalam menyambung antarfoto karena perspektif masing-masing arah berbeda. Untuk menghasilkan gambar yang baik, ambil arah pemotretan sebanyak mungkin, dengan jarak antar arah cukup kecil. Tigapuluhenam foto bisa menghasilkan penggabungan yang cukup baik.
+</p>
+
+<p>
+Setelah gambar selesai, untuk menampilkannya sehingga bisa bergerak memutar digunakan Javascript dan CSS, dengan gagasan seperti berikut :
+</p>
+
+<ul>
+<li>Gambar ditampilkan pada sebuah halaman HTML sederhana, kita sebut halaman A.</li>
+<li>Dalam halaman A ini gambar yang sudah disiapkan tersebut disusun sebanyak 5 buah mendatar secara berulang, dalam sebuah kontainer. Disini menggunakan tag &lt;DIV&gt;</li>
+<li>Buat sebuah halaman HTML lagi yang memiliki sebuah IFRAME.</li>
+<li>Atur ukuran IFRAME agar tingginya sama dengan tinggi gambar, dan lebarnya, sesuaikan dengan kebutuhan, dalam contoh di bawah ini 500 pixel.</li>
+<li>Tampilkan halaman A tadi dalam IFRAME ini</li>
+<li>Dengan Javascript kita buat sebuah navigasi yang berguna menggeser kontainer yang berisi gambar di halaman A tersebut, sehingga menimbulkan kesan gambar berputar.</li>
+</ul>
+
+<p>
+Contohnya dapat dilihat di bawah ini. Jika ingin melihat kode yang digunakan beserta file yang digunakan silahkan download <a href="media/gambar360/g360.zip">file gambar 360</a> (103 KB). Berisi 2 file HTML dan satu file gambar.
+</p>
+
+<!-- bagian gambar 360 -->
+<script type="text/javascript">
+var i = -7000;
+var ID_interval;
+var waktu = 50;
+var jarak = 2;
+function kiri() {
+  i = i - jarak;
+  if (i < -13400) { i = -13400; stop(); }
+  window.frames["f360"].document.getElementById("g2").style.left = i;
+}
+function kanan() {
+  i = i + jarak;
+  if (i >= 0) { i = 0; stop(); }
+  window.frames["f360"].document.getElementById("g2").style.left = i;
+}
+function mulaikanan() {
+  x = document.navigasi.geser.value;
+  jarak = Number(x);
+  ID_interval = window.setInterval("kanan()",waktu);
+}
+function mulaikiri() {
+  x = document.navigasi.geser.value;
+  jarak = Number(x);
+  ID_interval = window.setInterval("kiri()",waktu);
+}
+function stop() {
+  window.clearInterval(ID_interval);
+}
+</script>
+
+<IFRAME src="media/gambar360/l2.htm"
+        name="f360"
+        width="500"
+        height="245"
+        scrolling="no"
+        frameborder="0"
+        style="border:solid 1px #000090; margin-bottom:10px">
+</IFRAME>
+
+<form action="" name="navigasi" onSubmit="return false">
+<input type="button" onMouseOver="javascript:mulaikanan()" onMouseOut="javascript:stop()" value=" << ">
+<input type="button" onMouseOver="javascript:mulaikiri()" onMouseOut="javascript:stop()" value=" >> ">
+&bull; Besar pergeseran
+<select name="geser">
+<option value="2">2</option>
+<option value="5">5</option>
+<option value="10">10</option>
+<option value="25">25</option>
+</select>
+pixel<br>
+<small><i>Arahkan pointer mouse ke tombol << atau >> untuk menggerakkan gambar</i></small>
+</form>
+<!-- bagian gambar 360 selesai -->
+
+
+<!-- isi selesai -->
+
+</body>
+</html>

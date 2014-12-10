@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Fortune</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 12 Desember 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Fortune</h2>
+
+<p>
+Judul di atas tidaklah berkaitan dengan peramalan keberuntungan. Saya bukan peramal dan tak bisa meramal. Apalagi memberi keberuntungan. Anggota dewan yang (tidak) terhormat saja masih memerlukan banyak tunjangan, apalagi saya. Husy!.
+</p>
+
+<p>
+Jika anda masih menyukai login dalam mode teks, ada kemungkinan distro linux yang digunakan, membuat pengaturan agar setiap kali login menampilkan sebuah kutipan kalimat tertentu. Fortune adalah program yang dibundel dalam bagian BSD Games. Sekumpulan mainan dalam mode teks yang juga menyenangkan. Fortune berguna menampilkan sebuah kalimat yang ada dalam sebuah file yang berisi kumpulan kalimat.
+</p>
+
+<p>
+Untuk mengetahui apakah dalam komputer yang digunakan sudah diinstal program fortune, ketikkan saja perintah fortune pada prompt. Jika di layar muncul sebuah kalimat yang "manusiawi" kemungkinan besar program tersebut sudah diinstal. Jika belum coba cari dalam CD distro yang anda miliki.
+</p>
+
+<p>
+Beberapa hal yang akan kita utak-atik adalah mengenai pembuatan file data kalimat yang akan ditampilkan oleh program ini. Ketika diinstal secara default, umumnya kalimat yang dimunculkan fortune dalam bahasa Inggris. Bisa berkaitan dengan kutipan politik, teknik, hiburan, komputer, lelucon, atau lainnya. Tentu kalau kita menginginkan kalimat yang muncul dalam bahasa Indonesia, atau bahkan bahasa daerah, kita bisa membuat sebuah file yang sesuai dengan keinginan kita.
+</p>
+
+<p>
+Format file ini sangat sederhana. Contohnya dapat dilihat pada baris berikut :
+</p>
+
+<pre>
+Dan janganlah berbuat kerusakan di muka bumi
+%
+Ke bukit sama mendaki
+Ke lurah sama menurun
+Ringan sama dijinjing
+Berat sama dipikul
+  -- Pepatah
+%
+Kalau tidak bisa beli gas,
+Gunakan saja minyak tanah.
+  -- Ical (sewaktu menjabat menko ekuin)
+%
+Buruk muka cermin dibelah
+  -- Peribahasa
+</pre>
+
+<p>
+Tanda % yang berada dalam satu baris sendiri, digunakan sebagai pemisah antar kalimat/kumpulan kalimat yang akan ditampilkan. Dalam contoh di atas, berarti ada empat kalimat/kumpulan kalimat yang bisa ditampilkan secara random oleh program fortune.
+</p>
+
+<p>
+Selanjutnya, agar file ini bisa digunakan oleh program fortune, perlu dikonversi dulu menggunakan strfile. Misalkan file di atas kita simpan dengan nama kalimatku, maka untuk konversi kita gunakan perintah :
+</p>
+
+<pre>
+strfile -r kalimatku kalimatku.dat
+</pre>
+
+<p>
+Selanjutnya, kita sudah dapat menampikan kalimat yang ada dalam file kalimatku ini dengan menggunakan program fortune dengan cara
+</p>
+
+<pre>
+fortune kalimatku
+</pre>
+
+<h3>Slide Show</h3>
+
+<p>
+Ini sebenarnya tidaklah seperti slide show yang biasa dijumpai pada program presentasi. Kita hanya ingin menampilkan secara terus menerus isi file kalimat menggunakan fortune. Jadi di layar tampil bergantian berbagai kalimat yang sudah kita buat dalam file tersebut. Dengan sedikit menyusun kode untuk bash, ini bisa kita lakukan.
+</p>
+
+<pre>
+#!/bin/bash
+A=1
+while [ $A -lt 2 ]
+do
+  clear
+  fortune -w
+done
+</pre>
+
+<p>
+Simpan file ini misalnya dengan nama ssfortune. Kemudian chmod 755, agar bisa dieksekusi. Lalu eksekusi file ssfortune ini, maka di layar akan ditampilkan kalimat secara bergantian. Jika anda punya waktu untuk "dibuang-buang" silahkan baca berbagai kalimat yang akan tampil. Untuk menghentikan jalannya "slide show" ini, gunakan saja ctrl-c.
+</p>
+
+<h3>Kegunaan Lain</h3>
+
+<p>
+Bisa jadi kemungkinan penggunaan lainnya masih banyak dari program kecil ini. Misalnya, dipakai untuk menampilkan kalimat random dalam sebuah situs. Sebagai contoh untuk Php adalah dengan memakai fungsi exec() untuk mengeksekusi program fortune ini, lalu hasil dari eksekusi ditampilkan ke dalam situs. Cukup sederhana untuk menghasilkan sebuah kutipan pada sebuah situs.
+</p>
+
+<pre>
+&lt;?php
+
+$perintah = "fortune linuxcookie";
+$kutipan = "";
+$kodeexit = 0;
+$dummy = exec($perintah, $kutipan, $kodeexit);
+if ($kodeexit == 0) {
+  echo $kutipan;
+} else {
+  echo "Gagal ...";
+}
+
+?&gt;
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+body { background : #000000; margin : 25px; }
+form { margin : 0px; }
+.kotak {
+  width : 600px;
+  height : 350px;
+  margin : 0px;
+  border : 1px solid #FFFF00;
+  background : #0000C0;
+  padding : 0px;
+  font-family : monospace;
+  font-size : 14px;
+  color : #FFFF00;
+}
+.arearespon {
+  width : 100%;
+  height : 300px;
+  margin : 0px;
+  border : 0px solid #ff0000;
+  font-family : monospace;
+  font-size : 14px;
+  color : #FFFF00;
+  background : #0000C0;
+  padding : 10px 0px 10px 10px;
+}
+.tulisperintah {
+  border : 0px;
+  width : 500px;
+  margin : 10px 0px 0px 0px;
+  font-family : monospace;
+  font-size : 14px;
+  color : #FFFF00;
+  background : #0000C0;
+}
+.sembunyi {
+  display : none;
+}

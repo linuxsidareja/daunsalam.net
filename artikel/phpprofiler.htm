@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Menggunakan Xdebug Sebagai Profiler</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 26 Agustus 2008, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Menggunakan Xdebug Sebagai Profiler</h2>
+
+<p>
+Ketika kode program yang dibuat tidak terlalu banyak, kemungkinan besar bisa dengan
+mudah menemukan dimana kira-kira terjadi proses yang memerlukan waktu paling lama.
+Lalu jika perlu, dicari cara untuk membuat bagian tersebut bekerja lebih cepat.
+Ketika program sudah besar dan kompleks, menemukan "bottleneck" dalam program
+bisa jadi sangat sulit. Nah inilah saatnya memerlukan alat bantu.
+Alat bantu untuk keperluan seperti di atas disebut profiler.
+Demikian gambaran sederhananya.
+</p>
+
+<p>
+Sekarang langsung kepada pemrograman dengan PHP. Xdebug (www.xdebug.org)
+dapat digunakan sebagai profiler.
+Xdebug adalah sebuah ekstensi untuk interpreter PHP. Fungsi utamanya adalah sebagai
+pembantu dalam melakukan <i>debugging</i>. Selain itu juga memiliki kemampuan untuk
+melakukan <i>profiling</i>.
+</p>
+
+<p>
+Instalasi Xdebug pada sistem operasi Linux cukup mudah.
+Dari source code lakukan kompilasi, kemudian akan diperoleh sebuah
+file dengan nama <b>xdebug.so</b>. File xdebug.so inilah yang menjadi
+ekstensi untuk interpreter PHP.
+Letakkan file ini dalam direktori ekstensi PHP yang digunakan,
+kemudian lakukan sedikit penambahan opsi dalam file php.ini,
+maka fasilitas profiler dari Xdebug sudah bisa digunakan.
+Tidak ada perubahan apapun yang dilakukan dalam kode program PHP
+yang dibuat.
+</p>
+
+<p>
+Tambahkan opsi seperti berikut di bagian akhir dari file php.ini
+</p>
+
+<pre>
+zend_extension="/opt/php/lib/php/extensions/xdebug.so"
+xdebug.profiler_enable=1
+xdebug.profiler_output_dir=/amp/tmp
+</pre>
+
+<p>
+Baris pertama menentukan di mana file xdebug.so berada.
+Baris ketiga adalah dalam direktori apa output dari xdebug akan disimpan.
+Xdebug memberikan informasi tentang proses eksekusi program PHP dalam sebuah file teks.
+Setiap kali sebuah file PHP dijalankan, maka xdebug akan menulis sebuah file
+yang berisi informasi tentang proses bagaimana file PHP tersebut dijalankan.
+File ini bentuknya dalam format cachegrind.
+Untuk menampilkan isi file tersebut bisa menggunakan program KCacheGrind,
+yang lengkap dengan penyajian secara grafis.
+Menampilkan dalam bentuk teks untuk mode konsol juga bisa menggunakan
+program <b>ct_annotate</b>.
+Berikut ini adalah contoh profiling dari script PHP <b>phpsysinfo</b>,
+yang ditampilkan dengan ct_annotate.
+
+</p>
+
+<pre>
+--------------------------------------------------------------------------------
+Profiled target:  /opt/phpscript/phpsysinfo/index.php
+Events recorded:  Time
+Events shown:     Time
+Event sort order: Time
+Thresholds:       99
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+     Time
+--------------------------------------------------------------------------------
+1,796,275  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+   Time  file:function
+--------------------------------------------------------------------------------
+291,992  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_checknodetest []
+227,020  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_evaluatestep []
+208,650  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_handleaxis_child []
+135,229  /opt/phpscript/phpsysinfo/index.php:{main} []
+132,972  php:internal:php::fgets []
+100,112  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_evaluateprimaryexpr []
+ 80,560  /opt/phpscript/phpsysinfo/includes/class.Template.inc.php:template->pfp []
+ 62,514  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_checkpredicates []
+ 56,722  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_bracketexplode []
+ 55,175  php:internal:php::is_dir []
+ 46,360  php:internal:php::file_exists []
+ 46,049  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_getoperator []
+ 37,323  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_evaluatepathexpr []
+ 33,581  php:internal:php::preg_match []
+ 24,680  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_evaluateexpr []
+ 20,947  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_getaxis []
+ 20,697  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->match []
+ 14,996  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_bracketscheck []
+ 14,896  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_recursivereindexnodetree []
+ 12,751  php:internal:php::fopen []
+ 10,988  php:internal:php::xml_parse []
+ 10,781  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->getdataparts []
+  9,704  /opt/phpscript/phpsysinfo/includes/XPath.class.php:xpath->_resolvexpathquery []
+  8,212  php:internal:php::strtr []
+  6,611  php:internal:php::file []
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

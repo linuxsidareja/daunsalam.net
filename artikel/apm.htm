@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Instalasi Apache, Php, MySQL</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, April 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Instalasi Apache, Php, MySQL</h2>
+
+<p>
+Tutorial ini ditujukan untuk siapa saja yang berminat melakukan instalasi software Apache, Php, dan MySQL pada Sistem Operasi Windows. Pertanyaan menyangkut instalasi ketiga software ini sering muncul di kalangan yang sedang belajar membuat aplikasi berbasis web dengan bahasa Php, dengan database menggunakan MySQL. Walaupun dasarnya ketiga software tersebut lebih "merasa at home" di sistem operasi Linux, tersedia juga untuk sistem operasi Windows.
+</p>
+
+<p>
+Bagi yang ingin cara yang lebih mudah, ada yang membuat sebuah paket installer yang menyediakan ketiga software tersebut. Misalnya PhpTriad dan XAMPP. Sedangkan yang berkeinginan melakukan instalasi satu demi satu, silahkan melanjutkan membaca tutorial ini.
+</p>
+
+<p>
+Pada tutorial ini menggunakan sistem operasi Windows 98 SE, dan software yang digunakan adalah :
+</p>
+
+<ul>
+<li>Apache 1.3.27 <a href="http://httpd.apache.org">httpd.apache.org</a></li>
+<li>Php 4.3.10 <a href="http://www.php.net">www.php.net</a></li>
+<li>MySQL 3.23.58 <a href="http://www.mysql.com">www.mysql.com</a></li>
+</ul>
+
+<p>
+Untuk mendapatkan software tersebut dapat di-download dari situs masing-masing.
+</p>
+
+<h3>Persiapan</h3>
+
+<p>
+Download semua software yang akan kita instal. Kemudian buat sebuah direktori/folder khusus sebagai tempat instalasi ketiga software ini. Bisa juga menggunakan direktori yang ada, tapi dengan menyediakan sebuah direktori khusus akan lebih memudahkan, terutama menemukan file yang dibutuhkan dalam beberapa konfigurasi. Misalnya di drive C: degan nama direktori webapp. Untuk tutorial ini kita akan menggunakan folder C:\webapp.
+</p>
+
+<p>
+Siapkan juga sebuah text editor kesukaan anda. Untuk sistem operasi Windows 98, notepad memang bisa digunakan, namun tidak bisa membuka file lebih besar dari 64 KB. Setting untuk folder options juga perlu perubahan. Atur agar anda bisa melihat ekstensi nama file. Secara default ekstensi nama file disembunyikan, sehingga tidak tampil ketika dilihat di windows explorer.
+</p>
+
+<h3>MySQL</h3>
+
+<p>
+Pertama kita mulai dengan melakukan instalasi database MySQL. Paket untuk sistem operasi Windows sudah disediakan di situsnya dalam format executable/binary. Setelah didownload, lalu ekstrak file tersebut, karena biasanya dalam bentuk terkompres (zip).
+</p>
+
+<p>
+Ekstrak paket ini ke dalam folder C:\webapp\mysql. Setelah itu, copy salah satu file pre-konfigurasi yang sudah tersedia. Untuk contoh ini kita copy file my-medium.cnf dengan nama my.cnf. File my.cnf inilah yang menjadi file konfigurasi untuk MySQL. File my.cnf ini harus diletakkan di C:\my.cnf
+</p>
+
+<p>
+Edit file my.cnf dan isikan 2 baris berikut ke dalam file tersebut. Atau kalau sudah ada opsi tersebut ganti menjadi seperti di bawah ini
+</p>
+
+<pre>
+basedir = c:/webapp/mysql/
+datadir = c:/webapp/mysql/data/
+</pre>
+
+<p>
+Untuk menguji apakah MySQL sudah bisa berjalan dengan baik, jalankan file
+</p>
+
+<pre>
+c:\webapp\mysql\bin\mysqld.exe
+</pre>
+
+<p>File tersebut adalah server MySQL. Kemudian jalankan file</p>
+
+<pre>
+c:\webapp\mysql\bin\mysql.exe
+</pre>
+
+<p>
+Ini adalah program MySQL client dalam bentuk konsol. Jika program ini berjalan dengan baik, dengan tampilnya beberapa informasi tentang MySQL, maka instalasi MySQL sementara dapat dianggap berhasil. Untuk melihat info lebih detail, ketikkan perintah status; di konsol mysql tersebut. Beberapa informasi akan ditampilkan mengenai server MySQL. Untuk keluar dari konsol MySQL ini, ketikkan perintah exit.
+</p>
+
+<p>
+Untuk mematikan server MySQL yang tadi dijalankan, anda gunakan MSDOS prompt, kemudian masuk ke direktori C:\webapp\mysql\bin dan jalankan perintah
+</p>
+
+<pre>
+mysqladmin -u root shutdown
+</pre>
+
+<p>
+Atau bisa juga dengan menggunakan menu Run... yang ada di start menu, dengan memasukkan perintah
+</p>
+
+<pre>
+C:\webapp\mysql\bin\mysqladmin -u root shutdown
+</pre>
+
+<h3>Apache</h3>
+
+<p>
+Paket Apache untuk Windows disediakan dalam bentuk installer, atau msi (Microsoft Installer). Setelah didownload, jalankan langsung file tersebut dan kita ikuti proses instalasi apache. Pilih mode custom ketika proses instalasi, sehingga kita bisa merubah direktori tempat apache akan diinstal. Jadikan C:\webapp sebagai direktori tempat instalasi apache.
+</p>
+
+<p>
+Ketika ada pilihan apakah apache akan dijalankan sebagai service, atau dijalankan secara manual, pilih untuk dijalankan secara manual.
+</p>
+
+<p>
+Setelah proses instalasi selesai, kita dapat menjalan server Apache melalui menu yang sudah tersedia di start menu. Pastikan juga bahwa tidak ada server web yang sedang berjalan di komputer kita. Untuk menjalankan Apache dapat juga dengan menjalankan langsung file Apache.exe yang ada di direktori C:\webapp\Apache
+</p>
+
+<p>
+Setelah server Apache berjalan, uji menggunakan web browser. Jalankan Internet Explorer atau web browser lain, lalu buka alamat http://localhost<br>
+Jika sudah terlihat halaman yang berisi informasi oleh Apache, berarti server Apache sudah berjalan dengan baik.
+</p>
+
+<p>
+Untuk mematikan Apache, jalankan perintah berikut dari menu Run... di start menu
+</p>
+
+<pre>
+C:\webapp\Apache\Apache.exe -k shutdown
+</pre>
+
+<h3>Php</h3>
+
+<p>
+Paket executable Php disediakan dalam file terkompres. Setelah didownload, ekstrak file tersebut ke direktori C:\webapp\php<br>
+Langkah berikut perlu dilakukan agar php berfungsi menjadi sebuah modul bagi Apache.
+</p>
+
+<ul>
+<li>Copy file php4apache.dll yang ada dalam direktori C:\webapp\php\sapi<br>
+ke folder C:\webapp\php</li>
+<li>Copy file php4ts.dll yang ada dalam direktori C:\webapp\php<br>
+ke folder C:\webapp\Apache</li>
+<li>Copy file php.ini-recommended yang ada dalam direktori C:\webapp\php<br>
+ke folder C:\webapp\Apache dengan nama php.ini</li>
+<li>Edit file httpd.conf (konfigurasi Apache) yang ada dalam direktori C:\webapp\Apache\conf<br>
+Tambahkan baris berikut di bawah kelompok LoadModule yang ada di sekitar baris 192
+<pre>LoadModule php4_module "C:/webapp/php/sapi/php4apache.dll"</pre>
+Tambahkan baris berikut di bawah kelompok AddModule yang ada di sekitar baris 241
+<pre>AddModule mod_php4.c</pre>
+Tambahkan baris berikut di bawah kelompok AddType yang ada di sekitar baris 818
+<pre>AddType application/x-httpd-php .php</pre>
+</li>
+</ul>
+
+<p>
+Setelah selesai melakukan perbaikan pada file konfigurasi Apache tersebut, jalankan kembali Apache. Untuk memastikan apakah php telah berfungsi, buat sebuah file php dengan isi seperti berikut.
+</p>
+
+<pre>
+&lt;?php
+phpinfo();
+?&gt;
+</pre>
+
+<p>
+Lalu simpan dengan nama info.php di dalam direktori C:\webapp\Apache\htdocs<br>
+Kemudian dengan web browser buka alamat http://localhost/info.php<br>
+Jika halaman yang muncul adalah informasi detail tentang php, maka php sudah berfungi sebagai modul di Apache.
+</p>
+
+<p>
+Untuk menguji apakah php bisa melakukan koneksi ke MySQL, buat file php seperti berikut
+</p>
+
+<pre>
+&lt;?php
+
+$link_mysql = mysql_connect("localhost","root","")
+      or die("Gagal koneksi ke MySQL...");
+echo "Berhasil koneksi ke MySQL...";
+mysql_select_db("test")
+      or die("Gagal membuka database test...");
+echo "Berhasil membuka database test...";
+
+?&gt;
+</pre>
+
+<p>
+Lalu simpan dengan nama tesdb.php di dalam direktori C:\webapp\Apache\htdocs
+</p>
+
+<p>
+Jalankan server MySQL seperti keterangan di bagian MySQL. Setelah itu buka alamat http://localhost/tesdb.php dengan web browser. Lihat hasilnya.
+</p>
+
+<p>
+Untuk informasi lebih lengkap, adalah sangat baik untuk membaca manual yang bisa didapatkan di masing-masing situs software tersebut. Untuk Apache dan MySQL sudah tersedia dalam paket yang di-download tersebut. Sedangkan manual Php dapat diperoleh di situs www.php.net
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

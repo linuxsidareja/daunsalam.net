@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Aplikasi Quiz</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 6 Agustus 2007, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Aplikasi Quiz</h2>
+
+<p>Beberapa hari yang lalu seorang teman mengajak saya untuk ikut mengisi beberapa sesi dalam acara pelatihan komputer di sebuah hotel di Cisarua, Bogor. Kebetulan juga, karena diperlukan sedikit tes untuk peserta, maka saya buat sebuah aplikasi berbasis web untuk keperluan ini. Aplikasi ini tentu sederhana saja. Yang akan saya ceritakan di sini adalah ide dasar tentang aplikasi quiz ini. Sedangkan kode program yang waktu itu saya buat menggunakan PHP tidak saya sertakan. Mengapa? Malu ah, kodenya masih berantakan :)
+</p>
+
+<p>
+Gambaran umum penggunaan adalah seperti berikut :
+</p>
+
+<ul>
+<li>Pengguna memiliki account masing-masing untuk masuk ke dalam aplikasi sebelum mulai menjawab soal</li>
+<li>Soal terdiri dari beberapa kategori, berbentuk pilihan ganda</li>
+<li>Soal yang tampil di layar masing-masing pengguna tidak sama</li>
+<li>Soal tampil secara satu persatu, dan langsung dijawab, sebelum masuk ke soal berikutnya</li>
+<li>Jawaban yang benar untuk soal yang sama, bisa berada di posisi yang berbeda untuk setiap peserta. 
+</ul>
+
+<p>
+Tabel yang diperlukan untuk aplikasi ini adalah seperti berikut :
+</p>
+
+<ul>
+<li>Tabel <b>soal</b> berisi soal dan pilihan jawaban</li>
+<li>Tabel <b>kategori</b> berisi kode dan nama kategori soal</li>
+<li>Tabel <b>tugas</b> berisi id soal, kunci jawaban, jawaban dari pengguna</li>
+<li>Tabel <b>user</b> untuk data pengguna, seperti user, password, nama</li>
+</ul>
+
+<pre>
+Tabel soal
+----------
+id       : integer, key
+kategori : kode kategori yang merujuk ke tabel kategori
+soal     : isi soal
+benar    : jawaban benar untuk soal ini
+salah1   : jawaban salah
+salah2   : jawaban salah
+salah3   : jawaban salah
+</pre>
+
+<pre>
+Tabel kategori
+--------------
+kode : integer, kode kategori
+nama : nama kategori
+</pre>
+
+<pre>
+Tabel tugas
+-----------
+id         : integer, key
+user       : data user yang merujuk ke tabel user
+idsoal     : id soal yang merujuk ke field id tabel soal
+kunci      : tiniyint, kunci jawaban untuk soal yang memiliki id sesuai idsoal
+jawaban    : tiniyint, jawaban yang diberikan oleh pengguna
+dikerjakan : tiniyint, untuk status, bahwa soal ini sudah dikerjakan 
+</pre>
+
+<p>
+Bagian-bagian yang ada dalam aplikasi ini adalah :
+</p>
+
+<ul>
+<li>Bagian untuk menambah soal baru, edit soal, hapus soal</li>
+<li>Bagian untuk menampilkan soal untuk pengguna, berupa menampilkan soal, dan proses menulis jawaban pengguna ke dalam tabel tugas</li>
+<li>Bagian untuk menampilkan nilai dari peserta, khusus untuk admin</li>
+<li>Bagian untuk melahirkan soal dan kunci jawaban untuk masing-masing user ke dalam tabel tugas</li>
+</ul>
+
+<p>Tabel kategori hanya diisi dengan kode dan nama kategori. Misalnya ada 3 kategori, maka tabel kategori isinya bisa seperti berikut :
+</p>
+
+<pre>
+kode : nama kategori
+--------------------
+1    : Internet
+2    : Word Processor
+3    : Spreadsheet
+</pre>
+
+<p>
+Tabel soal diisi dengan soal-soal sesuai kategori yang ada dalam tabel kategori.  
+Untuk masing-masing kategori, jumlah soal sebaiknya lebih banyak dari yang akan dikerjakan peserta. Misalnya kategori Internet akan dikerjakan oleh masing-masing peserta sebanyak 10 soal, maka sebaiknya kita buat sebanyak 25 soal misalnya. Dari 25 soal ini akan dipilih secara acak sebanyak 10 soal yang akan dikerjakan user. Dan seorang user mendapat 10 soal yang bisa berbeda dengan 10 soal yang dikerjakan user lainnya.
+</p>
+
+<p>
+Yang menjadi ide utama di sini adalah penggunaan tabel tugas. Soal yang akan ditampilkan pada pengguna ketika menjalani tes dengan aplikasi ini diambil dari tabel tugas. Jika tabel tugas ini masih kosong, maka user tidak akan memperoleh soal, meskipun tabel soal sudah berisi sejumlah soal. 
+</p>
+
+<p>
+Untuk mengisi tabel tugas ini, dilakukan langkah sebagai berikut :
+</p>
+
+<ul>
+<li>Ambil data user dari tabel user</li>
+<li>Ambil semua id soal sesuai kategori yang diperlukan, misalnya ada 25 soal di tabel soal untuk sebuah kategori, maka kita memiliki 25 id soal</li>
+<li>Isikan ke tabel tugas sebanyak 10 id soal, dengan memilihnya secara acak dari 25 id soal tadi. Pengisian ini dilakukan sebanyak user yang ada. Misalnya ada 12 user, akan ada sebanyak 120 record pada tabel tugas. Masing-masing 10 id soal untuk 12 user. Pengambilan acak sebanyak 10 id soal dari 25 id soal yang ada, dilakukan setiap kali mengisi untuk user baru, sehingga masing-masing user memiliki 10 soal yang bisa berbeda.</li>
+<li>Ketika memasukkan id soal ke tabel tugas, kunci jawaban juga dibuat secara acak. Karena ada 4 pilihan untuk setiap soal, maka ada 4 kemungkinan untuk menjadi kunci jawaban, yaitu 1, 2, 3, 4. Kunci ini dipakai ketika menyajikan soal pada pengguna. Jika kuncinya 1, maka jawaban yang benar akan diletakkan di posisi paling atas (A). Jika kuncinya 2, maka jawaban benar diletakkan pada posisi ke-2 (B), demikian seterusnya.</li>
+</ul>
+
+<p>
+Proses mengerjakan oleh pengguna adalah seperti berikut :
+</p>
+
+<ul>
+<li>User login ke dalam apliksi quiz</li>
+<li>User memilih kategori soal</li>
+<li>User mendapatkan satu soal untuk dijawab. Menampilkan satu soal menggunakan SQL berikut 
+<pre>
+SELECT
+  tugas.id,
+  soal.soal,
+  soal.benar,
+  soal.salah,
+  soal.salah,  
+  soal.salah,
+  tugas.kunci
+FROM
+  tugas INNER JOIN soal ON tugas.idsoal=soal.id
+WHERE
+  tugas.user='$USER' // var $USER diambil dari sesi login user bersangkutan
+  AND
+  tugas.dikerjakan='0'
+ORDER BY
+  tugas.id
+LIMIT
+  1
+</pre>
+Jika ada data, tampilkan pada pengguna, jika tidak ada data yang dihasilkan dari query tersebut, berarti semua soal sudah dikerjakan. Isi dari field kunci pada tabel tugas digunakan untuk menentukan posisi jawaban yang benar ketika menampilkan soal pada user.
+</li>
+<li>User menjawab soal, lalu jawaban ini akan diisikan ke dalam tabel tugas, sesuai soal yang dikerjakan. Set field <tt>dikerjakan</tt> dalam tabel tugas menjadi 1, sebagai tanda bahwa soal ini sudah dikerjakan.</li>
+<li>Lanjutkan satu soal berikutnya</li>
+</ul>
+
+<p>
+Untuk memberi nilai, tinggal bandingkan kunci dan jawaban yang dikirim oleh peserta.
+</p>
+
+<p>
+Apakah keterangan di atas cukup membingungkan Anda? Aha, saya juga dibuat bingung bagaimana cara menerangkannya dengan kata-kata agar menjadi jelas :)
+Jadi, nikmati saja.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

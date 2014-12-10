@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Bermain-main dengan HTML</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 17 November 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Bermain-main dengan HTML</h2>
+
+<p>
+Kadang-kadang membuat yang tak serius itu perlu. Ide ini juga tidak orisinil dari saya. Sudah ada yang berbuat sebelumnya. Jadi jangan salahkan saya jika menimbulkan masalah :)
+Untuk menampilkan gambar/image dalam halaman HTML tentu digunakan tag &lt;img&gt; yang merujuk ke sebuah file gambar. Bagaimana kalau kita menampilkan sebuah gambar dalam halaman HTML tanpa harus merujuk ke file gambar tersebut. Mungkinkah menampilkan gambar hanya dengan tag HTML yang ada. Jelas jawabnya mungkin. Karena memang sudah ada yang kurang kerjaan melakukannya.
+</p>
+
+<p>
+Idenya sangat mudah. Buat sebuah tabel. Atur agar tinggi dan lebar sebuah td adalah 1 pixel x 1 pixel. Ini bisa dengan CSS. Lalu susunlah td ini menjadi sebuah gambar. Satu buah td adalah untuk satu pixel gambar. Lalu warna pixel ditentukan dengan attribut bgcolor yang ada dalam td.
+Sederhana sekali. Hanya akibatnya yang agak menakutkan. Kalau sebuah gambar dalam format JPG berukuran 15 KB, dengan cara ini ukurannya bisa membengkak sebanyak lebih 10 kali lipat!
+Namanya juga main-main.
+</p>
+
+<p>
+Terus caranya membuat gambar dengan cara ini? Saya menggunakan script PHP sederhana.
+Baca setiap pixel yang ada dalam file gambar. Lalu konversi setiap pixel tersebut ke sebuah &lt;td bgcolor=#xxxxxx&gt;&lt;/td&gt;. Dengan nilai #xxxxxx sesuai dengan warna pixel yang dibaca dari gambar. Selesai.
+</p>
+
+<p>Script PHP untuk konversi di atas sederhananya seperti berikut</p>
+
+<pre>
+&lt;?php
+
+$namafile = "gambar.jpg";
+$img = imagecreatefromjpeg($namafile);
+$lebar = imagesx($img);
+$tinggi = imagesy($img);
+
+$img2 = imagecreatetruecolor($lebar,$tinggi);
+imagecopy($img2,$img,0,0,0,0,$lebar,$tinggi);
+
+$tabel = "&lt;table border=0 cellspacing=0 cellpadding=0&gt;\n";
+$j = 0;
+for ($y = 0; $y &lt; $tinggi; $y++) {
+  $tabel .= "&lt;tr&gt;";
+  for ($x = 0; $x &lt; $lebar; $x++) {
+    $warna = imagecolorat($img2,$x,$y);
+    $r = ($warna &gt;&gt; 16) & 0xFF;
+    $g = ($warna &gt;&gt; 8) & 0xFF;
+    $b = $warna & 0xFF;
+    $rh = str_pad(dechex($r),2,"0",STR_PAD_LEFT);
+    $gh = str_pad(dechex($g),2,"0",STR_PAD_LEFT);
+    $bh = str_pad(dechex($b),2,"0",STR_PAD_LEFT);
+    $wh = "#" . $rh . $gh . $bh;
+    $tabel .= "&lt;td bgcolor=$wh&gt;&lt;/td&gt;";
+  }
+  $tabel .= "&lt;/tr&gt;\n";
+}
+$tabel .= "&lt;/table&gt;\n";
+
+echo $tabel;
+
+?&gt;
+</pre>
+
+<p>
+Ini <a href="media/imghtml.zip"><b>contohnya</b> (17 KB zip)</a> yang sudah dalam bentuk sebuah file HTML. Contoh tersebut sudah ditambahi dengan ornamen lain agar tambah menarik.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

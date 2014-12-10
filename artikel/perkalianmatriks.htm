@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Perkalian Matriks</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 28 Juli 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Perkalian Matriks</h2>
+
+<p>
+Seseorang mengirim email kepada saya. Bertanya bagaimana cara perkalian matriks dengan bahasa php? Baiklah, saya akan mencoba memberi jawaban dengan batas kemampuan saya. Lalu terbersit ide, mengapa tidak dimuat saja di situs ini? Jadi bisa memberi manfaat bagi yang lainnya, dan tentu saja untuk sang penanya sendiri.
+</p>
+
+<p>
+Sebagai gambaran dari proses perkalian matriks, silahkan lihat diagram. Diagram menggambarkan perkalian matriks dengan cara yang umumnya digunakan. Untuk mengalikan matriks a dengan matriks b, maka jumlah kolom matriks a harus sama dengan jumlah baris matriks b. Pada contoh ini matriks a mempunyai 3 kolom, dan matriks b mempunyai 3 baris.
+</p>
+
+<p>
+<img src="media/kalimatriks/m01.gif"><br>
+Diagram pertama ini menunjukkan, untuk mendapatkan elemen c<sub>1,1</sub> persamaannya adalah :<br>
+c<sub>1,1</sub> = (a<sub>1,1</sub> x b<sub>1,1</sub>) + (a<sub>1,2</sub> x b<sub>2,1</sub>) + (a<sub>1,3</sub> x b<sub>3,1</sub>)<br>
+Dengan penulisan indeks c<sub>x,y</sub>, dimana x adalah baris, dan y adalah kolom. Contoh ini, bila diganti dengan angka yang ada dalam matriks tersebut menjadi :<br>
+9 = (2 x 2) + (2 x 2) + (1 x 1)<br>
+Demikian seterusnya untuk mendapatkan hasil perkalian matriks a dan matriks b, lihat dalam urutan diagram berikut ini.
+</p>
+
+<p>
+<img src="media/kalimatriks/m01.gif"><br>
+<img src="media/kalimatriks/m02.gif"><br>
+<img src="media/kalimatriks/m03.gif"><br>
+<img src="media/kalimatriks/m04.gif"><br>
+<img src="media/kalimatriks/m05.gif"><br>
+<img src="media/kalimatriks/m06.gif">
+</p>
+
+<p>
+Apabila ditulis dengan rumus matematika yang agak serius :) maka perkalian matriks ditulis seperti berikut
+</p>
+
+<p>
+<img src="media/kalimatriks/rumus.gif"><br>
+Dimana i adalah indeks untuk baris, j indeks untuk kolom, dan n adalah jumlah kolom matriks a.
+</p>
+
+<p>
+Untuk melakukan proses perkalian matriks dengan menggunakan bahasa pemrograman tertentu, kita bisa mengikuti cara (algoritma) yang berlaku di atas. Proses ini melibatkan struktur data berbentuk <i>array</i>, loop, dan operasi perkalian, serta penjumlahan.
+</p>
+
+<p>
+Pertama, inisialisasi dulu matriks yang akan dikalikan. Matriks a dan matriks b yang akan dikalikan diisi terlebih dahulu dengan nilai yang diinginkan. Sedangkan matriks c yang merupakan hasil dari perkalian kedua matriks ini, semua eloemennya diinisialisasi dengan nilai 0. Array yang digunakan untuk matriks adalah array 2 dimensi. Setelah inisialisasi data, proses perkalian matriks sudah bisa dilakukan. Dan berikutnya, jika diperlukan, tampilkan hasil perkalian.
+</p>
+
+<p>
+Proses perkalian matriks dilakukan dengan menggunakan loop, seperti berikut ini :
+</p>
+
+<pre>
+for ($j = 1; $j <= $kolom_matriks_b; $j++) {
+  for ($i = 1; $i <= $baris_matriks_a; $i++) {
+    for ($k = 1; $k <= $kolom_matriks_a; $k++) {
+      $c[$i][$j] = $c[$i][$j] + ($a[$i][$k] * $b[$k][$j]);
+    }
+  }
+}
+</pre>
+
+<p>
+Loop dengan indeks $j akan melakukan perulangan sebanyak jumlah kolom matriks b. Kemudian loop di dalamnya dengan indeks $i, akan melakukan perulangan sebanyak jumlah baris matriks a. Dan terahir, loop terdalam dengan indeks $k akan melakukan perulangan sebanyak jumlah kolom matriks a.
+</p>
+
+<p>
+Jika dilihat operasi yang ada dalam loop terdalam, yaitu :
+</p>
+
+<pre>
+      $c[$i][$j] = $c[$i][$j] + ($a[$i][$k] * $b[$k][$j]);
+</pre>
+
+<p>
+sama dengan bentuk rumus perkalian matriks di atas.
+</p>
+
+<p>
+Dan berikutnya, saya memang kesulitan menguraikan proses perkalian matriks dengan bahasa program pada contoh ini. Walaupun proses ini hanya 7 baris, bisa jadi jika diurai dengan kata-kata menjadi begitu panjang rasanya. Jadi, maafkan saya. Mudah-mudahan saja dengan menulis diagram, dan contoh ini, bisa membantu dalam memahami perkalian matriks menggunakan sebuah bahasa pemrograman.
+</p>
+
+<p>
+Saya menyertakan dua buah script php yang melakukan proses perkalian matriks. Contoh pertama menggunakan data yang sudah tertentu nilainya. Sedangkan contoh kedua dengan memanfaatkan data random, sehingga matriks yang ditampilkan bisa berbeda-beda. Sebagai info, script saya jalankan pada php versi 4.3.10 Silahkan klik pada link berikut untuk melihat source code contoh tersebut.
+</p>
+
+<p>
+<a href="media/kalimatriks/kalimatriks01.txt">Contoh 1</a> &nbsp;&nbsp;
+<a href="media/kalimatriks/kalimatriks02.txt">Contoh 2</a>
+</p>
+
+<p>
+Untuk tambahan, jika kita lihat algoritma di atas, berapakah kompleksitasnya? Dari pengamatan sekilas, dengan menggunakan loop sampai kedalaman 3, bisa jadi berbentuk n<sup>3</sup>. Dengan asumsi bahwa matriks a dan matriks b adalah matriks bujursangkar (n x n), maka perhitungan kompleksitas secara sederhana seperti berikut :
+</p>
+
+<ul>
+<li>Proses terdalam c = c + (a x b) memerlukan proses tambah dan kali, dilakukan sebanyak jumlah kolom matriks a, yaitu n. Jadi proses ini memerlukan 2n langkah</li>
+<li>Karena proses ini berada dalam loop di luarnya sebanyak jumlah baris matriks a (sebanyak n), maka langkah sebanyak 2n tadi menjadi 2n x n = 2n<sup>2</sup></li>
+<li>Dan masih ada satu loop di luarnya yang dilakukan sebanyak jumlah kolom matriks b (sebanyak n), maka 2n<sup>2</sup> x n = 2n<sup>3</sup></li>
+</ul>
+
+<p>
+Jadi secara kasar, memang kompleksitas dengan algoritma ini berorde 3. Dan tentu saja ini perlu sedikit perhatian.
+Misalnya dengan matriks 2 x 2, kita memerlukan langkah sebanyak 2<sup>3</sup> = 8.
+Dan ketika dengan matriks 5 x 5, diperlukan 5<sup>3</sup> = 125 langkah.
+Dan ketika dengan matriks 10 x 10, diperlukan 10<sup>3</sup> = 1000 langkah.
+Dan jika dengan matriks 100 x 100, diperlukan 100<sup>3</sup> = 1000000 langkah!
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

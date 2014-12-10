@@ -1,0 +1,317 @@
+<html>
+<head>
+<title>yanmarshus bachtiar :: Pemilih Warna</title>
+
+<style type="text/css">
+.tombol { border : solid 1px #808080; }
+.barwarna { border : solid 1px #808080; background : #d0d0d0; }
+.kotakangka { border : solid 1px #808080; text-align : center; }
+.kotakwarna { border : solid 1px #808080; height : 50px; width : 100px; }
+.angkahasil { border : solid 0px #808080; width : 120px; }
+</style>
+
+<script type="text/javascript">
+
+var rrr = 0, ggg = 0, bbb = 0;
+var wr  = 0, wg  = 0, wb  = 0;
+
+function angka2karakter(angka) {
+  switch (angka) {
+    case 0  : karakter = "0"; break;
+    case 1  : karakter = "1"; break;
+    case 2  : karakter = "2"; break;
+    case 3  : karakter = "3"; break;
+    case 4  : karakter = "4"; break;
+    case 5  : karakter = "5"; break;
+    case 6  : karakter = "6"; break;
+    case 7  : karakter = "7"; break;
+    case 8  : karakter = "8"; break;
+    case 9  : karakter = "9"; break;
+    case 10 : karakter = "A"; break;
+    case 11 : karakter = "B"; break;
+    case 12 : karakter = "C"; break;
+    case 13 : karakter = "D"; break;
+    case 14 : karakter = "E"; break;
+    case 15 : karakter = "F"; break;
+  }
+  return karakter;
+}
+
+function desimal2hexa(desimal) {
+  var hasilbagi = 0;
+  hasilbagi = Math.floor(desimal / 16);
+  sisa = desimal % 16;
+  hexa = angka2karakter(hasilbagi) + angka2karakter(sisa);
+  return hexa;
+}
+
+function setbarrgb() {
+  window.document.tombol.barr.style.width = rrr;
+  window.document.tombol.barg.style.width = ggg;
+  window.document.tombol.barb.style.width = bbb;
+  window.document.tombol.angkabarr.value = rrr;
+  window.document.tombol.angkabarg.value = ggg;
+  window.document.tombol.angkabarb.value = bbb;
+}
+
+function hasilkan_komplementer() {
+  kodewarna = "#" + desimal2hexa(rrr) + desimal2hexa(ggg) + desimal2hexa(bbb);
+  window.document.hasil.w01.style.background = kodewarna;
+  window.document.hasil.a01.value = kodewarna;
+  wr = 255 - rrr; wg = 255 - ggg; wb = 255 - bbb;
+  if (wr != 0 && wr != 255) { wr = wr + 1; }
+  if (wg != 0 && wg != 255) { wg = wg + 1; }
+  if (wb != 0 && wb != 255) { wb = wb + 1; }
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w02.style.background = kodewarna;
+  window.document.hasil.a02.value = kodewarna;
+}
+
+function hasilkan_triad() {
+  kodewarna = "#" + desimal2hexa(rrr) + desimal2hexa(ggg) + desimal2hexa(bbb);
+  window.document.hasil.w11.style.background = kodewarna;
+  window.document.hasil.a11.value = kodewarna;
+  wr = ggg; wg = bbb; wb = rrr;
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w12.style.background = kodewarna;
+  window.document.hasil.a12.value = kodewarna;
+  wr = bbb; wg = rrr; wb = ggg;
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w13.style.background = kodewarna;
+  window.document.hasil.a13.value = kodewarna;
+}
+
+function hasilkan_analog1() {
+  kodewarna = "#" + desimal2hexa(rrr) + desimal2hexa(ggg) + desimal2hexa(bbb);
+  window.document.hasil.w21.style.background = kodewarna;
+  window.document.hasil.a21.value = kodewarna;
+  lewat = 0;
+  wr = rrr + 32; wg = ggg; wb = bbb;
+  if ((rrr + 64) > 255) { wr = rrr - 32; lewat = 1; }
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w22.style.background = kodewarna;
+  window.document.hasil.a22.value = kodewarna;
+  if (lewat == 1) { wr = rrr - 64; } else { wr = rrr + 64; }
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w23.style.background = kodewarna;
+  window.document.hasil.a23.value = kodewarna;
+}
+
+function hasilkan_analog2() {
+  kodewarna = "#" + desimal2hexa(rrr) + desimal2hexa(ggg) + desimal2hexa(bbb);
+  window.document.hasil.w31.style.background = kodewarna;
+  window.document.hasil.a31.value = kodewarna;
+  lewat = 0;
+  wr = rrr; wg = ggg + 32; wb = bbb;
+  if ((ggg + 64) > 255) { wg = ggg - 32; lewat = 1; }
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w32.style.background = kodewarna;
+  window.document.hasil.a32.value = kodewarna;
+  if (lewat == 1) { wg = ggg - 64; } else { wg = ggg + 64; }
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w33.style.background = kodewarna;
+  window.document.hasil.a33.value = kodewarna;
+}
+
+function hasilkan_analog3() {
+  kodewarna = "#" + desimal2hexa(rrr) + desimal2hexa(ggg) + desimal2hexa(bbb);
+  window.document.hasil.w41.style.background = kodewarna;
+  window.document.hasil.a41.value = kodewarna;
+  lewat = 0;
+  wr = rrr; wg = ggg; wb = bbb + 32;
+  if ((bbb + 64) > 255) { wb = bbb - 32; lewat = 1; }
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w42.style.background = kodewarna;
+  window.document.hasil.a42.value = kodewarna;
+  if (lewat == 1) { wb = bbb - 64; } else { wb = bbb + 64; }
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w43.style.background = kodewarna;
+  window.document.hasil.a43.value = kodewarna;
+}
+
+function hasilkan_monotone() {
+  kodewarna = "#" + desimal2hexa(rrr) + desimal2hexa(ggg) + desimal2hexa(bbb);
+  window.document.hasil.w51.style.background = kodewarna;
+  window.document.hasil.a51.value = kodewarna;
+  wr = rrr + 24; if (wr > 255) { wr = 255; }
+  wg = ggg + 24; if (wg > 255) { wg = 255; }
+  wb = bbb + 24; if (wb > 255) { wb = 255; }
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w52.style.background = kodewarna;
+  window.document.hasil.a52.value = kodewarna;
+  wr = rrr + 48; if (wr > 255) { wr = 255; }
+  wg = ggg + 48; if (wg > 255) { wg = 255; }
+  wb = bbb + 48; if (wb > 255) { wb = 255; }
+  kodewarna = "#" + desimal2hexa(wr) + desimal2hexa(wg) + desimal2hexa(wb);
+  window.document.hasil.w53.style.background = kodewarna;
+  window.document.hasil.a53.value = kodewarna;
+}
+
+function sesuaikanlayar() {
+  setbarrgb();
+  hasilkan_komplementer();
+  hasilkan_triad();
+  hasilkan_analog1();
+  hasilkan_analog2();
+  hasilkan_analog3();
+  hasilkan_monotone();
+}
+
+function setnilaiwarna(aksi,warna,nilai) {
+  if (rrr == 255) { rrr = 256; }
+  if (ggg == 255) { ggg = 256; }
+  if (bbb == 255) { bbb = 256; }
+  if (aksi == "+") {
+    if (warna == "r") { rrr = rrr + nilai; }
+    if (warna == "g") { ggg = ggg + nilai; }
+    if (warna == "b") { bbb = bbb + nilai; }
+  }
+  if (aksi == "-") {
+    if (warna == "r") { rrr = rrr - nilai; }
+    if (warna == "g") { ggg = ggg - nilai; }
+    if (warna == "b") { bbb = bbb - nilai; }
+  }
+  if (rrr > 255) { rrr = 255; }
+  if (rrr < 0)   { rrr = 0; }
+  if (ggg > 255) { ggg = 255; }
+  if (ggg < 0)   { ggg = 0; }
+  if (bbb > 255) { bbb = 255; }
+  if (bbb < 0)   { bbb = 0; }
+  sesuaikanlayar();
+}
+
+</script>
+
+</head>
+
+<body onLoad="setnilaiwarna('+','r',64);setnilaiwarna('+','b',128)">
+
+<form action="" name="tombol" onSubmit="return false">
+<table border="0" cellspacing="1" cellpadding="0">
+<tr>
+<td><input type="button" value="<<<" onClick="setnilaiwarna('-','r',64)" class="tombol"></td>
+<td><input type="button" value="<<" onClick="setnilaiwarna('-','r',16)" class="tombol"></td>
+<td><input type="button" value="<" onClick="setnilaiwarna('-','r',4)" class="tombol"></td>
+<td width="256" bgcolor="#e0e0e0"><input type="text" name="barr" class="barwarna" readonly></td>
+<td><input type="button" value=">" onClick="setnilaiwarna('+','r',4)" class="tombol"></td>
+<td><input type="button" value=">>" onClick="setnilaiwarna('+','r',16)" class="tombol"></td>
+<td><input type="button" value=">>>" onClick="setnilaiwarna('+','r',64)" class="tombol"></td>
+<td>&nbsp; <input type="text" name="angkabarr" class="kotakangka" size="3" readonly></td>
+<td>&nbsp; R/Merah</td>
+</tr>
+<tr>
+<td><input type="button" value="<<<" onClick="setnilaiwarna('-','g',64)" class="tombol"></td>
+<td><input type="button" value="<<" onClick="setnilaiwarna('-','g',16)" class="tombol"></td>
+<td><input type="button" value="<" onClick="setnilaiwarna('-','g',4)" class="tombol"></td>
+<td width="256" bgcolor="#e0e0e0"><input type="text" name="barg" class="barwarna" readonly></td>
+<td><input type="button" value=">" onClick="setnilaiwarna('+','g',4)" class="tombol"></td>
+<td><input type="button" value=">>" onClick="setnilaiwarna('+','g',16)" class="tombol"></td>
+<td><input type="button" value=">>>" onClick="setnilaiwarna('+','g',64)" class="tombol"></td>
+<td>&nbsp; <input type="text" name="angkabarg" class="kotakangka" size="3" readonly></td>
+<td>&nbsp; G/Hijau</td>
+</tr>
+<tr>
+<td><input type="button" value="<<<" onClick="setnilaiwarna('-','b',64)" class="tombol"></td>
+<td><input type="button" value="<<" onClick="setnilaiwarna('-','b',16)" class="tombol"></td>
+<td><input type="button" value="<" onClick="setnilaiwarna('-','b',4)" class="tombol"></td>
+<td width="256" bgcolor="#e0e0e0"><input type="text" name="barb" class="barwarna" readonly></td>
+<td><input type="button" value=">" onClick="setnilaiwarna('+','b',4)" class="tombol"></td>
+<td><input type="button" value=">>" onClick="setnilaiwarna('+','b',16)" class="tombol"></td>
+<td><input type="button" value=">>>" onClick="setnilaiwarna('+','b',64)" class="tombol"></td>
+<td>&nbsp; <input type="text" name="angkabarb" class="kotakangka" size="3" readonly></td>
+<td>&nbsp; B/Biru</td>
+</tr>
+</table>
+</form>
+
+<form action="" name="hasil" onSubmit="return false">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td valign="top">
+
+<table border="0" cellspacing="1" cellpadding="0">
+<tr><td><b>Komplementer</b></td></tr>
+<tr><td><input type="text" name="w01" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a01" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w02" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a02" readonly class="angkahasil"></td></tr>
+</table>
+
+</td><td valign="top">
+
+<table border="0" cellspacing="1" cellpadding="0">
+<tr><td><b>Triad</b></td></tr>
+<tr><td><input type="text" name="w11" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a11" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w12" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a12" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w13" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a13" readonly class="angkahasil"></td></tr>
+</table>
+
+</td><td valign="top">
+
+<table border="0" cellspacing="1" cellpadding="0">
+<tr><td><b>Analog 1</b></td></tr>
+<tr><td><input type="text" name="w21" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a21" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w22" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a22" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w23" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a23" readonly class="angkahasil"></td></tr>
+</table>
+
+</td><td valign="top">
+
+<table border="0" cellspacing="1" cellpadding="0">
+<tr><td><b>Analog 2</b></td></tr>
+<tr><td><input type="text" name="w31" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a31" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w32" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a32" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w33" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a33" readonly class="angkahasil"></td></tr>
+</table>
+
+</td><td valign="top">
+
+<table border="0" cellspacing="1" cellpadding="0">
+<tr><td><b>Analog 3</b></td></tr>
+<tr><td><input type="text" name="w41" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a41" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w42" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a42" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w43" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a43" readonly class="angkahasil"></td></tr>
+</table>
+
+</td><td valign="top">
+
+<table border="0" cellspacing="1" cellpadding="0">
+<tr><td><b>Monotone</b></td></tr>
+<tr><td><input type="text" name="w51" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a51" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w52" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a52" readonly class="angkahasil"></td></tr>
+<tr><td><input type="text" name="w53" readonly class="kotakwarna"></td></tr>
+<tr><td><input type="text" name="a53" readonly class="angkahasil"></td></tr>
+</table>
+
+</td></tr>
+</table>
+</form>
+
+<pre>
+Pemilih Warna Dengan JavaScript
+Atur kuantitas RGB untuk mendapatkan warna yang diinginkan
+Tombol &lt;&lt;&lt; / &gt;&gt;&gt; untuk pengurangan/penambahan sebesar 64
+Tombol &lt;&lt; / &gt;&gt; untuk pengurangan/penambahan sebesar 16
+Tombol &lt; / &gt; untuk pengurangan/penambahan sebesar 4
+Dibuat oleh yan[at]daunsalam[dot]net
+--------------------------------------------------------------------------
+log :
+13-01-2006 : Penambahan untuk Monotone
+12-01-2006 : Rilis pertama
+</pre>
+
+</body>
+</html>

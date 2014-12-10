@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Php di Lighttpd</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 7 September 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Php di Lighttpd</h2>
+
+<p>
+Ini sebuah bantuan kilat untuk menjalankan Php di webserver lighttpd. Dengan asumsi bahwa Php sudah berjalan dengan baik pada komputer yang akan digunakan, jadi instalasi Php tidak termasuk dalam lingkup ini. Karena php dijalankan dengan bentuk CGI pada lighttpd, maka yang dibutuhkan adalah interpreter Php (bukan php dalam bentuk modul Apache).
+</p>
+
+<p>
+Lighttpd adalah webserver yang cukup kecil dan cepat. Selengkapnya bisa dilihat di <a href="http://www.lighttpd.net">http://www.lighttpd.net</a> Download source code, kemudian kita akan melakukan kompilasi dan instalasi server ini. Kompilasi serta instalasi bisa berjalan dengan menggunakan langkah generik, yaitu
+</p>
+
+<pre>
+./configure
+make
+make install
+</pre>
+
+<p>
+Setelah itu yang penting adalah melakukan penyesuaian dalam file konfigurasi lighttpd. Salin file lighttpd.conf yang ada dalam direktori doc yang terdapat pada source code ke /etc/lighttpd.conf Kemudian edit file ini. Bagian yang perlu disesuaikan adalah :
+</p>
+
+<pre>
+* Aktifkan mod_cgi pada opsi server.modules
+* Isi opsi server.document-root dengan nama direktori
+  tempat file web disimpan, misalnya seperti berikut
+          server.document-root = "/var/www/"
+* Tentukan file untuk menyimpan log error
+  misalnya seperti berikut
+          server.errorlog = "/var/log/lighttpd.error.log"
+* Tentukan file untuk menyimpan log akses
+  misalnya seperti berikut
+          accesslog.filename = "/var/log/lighttpd.access.log"
+* Aktifkan cgi.assign
+  misalnya seperti berikut
+          cgi.assign = (".php" => "/usr/local/bin/php")
+  dengan catatan bahwa interpreter php ada di /usr/local/bin/
+  untuk mengetahui letak interpreter php di sistem anda
+  bisa menggunakan perintah
+          which php
+</pre>
+
+<p>
+Setelah file konfigurasi selesai diedit, jalankan lighttpd dengan perintah
+</p>
+
+<pre>
+lighttpd -f /etc/lighttpd.conf
+</pre>
+
+<p>
+Untuk memastikan Php sudah bisa berjalan coba uji dengan program "Hello World" yang sudah sangat terkenal itu :)
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

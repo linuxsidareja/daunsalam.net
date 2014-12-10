@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Network of Workstation</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, Oktober 1999, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Network of Workstation</h2>
+
+<p>
+Perkembangan yang cepat pada Personal Computer dan Workstation tidak terjadi secara kebetulan, tetapi memerlukan investasi yang cukup besar. Tetapi ini dapat dikembalikan dengan jumlah penjualan yang sangat besar. Dan ini memberikan pengaruh terhadap perbandingan antara harga dan kemampuan. Dibanding dengan mainframe, maka rasio antara harga/kemampuan pada workstation menunjukkan angka yang lebih baik.
+</p>
+
+<p>
+Dengan berhasilnya pengembangan VLSI (Very Large Scale Integrated), memberikan andil yang besar terhadap perkembangan komputer. Komputer dengan kemampuan yang cukup baik dapat diproduksi dalam jumlah besar dengan harga yang murah. Dan hal ini tadi yang memberikan angka (cost/performance) harga/kemampuan yang baik. Apa yang dapat kita perbuat dengan cost/performance ini ? Terutama bila dibandingkan dengan cost/performance pada mainframe yang tidak sebaik pada workstation. Mainframe memerlukan biaya yang besar untuk memproduksinya, tentu dengan kemampuan yang memang lebih besar dibanding workstation. Tetapi jumlah satuan yang demikian banyak dari workstation, akan memberi kita sebuah pilihan, apakah perlu mainframe atau gunakan sekian banyak workstation yang ada, yang punya kemampuan cukup baik yang berada dalam jaringan (Network of Workstations (NOW)).
+</p>
+
+<p>
+Bila kita melihat pada Massively Parallel Processing (MPP), maka ada sejumlah hal yang dapat memberi pertimbangan mengapa NOW berkemungkinan memberi keuntungan untuk dikembangkan.
+</p>
+
+<ul>
+<li>MPP mengalami keterlambatan pengembangan bila dibandingkan terhadap komponen yang tersedia. Misal, sekarang kita miliki komponen microporcessor terbaru, maka akan diperlukan waktu 2 tahun untuk mendapatkan MPP yang siap pakai. Sementara waktu itu ada kemungkinan sudah tersedia microprocessor dengan kemampuan lebih baik. Hal seperti ini tidak terjadi pada Workstation.</li>
+<li>MPP memerlukan sistem operasi tersendiri dan perangkat lunak yang dirancang khusus sesuai konstruksi MPP.</li>
+<li>Keuntungan yang dimiliki MPP adalah interkoneksi yang memang sangat baik, dengan bandwidth yang bisa diandalkan.</li>
+</ul>
+
+<p>
+Poin-poin utama yang menjadi alasan mengapa NOW menjadi pilihan yang menarik adalah :
+</p>
+
+<ul>
+<li>Infrastruktur jaringan/network yang makin membaik</li>
+<li>Kualitas workstation yang makin tinggi</li>
+<li>I/O Bottleneck. Microprocosser memang semakin cepat, tetapi perangkat I/O mengalami perkembangan yang lambat, terutama dalam hal kecepatan transfer data. Ini menyebabkan terjadinya  bottleneck pada sistem seperti pada mainframe/single host. Dan sebaliknya pada NOW, kejadian ini dapat direduksi dengan cara membuat memory pool yang sangat besar.</li>
+<li>Tentu saja pemikiran untuk memanfaatkan workstation yang idle menjadi faktor pendukung yang cukup berarti.</li>
+</ul>
+
+<p>Hal-hal yang dapat dimanfaatkan pada NOW</p>
+
+<ul>
+<li><u>Memory yang tersedia sangat besar</u>. Hal utama yang menguntungkan adalah bisa mengurangi akses ke disk (I/O). RAM yang besar ini dapat dijadikan network RAM, yang bisa dimanfaatkan sebagai pengganti sistem virtual memory yang harus melakukan swap ke disk, yang membuat proses jadi lebih lambat.</li>
+<li><u>Atau juga dapat dimanfaatkan sebagai Cooperative Cache</u>. Dengan cara ini, setiap workstation memiliki cache, yang dapat diakses oleh workstation yang lain, sehingga akan mengurangi akses ke disk.</li>
+<li><u>Redundant Array Disks</u>. Redundant Array Disks disini dimaksud adalah Redundant Array of Workstation Disks. Dibanding dengan RAID yang biasanya, yaitu yang ditempatkan pada satu host, RAID yang dibuat pada NOW bisa sangat besar.</li>
+<li><u>Ketersediaan dari workstation</u>. Ketika digunakan pada jam kerja pun didapatkan ada sampai sejumlah besar workstation yang bisa dimanfaatkan untuk proses pada NOW.</li>
+</ul>
+
+<p>Ada beberapa kasus yang menjadi perhatian yaitu :</p>
+
+<ul>
+<li>Bandwidth dan kecepatan network, seperti masalah latency. Juga komponen yang menyangkut dengan proses komunikasi dalam jaringan</li>
+<li>Bagaimana menangani resource yang ada pada NOW.  Dan ini menyangkut dengan Sistem Operasi yang akan digunakan. Jelas, seiring dengan kecendrungan NOW untuk menggunakan komponen yang sudah komersial, tentu Sistem Operasi yang digunakan adalah yang sudah ada di pasaran. Untuk hal ini diperlukan adanya penyesuaian pada kernel sistem operasi agar dapat berfungsi sesuai dengan kebutuhan untuk mengeksploitasi kemampuan NOW.</li>
+<li>Masalah sosialisasi. Bagi pengguna interaktif, yang menggunakan workstationnya untuk kebutuhan sendiri, merasa ketakutan resouce yang ada pada workstationnya "dicuri" sehingga mengurangi unjukkerja bagi keperluannya. Sementara bagi orang yang akan memanfaatkan NOW untuk proses yang besar juga cukup khawatir jika proses mereka hanya diberi waktu pada waktu workstion dalam keadaan idle (diluar jam kerja)</li>
+</ul>
+
+<pre>
+Konsep NOW ini memberikan pilihan bagi kita untuk membangun sebuah
+large scale computing, tanpa terikat pada teknologi khusus,
+seperti penggunaan mainframe, dan komputer yang didesain secara khusus.
+Dengan memanfaatkan workstation yang sudah ada dalam sebuah jaringan,
+dapat dibangun sebuah large scale computing yang memiliki kemampuan
+yang baik. Workstation ini memiliki sejumlah kelebihan,
+seperti cost/performance yang tinggi, komponen yang berkembang cepat,
+dengan kemampuan yang terus semakin baik, dan ketersediaan komponen
+yang banyak didukung pasar. Ini adalah sebuah ide yang menarik.
+Hal paling penting yang menjadi masalah pada NOW adalah
+ketersediaan jaringan, terutama bandwidth dan kecepatan transfer data.
+Saya cenderung memilih sistem yang terdistribusi,
+tanpa adanya suatu "server" dengan maksud menghindari bottleneck
+atau crash seluruh sistem jika "server" mengalami crash.
+Tetapi, jelas akan memberi dampak yang negatif terhadap lalu-lintas
+pada jaringan. Akan terjadi lalu-lintas data yang semakin "ramai"
+dan butuh aturan yang tepat. Sementara ketersediaan jaringan masih
+jadi halangan utama pada sistem NOW.
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

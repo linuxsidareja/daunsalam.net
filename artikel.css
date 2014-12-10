@@ -1,0 +1,10 @@
+BODY { margin : 75px; }
+H1,H2,H3,H4,H5,H6 { margin : 0px 0px 15px 0px; font-family : sans-serif; font-weight : normal; color : #404040; }
+P { margin : 0px 0px 15px 0px; }
+UL,OL { margin-top : 0px; margin-bottom : 15px; }
+A:hover { color : #C00000; }
+PRE { border : dashed 1px #808080; padding : 15px; background : #E8E8E8; margin : 0px 0px 15px 0px; font-family : monospace; }
+
+.logo { background : #E0E0E0; font-size : 16px; color : #FFFFFF; padding : 5px 0px 3px 5px; font-family : sans-serif; }
+.linklogo { text-decoration : none; color : #FFFFFF; } 
+.lisensi { color : #909090; font-size : 12px; font-style : italic; margin : 0px 0px 25px 0px; border-bottom : solid 1px #E0E0E0; padding : 5px 0px 5px 0px; }

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Kembali ke Dot Matrix</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 11 April 2008, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Kembali ke Dot Matrix</h2>
+
+<p>
+Dulu kala, ketika printer inkjet, deskjet, bubblejet atau apalah yang ada jetnya, belum lazim digunakan oleh pemakai rumahan, harganya lebih mahal dari printer dot matrix. Waktu itu saya hanya mengenal printer Epson LX-800. Ketika melihat sebuah printer *jet, beserta hasil cetakannya, sungguh amat istimewa rasanya di masa itu.
+</p>
+
+<p>
+Sekarang ini zaman sudah terbalik. Rata-rata printer yang digunakan adalah yang serba jet tadi. Printer dot matrix menjadi barang purba. Dan sekarang harga printer dot matrix malah menjadi mahal.
+</p>
+
+<p>
+Untuk saya yang tak terlalu sering mencetak ke kertas, memiliki sebuah printer yang menggunakan tinta ternyata menjadi siksaan. Karena jarang mencetak, akhirnya tinta membeku, lalu head printer jadi rusak tak bisa digunakan. Mau mengganti head yang rusak, kok harganya hampir sama dengan beli printer baru?
+</p>
+
+<p>
+Akhirnya dengan tekad yang dikuatkan, plus merogoh kantong agak dalam (ini bagian yang berat nih), saya memutuskan memiliki sebuah printer dot matrix. Epson LX-300. Horeee, mari kembali ke zaman baheula.
+</p>
+
+<p>
+Sekedar bagi-bagi pengalaman, saya akan bercerita salah satu cara penggunaan printer dot matrix tersebut. Saya tampaknya membuat jadi sulit sebuah hal di zaman serba mudah ini. Tapi tidak apa-apa, yang penting tidak ada lagi urusan tinta beku.
+</p>
+
+<p>
+Seorang saudara akan mengadakan acara pesta pernikahan. Tentu ada undangan. Ada undangan, ada alamat yang perlu dicetak ke amplop undangan tersebut. Dan alamat dicetak pada kertas label. Urusan kertas label ini, tentu pembaca sekalian sudah banyak yang paham. Hanya saya masih saja merasa lucu dengan judul kertas label tersebut. Tom & Jerry. Sebuah kertas dengan stiker label. Satu lembar ada 12 stiker yang bisa diisi alamat di atasnya.
+</p>
+
+<p>
+Dengan program seperti OpenOffice writer urusan membuat dan mencetak label seperti ini mungkin sudah cukup mudah. Hanya saja, karena kebiasaan menulis kode dengan PHP, maka yang terfikirkan oleh saya adalah membuat script untuk menyusun alamat untuk kertas label ini menggunakan PHP. Mirip dengan pepatah, orang yang membawa palu, segala yang di depannya tampak seperti paku :-)
+</p>
+
+<p>
+Idenya sederhana saja. Nama dan alamat ditulis dalam sebuah file teks biasa. Antara kolom nama dengan alamat dipisahkan tanda : (titik dua). Satu baris berisi satu data nama dan alamat. File ini akan menjadi sumber data untuk disusun agar pas untuk dicetak ke kertas stiker. Hasil yang nantinya dicetak ke printer dot matrix hanyalah dalam bentuk susunan karakter ASCII. Jadi sebuah file teks biasa, yang posisi hurufnya disesuaikan dengan kertas stiker. Sebagai contoh sederhana hasil yang akan dicetak ke kertas stiker menggunakan printer adalah seperti berikut:
+</p>
+
+<pre>
+
+      Agung Mujiono             Ujang Ahmad              Agus Priono
+           Di                       Di                       Di
+         Jakarta                 Semarang                   Bogor
+
+
+
+     Herman Maulana             Indah Suci                Septiawan
+           Di                       Di                       Di
+          Bogor                   Bandung                  Jakarta
+
+
+
+         Irawati                  Hendri             Samsul dan Keluarga
+           Di                       Di                       Di
+         Bekasi                   Ciledug                 Tangerang
+
+
+
+       Budi Mulia
+           Di
+          Ciawi
+
+</pre>
+
+<p>
+Proses membaca file sumber data, kemudian disusun agar pas untuk dicetak, dan disimpan dalam sebuah file teks, dilakukan dengan script php. Awalnya saya ingin menampilkan script tersebut disini, tapi jadi malu karena program tersebut amat sederhana. Maaf ya.
+</p>
+
+<p>
+Sedangkan untuk mencetak file teks yang sudah tersusun itu, melalui cara singkat saja. Printer LX-300 yang saya gunakan dihubungkan ke komputer melalui port USB. Link device untuk printer ini adalah <b>/dev/usb/lp0</b>. Dengan satu baris perintah, tanpa instalasi driver atau program apapun, proses mencetak hanya menggunakan perintah:
+</p>
+
+<pre>
+cat filealamat > /dev/usb/lp0
+</pre>
+
+<p>
+Font yang digunakan diset melalui tombol pemilih font yang ada pada printer. Tentu saja berupa font fixed size, sehingga proses menyusun agar pas dengan posisi stiker cukup mudah. Tinggal hitung jumlah baris dan karakter di setiap baris. Inilah cara kuno di zaman web 2.0 ini.
+</p>
+
+
+<!-- isi selesai -->
+
+</body>
+</html>

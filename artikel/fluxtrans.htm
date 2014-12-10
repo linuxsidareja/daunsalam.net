@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Menu Transparan pada Fluxbox</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 4 Desember 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Menu Transparan pada Fluxbox</h2>
+
+<p>
+Jika anda menggunakan window manager fluxbox pada Linux, ada konfigurasi untuk membuat menu jadi transparan. Untuk mengatur tingkat transparan bisa melalui fluxbox menu -> configure -> transparency. Nilai yang disediakan untuk alpha berkisar dari 0 sampai 255. Nilai 0 berarti transparan 100%, sedangkan 255 tidak transparan sama sekali. Nilai 160 cukup baik untuk dicoba sebagai permulaan.
+</p>
+
+<p>
+Setelah hal di atas dilakukan, reload konfigurasi fluxbox, maka menu akan menjadi transparan. Namun tidak selalu hal ini cukup untuk menghasilkan menu yang transparan. Ada beberapa hal yang perlu diperhatikan agar berhasil.
+<ul>
+<li>Versi fluxbox harus lebih besar dari 0.9.2 dan harus dikompilasi dengan opsi Xrender enable. Demikian juga dengan X server, ekstensi Xrender sudah enable. Untuk memeriksa kedua hal  ini, jalankan perintah <tt>fluxbox -i</tt> pada konsol, dan lihat apakah ada RENDER pada hasil yang ditampilkan. Untuk informasi Xrender pada X, gunakan perintah <tt>xdpyinfo</tt></li>
+<li>Background harus diset dengan program yang sudah bisa memanfaatkan Xrender, lihat informasi ini dengan perintah <tt>fbsetbg -i</tt></li>
+<li>fbsetbg adalah program yang disertakan beserta fluxbox, yang berguna untuk setting background layar, seperti gambar untuk wallpaper. Ketika dijalankan, fbsetbg mencari program lain yang melakukan aksi sesungguhnya untuk menampilkan gambar sebagai wallpaper</li>
+<li>Program yang bisa melakukan setting untuk wallpaper yang dipakai oleh fbsetbg salah satunya adalah <tt>feh</tt></li>
+<li>Untuk dapat menjalankan atau kompilasi <tt>feh</tt> memerlukan library imlib2 dan giblib</li>
+</ul>
+
+<p>
+Setelah hal di atas ada, maka untuk menampilkan wallpaper dilakukan dengan perintah <tt>fbsetbg -f /path/ke/file/gambar</tt> Atur nilai alpha pada konfigurasi transparency fluxbox, dan load lagi konfigurasi fluxbox. Semoga menu yang tampil sekarang sudah transparan.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

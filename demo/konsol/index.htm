@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Seperti Konsol</title>
+<link type="text/css" rel="stylesheet" href="konsol.css">
+<script type="text/javascript" src="fungsi2.js"></script>
+</head>
+<body onLoad="document.perintah.tulis.focus()">
+<div class="kotak">
+
+<!-- form untuk menampilkan respon -->
+<form action="" name="respon" onSubmit="return false">
+<textarea name="area" readonly class="arearespon">
+Selamat datang di sebuah halaman seperti konsol
+Untuk menampilkan bantuan penggunaan, ketik bantuan
+---------------------------------------------------
+</textarea>
+</form>
+
+<!-- form untuk menulis perintah -->
+<form action="proses.php" name="perintah" method="post" target="frameproses" onSubmit="kirimperintah()">
+&nbsp;>>
+<input type="text" name="tulis" maxlength="50" class="tulisperintah">
+<input type="hidden" name="aksi" value="">
+</form>
+
+<!-- iframe tersembunyi yang menjadi tempat proses perintah -->
+<iframe src="kosong.htm" name="frameproses" class="sembunyi"></iframe>
+
+</div>
+</body>
+</html>

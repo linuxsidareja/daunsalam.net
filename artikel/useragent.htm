@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Deteksi Browser dan OS Klien</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 24 November 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Deteksi Browser dan OS Klien</h2>
+
+<p>
+Dalam membuat sebuah halaman situs yang akan dilihat oleh pengunjung, terkadang timbul kebutuhan untuk mengetahui apa web browser dan sistem operasi klien. Misalnya dalam kasus penggunaan Javascript atau CSS dalam halaman tersebut. Ada hal-hal tertentu yang diterjemahkan secara berbeda oleh masing-masing web browser. Dengan mengetahui jenis web browser yang dipakai klien, terbuka peluang untuk menampilkan halaman situs dengan baik pada setiap jenis browser.
+</p>
+
+<p>
+Tentu saja itu bukan satu-satunya alasan untuk mengetahui apa jenis web browser dan sistem operasi klien. Bisa juga karena ingin sekedar menampilkan statistik dari jenis web browser yang digunakan klien. Namun, apapun alasannya, dalam artikel ini akan diuraikan cara mengetahui web browser dan sistem operasi klien, dalam bahasa PHP.
+</p>
+
+<p>
+Untuk keperluan ini, kita dapat memanfaatkan variabel autoglobal(superglobal)
+</p>
+
+<pre>
+$_SERVER["HTTP_USER_AGENT"]
+</pre>
+
+<p>
+Di bawah ini contoh script yang menampilkan isi variabel tersebut, serta hasilnya jika dilihat pada beberapa browser.
+</p>
+
+<pre>
+&lt;?php
+echo $_SERVER["HTTP_USER_AGENT"];
+?&gt;
+</pre>
+
+<p>
+<font color=#800000>Mozilla/4.7 (compatible; OffByOne; Windows 98)</font><br>
+menggunakan web browser OffByOne<br>
+<font color=#800000>Mozilla/4.0 (compatible; MSIE 5.01; Windows 98)</font><br>
+menggunakan web browser Microsoft Internet Explorer<br>
+<font color=#800000>Mozilla/5.0 (Windows; U; Win98; en-US; rv:1.7.8) Gecko/20050511 Firefox/1.0.4</font><br>
+menggunakan web browser Firefox.<br>
+Semuanya berjalan di Windows 98.
+</p>
+
+<p>
+Dari isi variabel tersebut, kemudian kita bisa menentukan apakah web browser, dan sistem operasi klien. Misalnya kita akan mengetahui apakah klien menggunakan Firefox, maka kita cari dalam nilai variabel $_SERVER["HTTP_USER_AGENT"] tersebut apakah mengandung string Firefox. Fungsi <b>strstr()</b> dapat dimanfaatkan untuk keperluan ini. Atau jika mau, bisa juga memanfaatkan regular expression. Berikut contoh script untuk mengetahui apakah klien menggunakan Firefox.
+</p>
+
+<pre>
+&lt;?php
+$useragent = $_SERVER["HTTP_USER_AGENT"];
+if (strstr($useragent,"Firefox")) {
+  echo "Web Browser yang digunakan adalah Firefox";
+}
+?&gt;
+</pre>
+
+<p>
+Sama halnya untuk mengetahui sistem operasi klien. Kita bisa mencari suatu string yang menunjukkan jenis sistem operasi yang digunakan oleh klien. Agar hasilnya tepat, diperlukan data yang cukup untuk string yang dihasilkan oleh masing-masing web browser klien. Sebagai contoh terakhir, berikut ini adalah script yang dipakai pada software blog Wordpress untuk mendeteksi web browser klien. Script ini berada dalam file wp-includes/vars.php dari program Wordpress. Untuk pencarian string digunakan fungsi <b>preg_match</b>
+</p>
+
+<pre>
+$is_lynx  = 0; $is_gecko = 0; $is_winIE = 0;
+$is_macIE = 0; $is_opera = 0; $is_NS4   = 0;
+if (!isset($HTTP_USER_AGENT)) {
+  $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
+}
+if (preg_match('/Lynx/', $HTTP_USER_AGENT)) {
+  $is_lynx = 1;
+} elseif (preg_match('/Gecko/', $HTTP_USER_AGENT)) {
+  $is_gecko = 1;
+} elseif ((preg_match('/MSIE/', $HTTP_USER_AGENT)) &&
+          (preg_match('/Win/', $HTTP_USER_AGENT))) {
+  $is_winIE = 1;
+} elseif ((preg_match('/MSIE/', $HTTP_USER_AGENT)) &&
+          (preg_match('/Mac/', $HTTP_USER_AGENT))) {
+  $is_macIE = 1;
+} elseif (preg_match('/Opera/', $HTTP_USER_AGENT)) {
+  $is_opera = 1;
+} elseif ((preg_match('/Nav/', $HTTP_USER_AGENT) ) ||
+          (preg_match('/Mozilla\/4\./', $HTTP_USER_AGENT))) {
+  $is_NS4 = 1;
+}
+$is_IE    = (($is_macIE) || ($is_winIE));
+</pre>
+
+<p>
+Untuk keterangan yang lebih detil tentang web browser klien, kita juga bisa menggunakan fungsi <b>get_browser()</b>. Informasi yang diperoleh bisa lebih banyak. Untuk keterangan fungsi ini, selanjutnya dapat dilihat dalam manual Php.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

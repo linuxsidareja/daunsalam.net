@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Keluarkan Dari Loop</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 7 Juni 2007, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Keluarkan Dari Loop</h2>
+
+<p>
+Ini hanyalah sebuah tips ringan dalam menulis kode program. Tujuannya untuk mengurangi waktu eksekusi program. Jika program yang dibuat bisa berjalan lebih cepat tentu itu lebih baik. Tips ini tidak berguna apabila yang diharapkan adalah sebaliknya. Tapi adakah orang yang berharap programnya berjalan dengan pelan?
+</p>
+
+<p>
+Dalam menulis sebuah program entah dengan bahasa apa, biasanya ada bagian yang berupa loop. Kalau ada waktu, coba lihat-lihat kembali kode program yang pernah dibuat, tentunya yang mengandung loop. Yang akan kita lakukan untuk meningkatkan kecepatan eksekusi program (tepatnya adalah waktu eksekusi loop), adalah mengeluarkan baris kode program yang bisa berada di luar loop.
+Tentu saja mengeluarkan sebuah baris kode dari dalam loop dilakukan jika baris kode tersebut memang bisa berada di luar loop.
+</p>
+
+<p>
+Dengan cara ini akan ada pengurangan waktu eksekusi loop, karena banyaknya instruksi yang dikerjakan akan berkurang. Seberapa besar peningkatan kecepatan bergantung banyak hal. Untuk menguji perbedaannya bisa dengan mengambil waktu sebelum dan sesuah loop dieksekusi, lalu dikurangkan antara waktu akhir dan waktu awal. Uji loop yang belum diperbaiki dengan loop yang sudah diperbaiki. Mudah-mudahan hasilnya memuaskan.
+Jika program Anda berjalan kacau setelah mengikuti tips ini, jelas itu bukan salah saya :)
+</p>
+
+<p>
+Sebagai contoh yang amat sederhana, ditunjukkan pada kode berikut.
+Awalnya baris kode <tt>$a = ($b * 2) + 200;</tt> ada dalam loop.
+Karena baris ini bisa diletakkan di luar loop, maka dikeluarkan dari loop,
+dengan meletakkan baris ini sebelum loop.
+</p>
+
+<pre>
+&lt;?php
+
+list($ms,$ss) = explode(" ",microtime());
+$awal = $ss + $ms;
+
+$b = 6;
+// Ini untuk loop pertama sebelum dibuat lebih cepat
+for ($i = 0; $i &lt; 100000; $i++) {
+  $a = ($b * 2) + 200;
+  $c = $a * $i;
+}
+
+list($ms,$ss) = explode(" ",microtime());
+$akhir = $ss + $ms;
+$lama = $akhir - $awal;
+
+echo "
+Loop sebelum dimodifikasi&lt;br&gt;
+Awal : $awal&lt;br&gt;
+Akhir : $akhir&lt;br&gt;
+Waktu : $lama detik&lt;br&gt;&lt;br&gt;
+";
+
+list($ms,$ss) = explode(" ",microtime());
+$awal = $ss + $ms;
+
+$b = 6;
+// Ini untuk loop kedua setelah dimodifikasi
+$a = ($b * 2) + 200;
+for ($i = 0; $i &lt; 100000; $i++) {
+  $c = $a * $i;
+}
+
+list($ms,$ss) = explode(" ",microtime());
+$akhir = $ss + $ms;
+$lama = $akhir - $awal;
+
+echo "
+Loop setelah dimodifikasi&lt;br&gt;
+Awal : $awal&lt;br&gt;
+Akhir : $akhir&lt;br&gt;
+Waktu : $lama detik&lt;br&gt;&lt;br&gt;
+";
+
+?&gt;
+</pre>
+
+<!-- isi selesai -->
+
+</body>
+</html>

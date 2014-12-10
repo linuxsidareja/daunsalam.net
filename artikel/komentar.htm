@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Komentar Pada Kode Program</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 6 Mei 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Komentar Pada Kode Program</h2>
+
+<p>
+Saya tak tahu pasti apakah semua bahasa pemrograman mempunyai cara untuk menulis komentar. Namun sejauh yang sudah pernah saya gunakan, semuanya memiliki cara untuk menulis komentar. Dan menulis komentar pada sebuah kode program adalah satu hal yang berkaitan dengan pemrograman.
+</p>
+
+<p>
+Kapan kita menulis komentar, atau kapan tidak menulis komentar adalah hal yang bisa diperdebatkan. Seperti apa komentar yang baik, atau bagaimana cara menulis komentar yang baik, juga sama halnya, bisa didiskusikan dengan seru. Untuk hal yang demikian, tidak akan dibahas disini. Saya pribadi menyukai menulis komentar dalam kode program jika memang diperlukan. "Jika diperlukan" juga batasannya subyektif. Jadi pilihannya terserah masing-masing. Mau menulis komentar atau tidak, tulisan ini tidak dalam posisi berkampanye untuk salah satu pilihan itu.
+</p>
+
+<p>
+Ketika menulis sebuah komentar, saya membuatnya karena memang saya membutuhkan. Dan itu, adalah untuk diri saya sebagai penulis kode program. Saya akan menulis komentar agar kode yang sedang saya buat bisa mudah dipahami di kemudian hari. Bagi pihak yang tak suka dengan komentar pada kode program biasanya beragumentasi, jika sebuah kode perlu dikomentari, artinya kode anda perlu diperbaiki cara menulisnya. Eh, tapi kita tidak sedang memperdebatkan hal itu bukan?
+</p>
+
+<p>
+Biasanya saya menulis komentar dengan maksud menjelaskan sebuah bagian dalam program. Misalnya pada satu blok tertentu, berfungsi untuk suatu tugas, dengan cara bla bla bla. Terkadang juga pada looping yang lebih dari satu kedalaman. Untuk mengurangi "kebingungan" dalam melihat looping yang bersarang tersebut, saya akan memberi komentar sepantasnya. Juga pada sebuah fungsi yang tidak sederhana, akan saya beri komentar fungsi tersebut untuk apa, dan sejumlah keterangan untuk variabel yang dikirim ke dalam fungsi tersebut.
+</p>
+
+<p>
+Terlepas dari gagasan serius di atas, ternyata menulis komentar pada program tak wajib harus terkait aturan tentang sebuah komentar. Ada saja hal-hal "ajaib" yang muncul dalam cara menulis komentar pada kode program. Silahkan anda lihat source code kernel Linux, dan kita bisa temukan berbagai komentar yang "tak masuk akal" di dalamnya. Berikut ini adalah contoh yang saya ambil dari file sunhme.c
+</p>
+
+<p>
+Ini mulai baris 1014
+</p>
+
+<pre>
+/* Only Sun can take such nice parts and fuck up the programming interface
+ * like this.  Good job guys...
+ */
+#define TCVR_RESET_TRIES       16 /* It should reset quickly        */
+#define TCVR_UNISOLATE_TRIES   32 /* Dis-isolation can take longer. */
+</pre>
+
+<p>
+Ini mulai baris 943
+</p>
+
+<pre>
+static void happy_meal_stop(struct happy_meal *hp, unsigned long gregs)
+{
+  int tries = STOP_TRIES;
+
+  HMD(("happy_meal_stop: reset, "));
+
+  /* We're consolidating our STB products, it's your lucky day. */
+  hme_write32(hp, gregs + GREG_SWRESET, GREG_RESET_ALL);
+  while (hme_read32(hp, gregs + GREG_SWRESET) && --tries)
+  	udelay(20);
+
+  /* Come back next week when we are "Sun Microelectronics". */
+  if (!tries)
+  	printk(KERN_ERR "happy meal: Fry guys.");
+
+  /* Remember: "Different name, same old buggy as shit hardware." */
+  HMD(("done\n"));
+}
+</pre>
+
+<p>
+Sebagai penutup tulisan ini, berikut adalah kutipan dari buku Code Complete, bab 19
+</p>
+
+<p>
+<u>Tokoh</u><br>
+<b>Thrasymachus</b> : Seorang teoritis murni masih hijau, yang mempercayai semua buku yang dibacanya<br>
+<b>Callicles</b> : Veteran garis pertempuran keras dari golongan tua, programmer sejati<br>
+<b>Glaucon</b> : Pakar komputer muda, dan penuh percaya diri<br>
+<b>Ismene</b> : Programmer senior yang bosan dengan janji besar, hingga ia hanya mencari sejumlah kecil praktek yang berhasil<br>
+<b>Socrates</b> : Programmer tua yang arif bijaksana
+</p>
+
+<p>
+"Saya ingin mengusulkan standar komentar untuk proyek kami", Thrasymachus berkata.
+"Sebagian programmer kami hanya sedikit mengomentari kode mereka, sementara setiap orang mengetahui bahwa kode tanpa komentar tidak dapat dibaca."
+</p>
+
+<p>
+"Saya kira Anda sudah sedikit lebih lama lulus dari sekolah, nyatanya baru saja", Callicles memberi tanggapan.
+"Komentar adalah obat mujarab di akademi, tapi siapapun yang telah berkecimpung dalam pemrograman yang sebenarnya, mengetahui bahwa komentar hanya menyulitkan pembacaan kode, bukan memudahkannya.
+Kalimat dari bahasa pemrograman singkat dan lugas. Jika Anda tidak dapat membuat kode yang jelas, bagaimana Anda bisa membuat komentar yang jelas? Lagipula, komentar akan ketinggalan zaman bila kode berubah. Jika mempercayai komentar yang ketinggalan zaman, Anda sendiri sangat ketinggalan.
+</p>
+
+<p>
+"Saya setuju", Glaucon bergabung.
+"Kode yang penuh komentar lebih sukar dibaca karena lebih banyak yang harus dibaca.
+Saya sudah harus membaca kode, masak harus membaca banyak komentar juga?"
+</p>
+
+<p>
+"Tunggu sebentar", Ismene berkata, meletakkan cangkir kopinya sambil menelan dua teguk.
+"Saya tahu komentar dapat salah pakai, tapi komentar yang baik bobotnya senilai emas.
+Saya pernah mencoba kode dengan komentar dan yang tidak, ternyata saya lebih suka kode dengan komentar.
+Memang saya tidak mengatakan bahwa kita seharusnya mempunyai standar di mana setiap x baris kode memakai satu komentar, tapi seharusnya kita mendorong setiap orang untuk menulis komentar."
+</p>
+
+<p>
+"Jika komentar merupakan sesuatu yang tidak bermanfaat, mengapa ada yang menggunakan?" Socrates bertanya.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

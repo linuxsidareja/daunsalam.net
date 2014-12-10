@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: If Not Defined</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 16 November 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>If Not Defined</h2>
+
+<p>
+Fungsi yang dimaksud pada judul ini adalah fungsi <b>define</b> yang ada dalam PHP. Disini akan diceritakan secara ringkas bagaimana menggunakan fungsi ini sebagai salah satu perlindungan untuk script PHP yang kita buat.
+</p>
+
+<p>
+Cukup sering dalam membuat program dengan PHP, karena alasan tertentu digunakan statement <b>include</b> untuk menyertakan file php lainnya agar ikut dieksekusi. Penggunaan include ini bisa berguna untuk membuat program lebih ringkas, sebab file yang sama bisa dipakai di beberapa file php lainnya. Dan file yang di-include-kan ini memang tidak dimaksud untuk dieksekusi secara langsung.
+</p>
+
+<p>
+Untuk menghindari agar file tersebut tidak dieksekusi secara langsung, ada beberapa cara yang bisa digunakan. Salah satunya adalah memanfaatkan file .htaccess jika menggunakan webserver Apache. Cara lain adalah dengan menambahkan beberapa baris instruksi dalam program yang kita buat dengan memanfaatkan fungsi define. Sebagai contoh, seperti pada potongan program berikut
+</p>
+
+<p>
+Misalnya file utama.php berisi kode seperti berikut. Di dalamnya ada statement untuk include file jablay.php
+</p>
+
+<pre>
+&lt;?php
+
+echo "Stasiun Citayam &lt;br&gt;";
+include "jablay.php";
+
+?&gt;
+</pre>
+
+<p>
+File jablay.php yang akan diikutkan di dalam file utama.php
+</p>
+
+<pre>
+&lt;?php
+
+echo "Mendadak Dangdut";
+
+?&gt;
+</pre>
+
+<p>
+Jika kita eksekusi file utama.php kita akan memperoleh hasil seperti berikut
+</p>
+
+<pre>
+Stasiun Citayam
+Mendadak Dangdut
+</pre>
+
+<p>
+Jika kita eksekusi file jablay.php kita juga akan tetap bisa memperoleh hasil, yaitu tampilnya tulisan Mendadak Dangdut. Dalam sejumlah keadaan, sebenarnya kita tidak mengizinkan file jablay.php ini untuk dieksekusi secara langsung. Dengan memanfaatkan fungsi define, kita bisa melindungi file jablay.php
+</p>
+
+<p>
+Caranya adalah dengan mendefinisikan sebuah konstan tertentu dalam file utama.php, lalu pada baris kode paling awal dalam file jablay.php kita lakukan pengujian, apakah konstan yang didefinisikan dalam file utama.php ada atau tidak. Kalau ada, bisa terus dilanjutkan, kalau tidak, program langsung dihentikan, misalnya dengan <b>die()</b>.
+</p>
+
+<p>
+File utama.php akan menjadi seperti berikut
+</p>
+
+<pre>
+&lt;?php
+
+define("XXYYZZ","film");
+echo "Stasiun Citayam &lt;br&gt;";
+include "jablay.php";
+
+?&gt;
+</pre>
+
+<p>
+File jablay.php yang akan diikutkan di dalam file utama.php
+</p>
+
+<pre>
+&lt;?php
+
+if (!defined("XXYYZZ")) { die('Jangan akses langsung file ini'); }
+echo "Mendadak Dangdut";
+
+?&gt;
+</pre>
+
+<p>
+Selain cara di atas, bisa juga dengan menguji melalui variabel global $_SERVER['PHP_SELF'] yaitu dengan mengetahui nama file yang sedang dieksekusi. Jika nama file yang dieksekusi adalah file jablay.php yaitu dirinya sendiri, maka proses langsung dihentikan.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

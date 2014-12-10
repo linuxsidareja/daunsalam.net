@@ -1,0 +1,161 @@
+<html>
+<head>
+<title>yanmarshus bachtiar :: jsmatrix-0.07</title>
+<style type="text/css">
+body {
+  background : #000000;
+  margin : 25px;
+}
+a {
+  text-decoration : none;
+  color : #00A000;
+}
+.layar {
+  border : 1px dotted #00E000;
+  background : #000000;
+  color : #00E000;
+  width : 700px;
+  height : 370px;
+  text-align : center;
+  vertical-align : middle;
+  overflow : hidden;
+  padding : 10px;
+  font-family : monospace;
+  font-size : 13px;
+}
+.menu {
+  width : 700px;
+  color : #00A000;
+  font-family : monospace;
+  font-size : 13px;
+}
+</style>
+
+<script type="text/javascript">
+
+/* inisialisasi variabel */
+var a = 0;
+var kolom = 80;
+var baris = 21;
+var idinterval = 0;
+var waktu = 100;
+var i = 0;
+var j = 0;
+var matriks = "";
+var karakter = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M","1","2","3","4","5","6","7","8","9","0","@","#","$","&"];
+
+/* inisialisasi array 2 dimensi karakter matrix */
+m = new Array(baris);
+for (i = 0; i < baris; i++) {
+  m[i] = new Array(kolom);
+}
+for (i = 0; i < baris; i++) {
+  for (j = 0; j < kolom; j++) {
+    m[i][j] = " ";
+  }
+}
+
+/* inisialisasi status kolom */
+ms  = new Array(kolom);
+msc = new Array(kolom);
+mw  = new Array(kolom);
+mwc = new Array(kolom);
+for (i = 0; i < kolom; i++) {
+  ms[i]  = Math.round(Math.random() * 2);
+  msc[i] = Math.round(Math.random() * 9) + 3;
+  mw[i]  = Math.round(Math.random() * 3);
+  mwc[i] = mw[i];
+}
+
+/* fungsi untuk menyusun karakter */
+function susun() {
+
+  for (j = 0; j < kolom; j++) {
+    if (mwc[j] == 0) {
+
+      /* turunkan karakter */
+      i = baris - 1;
+      while (i > 0) {
+        m[i][j] = m[i-1][j];
+        i = i - 1;
+      }
+
+      /* isi karakter baru */
+      if (ms[j] == 1) {
+        a = Math.round(Math.random() * 39);
+        m[0][j] = karakter[a];
+      } else {
+        m[0][j] = " ";
+      }
+
+      /* set counter karakter/spasi masing2 kolom */
+      msc[j] = msc[j] - 1;
+      if (msc[j] < 0) {
+        msc[j] = Math.round(Math.random() * 9);
+        if (ms[j] == 1) {
+          ms[j] = 0;
+        } else {
+          ms[j] = 1;
+        }
+      }
+
+    }
+  }
+
+  /* turunkan counter waktu kolom */
+  for (j = 0; j < kolom; j++) {
+    mwc[j] = mwc[j] - 1;
+    if (mwc[j] < 0) {
+      mwc[j] = mw[j];
+    }
+  }
+
+  /* susun semua karakter untuk ditampilkan */
+  matriks = "";
+  for (i = 0; i < baris; i++) {
+    for (j = 0; j < kolom; j++) {
+      matriks = matriks + m[i][j];
+    }
+    matriks = matriks + "\n";
+  }
+
+}
+
+function tampil() {
+  susun();
+  document.a.m.value = matriks;
+}
+
+function jalan() {
+  if (idinterval == 0) {
+    idinterval = window.setInterval("tampil()",waktu);
+  }
+}
+
+function berhenti() {
+  window.clearInterval(idinterval);
+  idinterval = 0;
+}
+
+</script>
+</head>
+
+
+<body onload="jalan()">
+<div align="center">
+<form name="a" action="" onSubmit="return false">
+<textarea name="m" class="layar" readonly>
+</textarea>
+</form>
+<table border="0" cellspacing="0" cellpadding="0" class="menu">
+<tr>
+<td>
+<a href="javascript:jalan()">start</a> &bull;
+<a href="javascript:berhenti()">stop</a>
+</td>
+<td align="right">jsmatrix-0.07</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title></title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 23 November 2009, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Javascript untuk Checkbox</h2>
+
+<p>
+Elemen checkbox dalam dokumen HTML bisa dipilih/dicentang dengan cara klik mouse
+pada checkbox tersebut. Demikian juga apabila membatalkan pemilihan terhadap checkox,
+juga dilakukan dengan klik mouse. Pada penggunaan tertentu, seperti daftar yang
+memiliki satu checkbox untuk setiap item, diperlukan fungsi yang bisa memilih
+semua checkbox sekaligus, atau untuk membatalkan semua pilihan sekaligus,
+atau juga fungsi untuk membalikkan (toggle) pilihan yang ada pada checkbox.
+</p>
+
+<p>
+Untuk mendapatkan fungsi di atas, bisa dengan menggunakan javascript.
+Cara yang digunakan dalam tulisan ini adalah cara yang sederhana, yaitu :<br>
+<tt>
+- semua elemen yang ada dalam form diperiksa<br>
+- apabila elemen bertipe checkbox, maka property checked diset menjadi true<br>
+- demikian juga untuk membersihkan, property checked diset menjadi false<br>
+- untuk membalik pilihan, diperiksa nilai property checked, kemudian nilainya dibalik<br>
+</tt>
+</p>
+
+<p>
+Contoh dapat dilihat di bawah ini. Kode javascript, silahkan lihat langsung
+source code halaman HTML ini.
+</p>
+
+<script type="text/javascript">
+function centang(formid,jenis) {
+    objek = document.getElementById(formid);
+    je = objek.length;
+    if (jenis == "semua") {
+        for (i = 0; i < je; i++) {
+            if (objek.elements[i].type == "checkbox") {
+                objek.elements[i].checked = true;
+            }
+        }
+    }
+    if (jenis == "bersih") {
+        for (i = 0; i < je; i++) {
+            if (objek.elements[i].type == "checkbox") {
+                objek.elements[i].checked = false;
+            }
+        }
+    }
+    if (jenis == "balik") {
+        for (i = 0; i < je; i++) {
+            if (objek.elements[i].type == "checkbox") {
+                if (objek.elements[i].checked == true) {
+                    objek.elements[i].checked = false;
+                } else {
+                    objek.elements[i].checked = true;
+                }
+            }
+        }
+    }
+}
+</script>
+
+<div style="padding:25px;border:1px solid #969696;background:#fff0e0">
+<form action=# id=formsatu>
+<input type=checkbox> Cicak <br>
+<input type=checkbox> Cicak juga<br>
+<input type=checkbox> Cicak lagi<br>
+<input type=checkbox> Cicak di dinding<br>
+<input type=checkbox> Buaya<br>
+<input type=checkbox> Buaya darat<br>
+<input type=checkbox> Buaya airmata<br>
+<input type=checkbox> Buaya kulit<br>
+</form>
+<hr size=1>
+&bull; <a href="javascript:centang('formsatu','semua')">Pilih Semua</a><br>
+&bull; <a href="javascript:centang('formsatu','bersih')">Bersihkan Semua</a><br>
+&bull; <a href="javascript:centang('formsatu','balik')">Yang dipilih tidak dipilih, yang tidak dipilih, dipilih</a> (aka toggle)<br>
+</div>
+
+<!-- isi selesai -->
+
+</body>
+</html>

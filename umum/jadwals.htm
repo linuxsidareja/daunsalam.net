@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Grafik Jadwal Shalat</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 16 Januari 2008, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Grafik Jadwal Shalat</h2>
+
+<p>
+Untuk umat Islam, shalat merupakan salah satu ibadah utama.
+Ada lima kali shalat wajib dalam sehari.
+Waktu untuk melaksanakannya juga tertentu.
+Sederhananya, waktu shalat berkaitan dengan posisi matahari.
+Sekarang ini, dengan adanya komputasi menggunakan komputer,
+ada banyak program yang berfungsi menentukan waktu shalat di berbagai daerah di muka bumi.
+</p>
+
+<p>
+Perhitungan yang dilakukan dalam program tersebut melibatkan kalkulasi matematika,
+aplikasi pengetahuan astronomi dan kaidah yang ditetapkan oleh fikih mengenai waktu shalat.
+Saya mencoba tiga buah program. Data dari tiga program ini kemudian ditampilkan
+dalam bentuk grafik. Satu buah grafik merupakan waktu shalat untuk satu tahun.
+Data yang digunakan adalah tahun 2008.
+Angka yang berada di bagian atas grafik, yaitu 1 - 12, adalah angka untuk bulan.
+1 untuk bulan Januari, 2 Februari, dan seterusnya.
+Angka yang ada di samping kiri menunjukkan jam.
+Berikut ini adalah grafik yang dihasilkan.
+</p>
+
+<p>
+<br><br><br><img src="media/shalat/g1.gif"><br>
+<tt>Grafik A. Menggunakan program ipraytime</tt><br>
+Grafik A adalah grafik data dari program <b>ipraytime</b> versi 0.6.2.
+Program ini menggunakan library libitl (Islamic Tools Library) versi 0.6.4
+Dijalankan pada komputer dengan sistem operasi Linux.
+Konfgurasi untuk program ini adalah sebagai berikut.
+</p>
+
+<pre>
+City             : Jakarta
+Latitude         : 006° 10' 47" S
+Longitude        : 106° 49' 47" E
+Angle Method     : Egyptian General Authority of Survey
+TimeZone         : UTC+7.0
+Qibla            : 064° 51' 11" W of true North
+</pre>
+
+<p>
+<br><br><br><img src="media/shalat/g2.gif"><br>
+<tt>Grafik B. Menggunakan program Prayer Time Calculator</tt><br>
+Grafik B adalah grafik data dari program <b>Prayer Time Calculator</b> versi 2.9.
+Program dijalankan pada komputer dengan sistem operasi Linux, melalui Dosbox versi 0.71
+karena program tersebut adalah program untuk DOS.
+Untuk shalat Ashar ada dua data, karena program ini menyertakan dua fikih yang berbeda.
+Konfigurasi untuk program ini sebagai berikut
+</p>
+
+<pre>
+Jakarta  6:08S  106:45E
+Time zone: +7.0 hrs  Height ASL: 0m
+Twilight angle Fajr: 18.00 deg, Isha: 18.00 deg
+Height ASL: height above sea level in metres
+Zawal: Midday - should not pray 5 mins before or after.
+Asr[1]: Asr Shafi (shadow = 1x object).
+Asr[2]: Asr Hanafi (shadow = 2x object).
+Data from Prayer Time Calculator Version 2.9
+By Dr. Monzur Ahmed, Birmingham, UK. July 2001
+</pre>
+
+<p>
+<br><br><br><img src="media/shalat/g3.gif"><br>
+<tt>Grafik C. Menggunakan data dari www.sajda.com</tt><br>
+
+<pre>
+Prayer Time Table
+Jakarta, Indonesia
+(Qiblah: 295 degrees)
+Prayer Time Table generated at :www.sajda.com
+Asr prayer time will be calculated according to Shafe'i Fiqh
+Fajr/Isha times will be calculated according to University of Karachi Method.
+</pre>
+
+<p>
+<br><br><br><img src="media/shalat/g4.gif"><br>
+<tt>Grafik D. Ketiga grafik di atas ditempel jadi satu</tt><br>
+Untuk waktu shalat Ashar ada perbedaan yang cukup kontras.
+Perbedaan ini pada bulan Oktober, November, Desember, Januari, dan Februari.
+Data yang cukup berbeda ini adalah hasil dari perhitungan oleh
+program <b>ipraytime</b> (garis yang berwarna merah).
+Sedangkan data dari dua program lainnya, yaitu Prayer Time Calculator,
+dan dari situs www.sajda.com memiliki hasil yang sama.
+Jika diamati, grafik untuk waktu Ashar yang dihasilkan oleh data ipraytime
+tentu cukup "masuk akal", karena berjalan dengan mulus.
+Sedangkan grafik dari dua data lainnya mengalami "patahan" di bulan Oktober dan Maret.
+</p>
+
+<p>
+Apakah penyebab "patahan" ini, dan mengapa perbedaan ini terjadi,
+saya belum punya jawaban.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

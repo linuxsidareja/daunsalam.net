@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Memanfaatkan CSS untuk Popup Window</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 16 Oktober 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Memanfaatkan CSS untuk Popup Window</h2>
+
+<p>
+Adakalanya ketika membuat sebuah situs atau aplikasi berbasis web, dibutuhkan sebuah window popup untuk menampilkan sebuah daftar, atau data lainnya. Biasanya fungsi window popup ini hanya untuk menampilkan data jika memang diperlukan oleh pengguna.
+</p>
+
+<p>
+Untuk keperluan ini bisa juga ditempuh dengan cara lain, yaitu memanfaatkan CSS dan Javascript. Gambarannya kira-kira sebagai berikut :
+</p>
+
+<ul>
+<li>Data yang akan ditampilkan dalam popup window diletakkan dalam sebuah kontainer misalnya dengan menggunakan tag &lt;div&gt; ... &lt;/div&gt;</li>
+<li>Kontainer ini pada awalnya disembunyikan dengan menggunakan CSS yaitu dengan attribut visibility diset hidden</li>
+<li>Ketika diperlukan untuk menampilkan data dalam kontainer, maka attribut visibility untuk kontainer ini diset visible, menggunakan javascript.</li>
+<li>Jika kontainer ingin disembunyikan kembali, maka attribut visibility untuk kontainer ini diset hidden, juga menggunakan javascript.</li>
+<li>Agar kontainer berada di layer atas dari isi halaman web, maka attribut z-index pada CSS untuk kontainer ini diberi nilai yang cukup untuk meletakkannya dalam layer paling atas.</li>
+</ul>
+
+<p>
+Sebagai contoh, kita akan membuat sebuah form isian berupa textbox. Disamping textbox ada sebuah button, jika ditekan, akan menampilkan sebuah popup window. Dalam popup window ini ada sebuah daftar, berupa kode. Kode ini apabila di-klik akan diisikan ke dalam textbox, lalu popup window akan tertutup.
+</p>
+
+<b>Form untuk textbox dan button</b>
+<pre>
+&lt;form action="" name="f1" onSubmit="return false"&gt;
+Kode &lt;input type="text" name="kode" size="10"&gt;
+&lt;input type="button" value="..." onClick="buka_popup()"&gt;
+&lt;/form&gt;
+</pre>
+
+<b>Beberapa fungsi dalam Javascript yang diperlukan</b>
+<pre>
+&lt;script type="text/javascript"&gt;
+function buka_popup() {
+  document.getElementById("p1").style.visibility = "visible";
+}
+function tutup_popup() {
+  document.getElementById("p1").style.visibility = "hidden";
+}
+function isi(kode) {
+  document.f1.kode.value = kode;
+  tutup_popup();
+}
+&lt;/script&gt;
+</pre>
+
+<b>Kontainer untuk popup yang berisi data kode</b>
+<pre>
+&lt;div id="p1"
+     style="visibility : hidden;
+            border : solid 1px #ff0000;
+            padding : 25px;
+            margin : 25px;
+            z-index : 9;
+            position : fixed;
+            top : 0px;
+            left : 0px;
+            background : #ffffc0"&gt;
+&lt;a href="javascript:isi('17322')"&gt;17322&lt;/a&gt; Sepatu Kumal&lt;br&gt;
+&lt;a href="javascript:isi('89622')"&gt;89622&lt;/a&gt; Ikat Pinggang Buluk&lt;br&gt;
+&lt;a href="javascript:isi('20812')"&gt;20812&lt;/a&gt; Sendal Jepit Bolong&lt;br&gt;
+&lt;a href="javascript:isi('23788')"&gt;23788&lt;/a&gt; Celana Cutbrai Belel&lt;br&gt;
+&lt;a href="javascript:isi('76544')"&gt;76544&lt;/a&gt; Topi Robek Sebelah&lt;br&gt;
+&lt;form action="" onSubmit="return false"&gt;
+&lt;input type="button" value="Tutup" onClick="tutup_popup()"&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+</pre>
+
+<p>
+Contoh untuk kode di atas adalah seperti berikut
+</p>
+
+<hr size="1">
+<form action="" name="f1" onSubmit="return false">
+<b>Kode</b>
+<input type="text" name="kode" size="10">
+<input type="button" value=" ... " onClick="buka_popup()">
+</form>
+<hr size="1">
+<br><br>
+
+<script type="text/javascript">
+function buka_popup() {
+  document.getElementById("p1").style.visibility = "visible";
+}
+function tutup_popup() {
+  document.getElementById("p1").style.visibility = "hidden";
+}
+function isi(kode) {
+  document.f1.kode.value = kode;
+  tutup_popup();
+}
+</script>
+
+<div id="p1" style="visibility:hidden; border:solid 1px #ff0000; padding : 25px; margin:25px; z-index:3; position:fixed; top:0px; left:0px; background:#ffffc0">
+&bull; <a href="javascript:isi('17322')">17322</a> Sepatu Kumal<br>
+&bull; <a href="javascript:isi('89622')">89622</a> Ikat Pinggang Buluk<br>
+&bull; <a href="javascript:isi('20812')">20812</a> Sendal Jepit Bolong<br>
+&bull; <a href="javascript:isi('23788')">23788</a> Celana Cutbrai Belel<br>
+&bull; <a href="javascript:isi('76544')">76544</a> Topi Robek Sebelah<br>
+<form action="" onSubmit="return false" style="margin:10px 0px 0px 0px">
+<input type="button" value="Tutup" onClick="tutup_popup()">
+</form>
+</div>
+
+<!-- isi selesai -->
+
+</body>
+</html>

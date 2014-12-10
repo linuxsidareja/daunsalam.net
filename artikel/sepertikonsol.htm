@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Seperti Konsol</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 1 September 2006, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Seperti Konsol</h2>
+
+<p>
+Anda mungkin pernah melihat aplikasi jadul yang tampilannya hanya berupa teks. Ada dengan latar belakang hitam dengan teks hijau, atau latar belakang biru dengan warna teks kuning. Untuk menggunakan program tersebut diketikkan sejumlah perintah yang dikenali program. Lalu ada respon dari program yang juga dalam bentuk teks sesuai fungsi program tersebut.
+</p>
+
+<p>
+Sekarang juga masih ada sejumlah aplikasi yang menggunakan pendekatan dengan cara seperti di atas. Sedikit iseng, saya membuat aplikasi berbasis web yang menirukan model di atas. Dengan menggunakan sedikit ramuan AJAX tanpa XmlHttpRequest, bentuk ini adalah penggabungan nuansa nostalgia dan AJAX yang sedang banyak didengung-dengungkan :)
+</p>
+
+<p>
+Jurusnya tidaklah terlalu rumit, kalau tidak bisa dibilang sederhana. Bentuk ini disusun pada satu halaman HTML. Sebuah input berupa textbox digunakan untuk menulis perintah yang akan diproses. Sebuah textarea yang akan menjadi "layar" untuk menampilkan respon dari pemberian perintah. Sebuah frame yang berfungsi sebagai saluran untuk mengirim perintah dan menerima respon. Frame ini disembunyikan dengan CSS sehingga tak terlihat pada browser. Untuk tampilan agar terlihat seperti aplikasi dalam mode konsol, digunakan CSS untuk mengaturnya.
+</p>
+
+<p>
+Cara kerjanya kira-kira seperti berikut :
+</p>
+
+<ul>
+<li>Perintah diketik pada input textbox.</li>
+<li>Form yang berisi perintah ini dikirim dengan target adalah frame yang disembunyikan.</li>
+<li>Sebuah script PHP menerima kiriman form ini.</li>
+<li>Perintah yang diterima diproses oleh PHP, lalu dibuat sebuah halaman HTML. Halaman HTML ini berisi javascript yang berguna untuk menampilkan hasil proses ke textarea (yang berfungsi sebagai layar respon) yang ada di halaman utama.</li>
+</ul>
+
+<p>
+Demikian cara kerjanya, dilakukan berulang-ulang, sesuai perintah yang dikirim oleh pengguna. Untuk mencoba silahkan lihat <a href="../demo/konsol/index.htm"><b>halaman demo</b></a> berikut ini. Dan kalau tertarik, <a href="media/konsol.zip"><b>source code</b></a> yang berukuran sekitar 2 KB (zip) bisa juga didownload.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

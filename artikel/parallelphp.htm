@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Komputasi Parallel dengan PHP</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, 18 September 2007, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Komputasi Parallel dengan PHP</h2>
+
+<p>
+Tulisan ini adalah uraian tentang sebuah konsep. Belum ada pembuktian.
+Pada beberapa tulisan lain yang berkaitan dengan PHP biasanya saya menyertakan kode program,
+kali ini untuk sementara tidak ada. Mudah-mudahan ada kesempatan untuk mencobanya dengan program
+yang bisa berjalan dan berguna tentu saja.
+</p>
+
+<p>
+Bagi yang pernah mempelajari dan membuat program dengan model parallel, kemungkinan besar
+pernah menggunakan PVM (Parallel Virtual Machine) atau MPI (Message Passing Interface).
+Dua software/library tersebut cukup luas digunakan dalam komputasi parallel, dan memang
+didesain untuk keperluan komputasi parallel.
+Sedangkan PHP, yang sangat terkenal dalam dunia aplikasi web, apakah mungkin dimanfaatkan
+untuk model komputasi seperti itu? Gagasan ini tampaknya bisa.
+</p>
+
+<p>
+Mari kita lihat sebuah diagram sederhana berikut ini<br>
+<img src="media/msp.jpg"><br>
+Komputasi parallel yang akan dilakukan menggunakan model master-slave.
+Ada satu buah komputer yang bertindak sebagai master, yang akan membagi pekerjaan
+pada sejumlah komputer slave. Setelah pekerjaan dibagi, komputer slave memprosesnya,
+lalu hasilnya dikembalikan pada komputer master.
+</p>
+
+<p>
+Masing-masing komputer tersebut diinstal dengan PHP, beserta webserver, misalnya Apache.
+Library cURL untuk PHP juga diperlukan untuk proses pengiriman data antar komputer.
+Untuk cara yang sederhana, pada komputer master kita buat sebuah program PHP yang tugasnya adalah :
+</p>
+
+<ul>
+<li>menerima upload data (dari user) yang akan diproses secara parallel</li>
+<li>setelah data diterima, data tersebut dibagi ke sejumlah komputer slave</li>
+<li>menerima data yang sudah dikerjakan oleh komputer slave</li>
+</ul>
+
+<p>
+Sedangkan pada komputer slave dibuat program PHP yang tugasnya :
+</p>
+
+<ul>
+<li>menerima data dari komputer master</li>
+<li>melakukan pengolahan data yang diterima dari master</li>
+<li>mengirim data yang sudah diproses ke komputer master</li>
+</ul>
+
+<p>
+Dengan cara di atas, kita perlu membuat kode program PHP yang berguna untuk memproses data,
+lalu memasangnya pada semua komputer slave. Tentu hal ini agak merepotkan juga,
+jika ada proses kalkulasi baru, perlu memasang lagi ke semua komputer slave.
+Bagaimana kalau dibuat sebuah framework untuk keperluan ini.
+Aha, kalau ada kata framework ini tampaknya para penggemar PHP agak
+meningkat minatnya nih ;)
+</p>
+
+<p>
+Daripada setiap kali ada sebuah proses kalkulasi yang baru harus memasang programnya ke
+komputer slave, tampaknya bisa dengan melakukan upload satu kali ke komputer master.
+Kode program yang diperlukan untuk memproses data diupload ke komputer master,
+kemudian komputer master yang akan mengirim kode program tersebut ke semua komputer slave
+untuk dieksekusi bersama dengan data yang juga diberikan oleh komputer master.
+</p>
+
+<p>
+Dengan membuat sebuah framework yang sederhana seperti di atas,
+maka kita cukup instal sekali framework ini untuk master dan semua slave.
+Lalu sistem ini sudah siap menerima program untuk melakukan proses kalkulasi data
+secara parallel.
+</p>
+
+<p>
+Dalam konsep ini, semua komputer ada dalam sebuah LAN, dan masih dalam bentuk sangat sederhana.
+Belum mempertimbangkan masalah kecepatan, skalabilitas, reliabilitas, keamanan, atau hal "rumit"
+lainnya. Yang penting dengan PHP bisa melakukan komputasi parallel. Itu saja. :)
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

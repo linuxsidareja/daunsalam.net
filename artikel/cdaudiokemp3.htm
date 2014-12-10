@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>yanmarshus bachtiar :: Membuat File mp3 dari CD Audio</title>
+<link type="text/css" rel="stylesheet" href="../artikel.css">
+</head>
+<body>
+
+<div class="logo"><a href="../index.htm" class="linklogo"><b>daunsalam</b>.net</a></div>
+<div class="lisensi">
+Artikel ini dapat digunakan, disalin, dan disebarluaskan.
+Cukup cantumkan sumber asli.
+Jika isinya mengandung kebenaran, semoga memberi kebaikan bagi kita yang memanfaatkannya.
+Jika ada yang salah, mohon kiranya penulis dimaafkan.
+Dan sangat baik, jika kesalahan tersebut dapat diberitahukan kepada penulis.<br>
+Yanmarshus, April 2005, yan[at]daunsalam[dot]net
+</div>
+
+<!-- isi mulai -->
+
+<h2>Membuat File mp3 dari CD Audio</h2>
+
+<p>
+Tulisan ini dibuat sederhana dan ringkas. Artikel ini dibuat karena satu hari kemarin tiba-tiba mempunyai keinginan mejadikan beberapa lagu yang ada dalam CD audio menjadi file mp3. Kemudian disimpan di harddisk untuk dinikmati sewaktu bekerja di komputer.
+</p>
+
+<p>
+Ada dua tahap yang dilakukan ketika menjadikan lagu yang ada dalam CD audio menjadi file mp3. Langkah pertama mengambil data lagu di CD audio untuk dijadikan dalam format wav. Langkah ini biasa juga disebut dengan "grab". Tahap ke dua menjadikan file wav ini menjadi file mp3. Proses ini disebut dengan "encode".
+</p>
+
+<p>
+Banyak software yang tersedia untuk proses ini. Ada juga yang bisa langsung melakukan proses pengambilan data dari CD audio dan merubahnya ke file mp3. Namun secara detail, software ini tetap melakukan dua langkah di atas, yaitu "grab" dan "encode".
+</p>
+
+<p>
+Di internet banyak tersedia software yang bisa melakukan konversi dari CD audio ke bentuk file mp3. Percobaan yang dilakukan di sini menggunakan software audiograbber versi 1.83 dan lame versi 3.96.1. Kedua software ini adalah software gratis. Audiograbber dapat diambil di http://www.audiograbber.com-us.net sedangkan lame di situs http://www.mp3dev.org
+</p>
+
+<p>
+Langkah pertama yaitu melakukan konversi data lagu dari CD audio menjadi format wav. Masukkan CD audio ke cd drive, kemudian jalankan software audiograbber. Dari dalam program akan ditampilkan track lagu yang ada dalam CD. Pilih track yang akan dikonversi ke wav, dan lakukan proses "grab". Sebaiknya beberapa bagian dalam menu setting diganti dulu sesuai keadaan komputer. Misalnya direktori tempat file wav akan disimpan. Proses konversi sebaiknya tidak langsung menjadi file mp3, karena kita akan menggunakan proses sendiri untuk konversi ke file mp3 menggunakan lame. Juga deteksi dulu cdrom drive dengan autodetect pada bagian setting.
+</p>
+
+<p>
+Setelah proses "grab" selesai, maka file wav yang sudah ada dalam harddisk akan kita "encode" menjadi file mp3. Umumnya ukuran file wav yang dihasilkan proses "grab" berkisar antara 40 MB sampai 80 MB. Namun bisa juga berukuran lebih kecil atau lebih besar. File mp3 yang akan dihasilkan berukuran sekitar 5 MB. Program lame adalah program yang berupa command line program, jadi tanpa window. Menjalankan program ini dari msdos prompt.
+</p>
+
+<p>
+Untuk memudahkan, copy file lame.exe dan lame_enc.dll ke direktori tempat file wav yang akan di"encode". Ukuran kedua file ini cukup kecil, kurang dari 200 KB. Untuk melakukan proses merubah file wav ke mp3, jalankan perintah
+</p>
+
+<pre>
+lame -h namafilewav.wav namafilemp3.mp3
+</pre>
+
+<p>
+Perintah di atas cukup menghasilkan file mp3 yang berkualitas bagus. Opsi yang tersedia pada program lame cukup banyak. Untuk detailnya bisa dibaca pada manual program tersebut.
+</p>
+
+<p>
+Jika cukup banyak file yang akan di"encode" maka bisa juga dibuat sebuah file batch yang berisi perintah untuk melakukan proses "encode" semua file wav menjadi mp3. Setelah semua selesai diproses, maka kita siap untuk mendengarkan lagu-lagu kesukaan dengan player mp3. Untuk "membersihkan" ruang harddisk, file-file wav yang sudah di"encode" dapat dihapus.
+</p>
+
+<!-- isi selesai -->
+
+</body>
+</html>

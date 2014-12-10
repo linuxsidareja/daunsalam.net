@@ -1,0 +1,110 @@
+<?php
+
+/* inisialisasi matriks a b dan c
+kolom dan baris matriks dihasilkan secara random
+isi masing-masing matriks juga dibuat secara random
+matriks c diinisialisasi dengan nilai 0
+*/
+
+$baris_matriks_a = rand(2,5);
+$kolom_matriks_a = rand(2,5);
+$baris_matriks_b = $kolom_matriks_a;
+$kolom_matriks_b = rand(2,5);
+$baris_matriks_c = $baris_matriks_a;
+$kolom_matriks_c = $kolom_matriks_b;
+
+for ($i = 1; $i <= $baris_matriks_a; $i++) {
+  for ($j = 1; $j <= $kolom_matriks_a; $j++) {
+    $a[$i][$j] = rand(0,10);
+  }
+}
+
+for ($i = 1; $i <= $baris_matriks_b; $i++) {
+  for ($j = 1; $j <= $kolom_matriks_b; $j++) {
+    $b[$i][$j] = rand(0,10);
+  }
+}
+
+for ($i = 1; $i <= $baris_matriks_c; $i++) {
+  for ($j = 1; $j <= $kolom_matriks_c; $j++) {
+    $c[$i][$j] = 0;
+  }
+}
+
+
+/* inilah loop yang melakukan proses perkalian matriks */
+for ($j = 1; $j <= $kolom_matriks_b; $j++) {
+  for ($i = 1; $i <= $baris_matriks_a; $i++) {
+    for ($k = 1; $k <= $kolom_matriks_a; $k++) {
+      $c[$i][$j] = $c[$i][$j] + ($a[$i][$k] * $b[$k][$j]);
+    }
+  }
+}
+
+
+/* menyusun matriks a dalam bentuk tabel */
+$matriks_a = "<table cellpadding=10 cellspacing=0 border=1>\n";
+for ($i = 1; $i <= $baris_matriks_a; $i++) {
+  $matriks_a .= "<tr>\n";
+  for ($j = 1; $j <= $kolom_matriks_a; $j++) {
+    $matriks_a .= "<td>" . $a[$i][$j] . "</td>";
+  }
+  $matriks_a .= "</tr>\n";
+}
+$matriks_a .= "</table>\n";
+
+
+/* menyusun matriks b dalam bentuk tabel */
+$matriks_b = "<table cellpadding=10 cellspacing=0 border=1>\n";
+for ($i = 1; $i <= $baris_matriks_b; $i++) {
+  $matriks_b .= "<tr>\n";
+  for ($j = 1; $j <= $kolom_matriks_b; $j++) {
+    $matriks_b .= "<td>" . $b[$i][$j] . "</td>";
+  }
+  $matriks_b .= "</tr>\n";
+}
+$matriks_b .= "</table>\n";
+
+
+/* menyusun matriks c dalam bentuk tabel */
+$matriks_c = "<table cellpadding=10 cellspacing=0 border=1>\n";
+for ($i = 1; $i <= $baris_matriks_c; $i++) {
+  $matriks_c .= "<tr>\n";
+  for ($j = 1; $j <= $kolom_matriks_c; $j++) {
+    $matriks_c .= "<td>" . $c[$i][$j] . "</td>";
+  }
+  $matriks_c .= "</tr>\n";
+}
+$matriks_c .= "</table>\n";
+
+
+/* tampilkan halaman dalam format html,
+yang sudah berisi matriks a b dan c */
+
+echo "
+<html>
+<head>
+<title>Perkalian matriks</title>
+<style type=\"text/css\">
+td { text-align:center; }
+</style>
+</head>
+<body>
+
+<table border=0 cellpadding=10>
+<tr>
+<td>$matriks_a</td>
+<td>X</td>
+<td>$matriks_b</td>
+<td>=</td>
+<td>$matriks_c</td>
+</tr>
+</table>
+
+<br><br>Refresh/Reload halaman ini untuk menampilkan contoh matriks yang lain
+
+</body>
+</html>
+";
+
+?>
